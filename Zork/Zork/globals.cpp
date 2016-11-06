@@ -2,12 +2,8 @@
 
 void ParseInput(const string &inputString, vector<string> &inputWordsVector) 
 {
-	size_t currentWord = 1;
 	bool processingWords = false;
 	size_t parsedChars = 0;
-
-	//auto begin = inputString.cbegin();
-	//auto end = inputString.cbegin();
 
 	const char *begin = inputString.c_str();
 	const char *end = inputString.c_str();
