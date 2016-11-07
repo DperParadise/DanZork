@@ -7,8 +7,9 @@ void ParseInput(const string &inputString, vector<string> &inputWordsVector)
 
 	const char *begin = inputString.c_str();
 	const char *end = inputString.c_str();
+	size_t inputLength = inputString.length();
 
-	while (parsedChars <= inputString.length() && inputString.length() != 0)
+	while (parsedChars <= inputLength && inputLength != 0)
 	{
 		if (*end != ' ' && *end !='\0')
 		{
