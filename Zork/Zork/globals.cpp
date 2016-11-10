@@ -1,5 +1,7 @@
 #include "globals.h"
 
+using namespace std;
+
 void ParseInput(const string &inputString, vector<string> &inputWordsVector) 
 {
 	bool processingWords = false;

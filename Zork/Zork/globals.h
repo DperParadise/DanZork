@@ -4,8 +4,13 @@
 #include <string>
 #include <vector>
 
-using namespace std;
 
-void ParseInput(const string &inputString, vector<string> &inputWordsVector);
+void ParseInput(const std::string &inputString, std::vector<std::string> &inputWordsVector);
+
+enum class Type { NPC, PLAYER, CREATURE, EXIT, ROOM, ITEM, ENTITY };
+
+enum class Direction { NORTH, EAST, SOUTH, WEST };
+
+
 
 #endif //end GLOBALS_H
