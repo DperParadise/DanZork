@@ -1,7 +1,9 @@
-#include "Item.h"
+#include "item.h"
 
 Item::Item(
+	ptrParentItem parentItem,
+	bool isOpen,
 	Type type,
 	std::string name,
 	std::string desc,
-	std::list<ptrEntity> list) : Entity(type, name, desc, list) {}
+	std::list<ptrEntity> list) : parentItem(parentItem), isOpen(isOpen), Entity(type, name, desc, list) {}

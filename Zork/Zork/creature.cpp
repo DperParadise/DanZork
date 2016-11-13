@@ -3,9 +3,10 @@
 
 Creature::Creature(
 	ptrRoom location,
+	ptrParentItem parentItem,
 	Type type,
 	std::string name,
 	std::string desc,
-	std::list<ptrEntity> list) : location(location), Entity(type, name, desc, list) {}
+	std::list<ptrEntity> list) : location(location), parentItem(parentItem), Entity(type, name, desc, list) {}
 
 Creature::~Creature() {}
