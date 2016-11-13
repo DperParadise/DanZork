@@ -13,8 +13,8 @@ GitHub link: https://github.com/DperParadise/Zork
 H: Shows you a list of accepted commands in game  
 I: Shows your inventory  
 Q: Quit Menu. You can either restart or quit the game.  
-TAKE "item": you pick up "item".  
-DROP "item": you drop the "item" right where you are.  
+TAKE "something/someone": you pick up "something/someone".  
+DROP "something/someone": you drop the item right where you are.  
 PUT "something/someone" INTO "something": punt one item into another.  
 HIT "something/someone": you hit a person or a thing.  
 LOOK "something/someone": you carefully look at someone/something.  
