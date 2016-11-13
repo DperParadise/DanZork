@@ -7,7 +7,7 @@
 
 void ParseInput(const std::string &inputString, std::vector<std::string> &inputWordsVector);
 
-enum class Type { NPC, PLAYER, CREATURE, EXIT, ROOM, ITEM, ENTITY };
+enum class Type { NPC, PLAYER, EXIT, ROOM, ITEM };
 
 enum class Direction { NORTH, EAST, SOUTH, WEST };
 

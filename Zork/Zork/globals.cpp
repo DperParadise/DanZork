@@ -1,8 +1,8 @@
 #include "globals.h"
+#include <memory>
 
-using namespace std;
-
-void ParseInput(const string &inputString, vector<string> &inputWordsVector) 
+ 
+void ParseInput(const std::string &inputString, std::vector<std::string> &inputWordsVector) 
 {
 	bool processingWords = false;
 	size_t parsedChars = 0;
@@ -22,7 +22,7 @@ void ParseInput(const string &inputString, vector<string> &inputWordsVector)
 		{	// we have read one word
 			if (processingWords)
 			{
-				inputWordsVector.push_back(string(begin, end));
+				inputWordsVector.push_back(std::string(begin, end));
 				processingWords = false;
 				++end;
 				begin = end;

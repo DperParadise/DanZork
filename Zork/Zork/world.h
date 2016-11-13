@@ -3,14 +3,18 @@
 
 #include "entity.h"
 #include <vector>
+#include <memory>
+
 
 class World : public Entity
 {
+	
 public:
-	World(std::vector<Entity*> v);
+	
+	World(std::vector<ptrEntity> v);
 	virtual ~World();
 	
-	std::vector<Entity*> entities;
+	std::vector<ptrEntity> entities;
 };
 
 

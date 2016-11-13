@@ -4,18 +4,24 @@
 #include "globals.h"
 #include <string>
 #include <list>
+#include <memory>
+
+
 
 class Entity
 {
+	
 public:
+	typedef std::shared_ptr<Entity> ptrEntity;
+	
 	Entity();
-	Entity(Type t, std::string n, std::string d, std::list<Entity*> l);
+	Entity(Type type, std::string name, std::string desc, std::list<ptrEntity> list);
 	virtual ~Entity();
 
 	Type type;
 	std::string name;
 	std::string description;
-	std::list<Entity*> contains;
+	std::list<ptrEntity> contains;
 };
 
 

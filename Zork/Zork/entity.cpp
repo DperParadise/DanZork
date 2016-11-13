@@ -1,7 +1,10 @@
 #include "entity.h"
 
-using namespace std;
 
-Entity::Entity() {};
-Entity::Entity(Type t, string n, string d, list<Entity*> l) : type(t), name(n), description(d), contains(std::move(l)) {};
-Entity::~Entity() {};
+Entity::Entity() {}
+Entity::Entity(
+	Type type, 
+	std::string name, 
+	std::string desc, 
+	std::list<ptrEntity> list) : type(type), name(name), description(desc), contains(std::move(list)) {}
+Entity::~Entity() {}
