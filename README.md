@@ -15,7 +15,7 @@ I: Shows your inventory
 Q: Quit Menu. You can either restart or quit the game.  
 TAKE "item": you pick up "item".  
 DROP "item": you drop the "item" right where you are.  
-PUT "item" INTO "item": punt one item into another.  
+PUT "something/someone" INTO "something": punt one item into another.  
 HIT "something/someone": you hit a person or a thing.  
 LOOK "something/someone": you carefully look at someone/something.  
 SEARCH "someone": you search someone's belongings.  
