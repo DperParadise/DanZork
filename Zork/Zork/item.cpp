@@ -3,6 +3,7 @@
 Item::Item(
 	ptrParentItem parentItem,
 	bool isOpen,
+	bool discovered,
 	Type type,
 	std::string name,
 	std::string desc,

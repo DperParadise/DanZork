@@ -10,10 +10,11 @@ public:
 
 	typedef std::shared_ptr<Item> ptrParentItem;
 
-	Item(ptrParentItem parentItem, bool isOpen, Type type, std::string name, std::string desc, std::list<ptrEntity> list);
+	Item(ptrParentItem parentItem, bool isOpen, bool discovered, Type type, std::string name, std::string desc, std::list<ptrEntity> list);
 
 	ptrParentItem parentItem;
 	bool isOpen;
+	bool discovered;
 
 };
 
