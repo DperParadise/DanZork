@@ -2,7 +2,7 @@
 
 ## Synopsis
 
-Your character is unfairly jailed in a medieval prison. You have to find a way to get out of it, will you dare to find your way out? or will you perish in the hands of terrible guards?
+Your character is unfairly jailed in a medieval prison. You have to find a way to get out of it. Will you dare to find your way out? or will you perish in the hands of terrible guards?
 
 ## Author
 Daniel Pérez Paraíso  
