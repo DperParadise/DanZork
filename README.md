@@ -27,12 +27,12 @@ DETACH "something" FROM "something": splits two combined objects.
 
 ## Map
 
-## Gameplay guide ( spoiler!!! )
+## Gameplay guide ( spoiler!!! )   
 
 The game has two exits.  
-Exit 1 commands sequence  
+**Exit 1 commands sequence**  
 
-Start: CELL
+**Start: CELL**   
 LOOK window  
 TAKE bar  
 TAKE breadcrumbs  
@@ -46,62 +46,62 @@ DROP bar
 DROP breadcrumbs  
 GO east  
 
-Start: AISLE 1  
+**Start: AISLE 1**  
 TAKE chair  
 OPEN door  
 
-Start: AISLE 2  
+**Start: AISLE 2**    
 OPEN north door  
 
-Start: GUARDROOM  
+**Start: GUARDROOM**    
 OPEN small closet  
 TAKE cleaning staff key  
 TAKE armory key   
 GO south  
 
-Start: AISLE 2  
+**Start: AISLE 2**    
 OPEN south door  
 
-Start: ARMORY  
+**Start: ARMORY**    
 USE chair  
 TAKE shield   
 TAKE sword   
 DROP armory key   
 GO north  
 
-Start: AISLE 2   
+**Start: AISLE 2**     
 GO east   
 
-Start: AISLE 3     
+**Start: AISLE 3**       
 GO south  
 
-Start: TOOLROOM  
+**Start: TOOLROOM**    
 HIT guard   
 OPEN closet   
 TAKE rope   
 TAKE mace   
 GO north   
 
-Start: AISLE 3  (Here starts Exit 2 sequence ) 
+**Start: AISLE 3  (Here starts Exit 2 sequence )**     
 GO west   
 
-Start: AISLE 2   
+**Start: AISLE 2**     
 GO west   
 
-Start: AISLE 1   
+**Start: AISLE 1**     
 GO west   
 
-Start: CELL   
+**Start: CELL**     
 HIT window   
 USE rope WITH sword   
-USE rope
+USE rope  
 
-You are free in the woods.
+You are free in the woods.   
 
-Exit 2 commands sequence  
+**Exit 2 commands sequence**  
 Repeat steps from the first sequence until Start: AISLE 3   
 
-Start: AISLE 3   
+**Start: AISLE 3**   
 GO north    
 Start: UPSTAIRS FLOOR   
 OPEN west door   
@@ -111,18 +111,18 @@ TAKE leather cuirass
 TAKE helmet   
 GO east   
 
-Start: UPSTAIRS FLOOR   
+**Start: UPSTAIRS FLOOR**    
 OPEN north door   
 
-Start: MEETINGS ROOM   
+**Start: MEETINGS ROOM**      
 HIT officer   
 DROP cleaning staff key   
 GO south   
 
-Start: UPSTAIRS FLOOR   
+**Start: UPSTAIRS FLOOR**     
 GO west   
 
-Start: GUARDS BEDROOM   
+**Start: GUARDS BEDROOM**     
 LOOK wardrobe   
 TAKE clothes   
 SEARCH guard   
@@ -130,23 +130,13 @@ DROP helmet
 TAKE bag of coins   
 GO east   
 
-Start: UPSTAIRS FLOOR   
+**Start: UPSTAIRS FLOOR**     
 GO east   
 
-Start: MAIN HALL   
+**Start: MAIN HALL**     
 OPEN door  
 
 You are free on the street.
-
-
-
-
-
-
-
-## Contributors
-
-Let people know how they can dive into the project, include important links to things like issue trackers, irc, twitter accounts if applicable.
 
 ## License
 
