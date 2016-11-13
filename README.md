@@ -10,20 +10,20 @@ GitHub link:
 
 ## Accepted commands
 
-H: Shows you a list of accepted commands in game
-I: Shows your inventory
-Q: Quit Menu. You can either restart or quit the game.
-TAKE "item": you pick up "item".
-DROP "item": you drop the "item" right where you are.
-PUT "item" INTO "item": punt one item into another.
-HIT "something/someone": you hit a person or a thing.
-LOOK "something/someone": you carefully look at someone/something.
-SEARCH "someone": you search someone's belongings.
-OPEN
-CLOSE
-USE "something".
-COMBINE "something" WITH "something".
-DETACH "something" FROM "something": splits two combined objects.
+H: Shows you a list of accepted commands in game  
+I: Shows your inventory  
+Q: Quit Menu. You can either restart or quit the game.  
+TAKE "item": you pick up "item".  
+DROP "item": you drop the "item" right where you are.  
+PUT "item" INTO "item": punt one item into another.  
+HIT "something/someone": you hit a person or a thing.  
+LOOK "something/someone": you carefully look at someone/something.  
+SEARCH "someone": you search someone's belongings.  
+OPEN "something".   
+CLOSE "something".  
+USE "something".  
+COMBINE "something" WITH "something".  
+DETACH "something" FROM "something": splits two combined objects.  
 
 
 ## Tests
