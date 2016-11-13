@@ -6,7 +6,11 @@ class Player : public Creature
 {
 public:
 
-	Player(ptrRoom loc, Type type, std::string name, std::string desc, std::list<ptrEntity> list);
+	Player(ptrRoom loc, Type type, std::string name, std::string desc, std::list<ptrEntity> list, ptrRoom prevRoom, int lives, int score);
+
+	int score;
+	int lives;
+	ptrRoom previousRoom;
 };
 
 
