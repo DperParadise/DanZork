@@ -140,6 +140,6 @@ OPEN door
 
 You are free on the street.
 
-## License
+## License   
 
-A short snippet describing the license (MIT, Apache, etc.)
+This software is licensed under: [GNU GENERAL PUBLIC LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt)   
