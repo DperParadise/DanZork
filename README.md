@@ -27,6 +27,8 @@ DETACH "something" FROM "something": splits two combined objects.
 
 ## Map
 
+![prsion map](https://i.imgsafe.org/8cd1dc2bde.jpg)
+
 ## Gameplay guide ( spoiler!!! )   
 
 The game has two exits.  
