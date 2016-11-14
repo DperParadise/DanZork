@@ -3,8 +3,8 @@
 Item::Item(
 	ptrParentItem parentItem,
 	bool isOpen,
-	bool discovered,
+	bool isVisible,
 	Type type,
 	std::string name,
 	std::string desc,
-	std::list<ptrEntity> list) : parentItem(parentItem), isOpen(isOpen), Entity(type, name, desc, list) {}
+	std::list<ptrEntity> list) : parentItem(parentItem), isOpen(isOpen), isVisible(isVisible), Entity(type, name, desc, list) {}
