@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-
+#include <map>
 
 void ParseInput(const std::string &inputString, std::vector<std::string> &inputWordsVector);
 
@@ -11,6 +11,29 @@ enum class Type { NPC, PLAYER, EXIT, ROOM, ITEM };
 
 enum class Direction { NORTH, EAST, SOUTH, WEST };
 
+enum class Scenario {
+	CELL,
+	AISLE1,
+	AISLE2,
+	AISLE3,
+	ARMONY,
+	GUARDROOM,
+	TOOLROOM,
+	UPSTAIRS,
+	GUARDS_BEDROOM,
+	MEETINGS_ROOM,
+	MAIN_HALL,
+	MAIN_HALL_EXIT,
+	CELL_EXIT,
+	START,
+	QUIT,
+	ERROR
+};
+
+enum class ReturnState {
+	OK,
+	ERROR
+};
 
 
 //Text descriptions

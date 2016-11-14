@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -9,8 +10,14 @@ int main()
 {
 	string input;
 	vector<string> wordsVector;
+	map<Scenario, string> scenarioNames;
+
 	
-	cout << "> ";
+
+
+
+
+	/*cout << "> ";
 	getline(cin, input);
 
 	if (input.length() == 0)
@@ -24,7 +31,7 @@ int main()
 
 	for (const auto &elem : wordsVector) {
 		cout << elem << endl;
-	}
+	}*/
 
 	return 0;
 }
