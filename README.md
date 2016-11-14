@@ -10,28 +10,28 @@ GitHub link: https://github.com/DperParadise/Zork
 
 ## Accepted commands
 
-H: Shows you a list of accepted commands in game  
-I: Shows your inventory  
-Q: Quit Menu. You can either restart or quit the game.  
-TAKE "something/someone": you pick up "something/someone".  
-DROP "something/someone": you drop the item right where you are.  
-PUT "something/someone" INTO "something": punt one item into another.  
-HIT "something/someone": you hit a person or a thing.  
-LOOK "something/someone": you carefully look at someone/something.  
-SEARCH "someone": you search someone's belongings.  
-OPEN "something".   
-CLOSE "something".  
-USE "something".  
-COMBINE "something" WITH "something".  
-DETACH "something" FROM "something": splits two combined objects.  
-GO NORTH: move towards north   
-N: move towards north   
-GO SOUTH: move towards south   
-S: move towards south   
-GO EAST: move towards east   
-E: move towards east   
-GO WEST: move towards west   
-W: move towards west      
+**H**: Shows you a list of accepted commands in game  
+**I**: Shows your inventory  
+**Q**: Quit Menu. You can either restart or quit the game.  
+**TAKE** "something/someone": you pick up "something/someone".  
+**DROP** "something/someone": you drop the item right where you are.  
+**PUT** "something/someone" **INTO** "something": punt one item into another.  
+**HIT** "something/someone": you hit a person or a thing.  
+**LOOK** "something/someone": you carefully look at someone/something.  
+**SEARCH** "someone": you search someone's belongings.  
+**OPEN** "something".   
+**CLOSE** "something".  
+**USE** "something".  
+**COMBINE** "something" **WITH** "something".  
+**DETACH** "something" **FROM** "something": splits two combined objects.  
+**GO NORTH**: move towards north   
+**N**: move towards north   
+**GO SOUTH**: move towards south   
+**S**: move towards south   
+**GO EAST**: move towards east   
+**E**: move towards east   
+**GO WEST**: move towards west   
+**W**: move towards west      
 
 ## Map
 
