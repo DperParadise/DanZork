@@ -24,14 +24,14 @@ GitHub link: https://github.com/DperParadise/Zork
 **USE** "something".  
 **COMBINE** "something" **WITH** "something".  
 **DETACH** "something" **FROM** "something": splits two combined objects.  
-**GO NORTH**: move towards north   
-**N**: move towards north   
-**GO SOUTH**: move towards south   
-**S**: move towards south   
-**GO EAST**: move towards east   
-**E**: move towards east   
-**GO WEST**: move towards west   
-**W**: move towards west      
+**GO NORTH**: move towards north.      
+**N**: move towards north.      
+**GO SOUTH**: move towards south.      
+**S**: move towards south.      
+**GO EAST**: move towards east.      
+**E**: move towards east.      
+**GO WEST**: move towards west.      
+**W**: move towards west.         
 
 ## Map
 
