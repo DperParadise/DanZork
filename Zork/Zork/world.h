@@ -11,6 +11,8 @@ class World : public Entity
 	
 public:
 	
+	typedef std::shared_ptr<Entity> ptrEntity;
+
 	World(std::vector<ptrEntity> v);
 	virtual ~World();
 	

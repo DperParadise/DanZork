@@ -2,6 +2,7 @@
 #define APPLICATION_H
 
 #include "globals.h"
+#include "entity.h"
 #include "world.h"
 #include "room.h"
 #include "item.h"
@@ -27,20 +28,19 @@ public:
 	typedef  std::shared_ptr<Weapon> ptrWeapon;
 	typedef  std::shared_ptr<Armor> ptrArmor;
 	
-	
 
 	Application();
 	void Init();
-	void Start();
+	void Start(Scenario scenario);
 	ReturnState Update();
 
 private:
 
 	std::map<Scenario, std::string> scenarioNames;
 
-	ptrWorld world;
+	ptrWorld world
 
-	//ITEMS (including weapons and armors)
+;	////ITEMS (including weapons and armors)
 	//cell
 	ptrItem mattress;
 	ptrItem bowl;
@@ -126,7 +126,7 @@ private:
 
 	//Aisle3
 	ptrExit aisle3WestExit;
-	ptrExit aisle3NorhtExit;
+	ptrExit aisle3NorthExit;
 	ptrExit aisle3ToolroomExit;
 
 	//Toolroom
@@ -154,11 +154,6 @@ private:
 	ptrCreature guardToolRoom;
 	ptrCreature guardSleeping;
 	ptrCreature officerMeetingRoom;
-
-	
-
-
-
 
 };
 

@@ -3,9 +3,10 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 
-void ParseInput(const std::string &inputString, std::vector<std::string> &inputWordsVector);
+//void ParseInput(const std::string &inputString, std::vector<std::string> &inputWordsVector);
 
 enum class Type { NPC, PLAYER, EXIT, ROOM, ITEM, WEAPON, ARMOR };
 
@@ -25,7 +26,6 @@ enum class Scenario {
 	MAIN_HALL,
 	MAIN_HALL_EXIT,
 	CELL_EXIT,
-	START,
 	QUIT,
 	ERROR
 };
@@ -40,7 +40,7 @@ enum class ReturnState {
 
 // CELL SCENARIO
 #define CELL_TITLE "Cell"
-#define CELL_INIT_DESC "There's an old dirty mattress on the floor, a window to the west and an door to the east with a small opening.\n"
+#define CELL_INIT_DESC "There's an old dirty mattress and a bowl on the floor, a window to the west and an door to the east with a small opening."
 #define CELL_MATTRESS "And old mattress"
 #define CELL_LOOK_MATTRESS "And old dirty mattres. I'm not going to lay on that."
 #define CELL_BOWL "wood bowl with something inside"

@@ -6,14 +6,15 @@
 #include <map>
 #include <memory>
 
-using namespace std;
+
 
 int main() 
 {
-	
-	Scenario scenario = Scenario::START;
+
+	/*std::unique_ptr<Application> ptrApp = unique_ptr<Application>(new Application());
+	Scenario scenario = Scenario::CELL;
 	bool play = true;
-	std::unique_ptr<Application> ptrApp(new Application);
+	
 	
 	ptrApp->Init();
 
@@ -21,39 +22,9 @@ int main()
 	{
 		switch (scenario)
 		{
-		case Scenario::START:
-			std::cout << "Hello World!\n";
-		}
-	}
-	
+		case Scenario::CELL:
+			ptrApp->Start(scenario);
 
-
-
-
-
-
-
-
-
-	/*
-	string input;
-	vector<string> wordsVector;
-	
-	cout << "> ";
-	getline(cin, input);
-
-	if (input.length() == 0)
-	{
-		cout << "Cadena vacia" << endl;
-	}
-	else
-	{
-		ParseInput(input, wordsVector);
-	}
-
-	for (const auto &elem : wordsVector) {
-		cout << elem << endl;
-	}*/
-
-	return 0;
+		}*/
 }
+	

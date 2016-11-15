@@ -1,5 +1,6 @@
 #include "globals.h"
 #include "application.h"
+#include <iostream>
 #include <list>
 
 Application::Application(){}
@@ -70,7 +71,7 @@ void Application::Init()
 	cell = ptrRoom(new Room(Type::ROOM, CELL_TITLE, CELL_INIT_DESC, { mattress, bowl, cellDoorExit, windowExit}));
 	aisle1 = ptrRoom(new Room(Type::ROOM, AISLE1_TITLE, AISLE1_INIT_DESC, { aisle1WestExit, aisle1DoorExit }));
 	aisle2 = ptrRoom(new Room(Type::ROOM, AISLE2_TITLE, AISLE2_INIT_DESC, { aisle2WestExit, aisle2ArmoryExit, aisle2GuadroomExit, aisle2EastExit }));
-	aisle3 = ptrRoom(new Room(Type::ROOM, AISLE3_TITLE, AISLE3_INIT_DESC, { aisle3WestExit, aisle3NorhtExit, aisle3ToolroomExit }));
+	aisle3 = ptrRoom(new Room(Type::ROOM, AISLE3_TITLE, AISLE3_INIT_DESC, { aisle3WestExit, aisle3NorthExit, aisle3ToolroomExit }));
 	armory = ptrRoom(new Room(Type::ROOM, ARMORY_TITLE, ARMORY_INIT_DESC, {shield, armoryCloset, armoryDoorExit}));
 	guardroom = ptrRoom(new Room(Type::ROOM, GUARDROOM_TITLE, GUARDROOM_INIT_DESC, { chairGuardroom, smallClosetGuardRoom, armoryKey, cleaningStaffKey, guardroomExit}));
 	toolroom = ptrRoom(new Room(Type::ROOM, TOOLROOM_TITLE, TOOLROOM_INIT_DESC, { twoHandedMace, toolsCloset, toolroomExit }));
@@ -102,7 +103,7 @@ void Application::Init()
 
 	//aisle3
 	aisle3WestExit = ptrExit(new Exit(Direction::WEST, aisle3, aisle2, true, Type::EXIT, EXIT_DESC, EXIT_DESC, {}));
-	aisle3NorhtExit = ptrExit(new Exit(Direction::NORTH, aisle3, upstairs, true, Type::EXIT, EXIT_STAIRS_DESC, EXIT_STAIRS_DESC, {}));
+	aisle3NorthExit = ptrExit(new Exit(Direction::NORTH, aisle3, upstairs, true, Type::EXIT, EXIT_STAIRS_DESC, EXIT_STAIRS_DESC, {}));
 	aisle3ToolroomExit = ptrExit(new Exit(Direction::SOUTH, aisle3, toolroom, true, Type::EXIT, DOOR_DESC, DOOR_DESC, {}));
 
 	//toolroom
@@ -133,9 +134,11 @@ void Application::Init()
 
 }
 
-void Application::Start()
+void Application::Start(Scenario scenario)
 {
+	//std::cout << "***" + scenarioNames[scenario] + "***" << std::endl;
 	
+
 }
 
 ReturnState Application::Update()
