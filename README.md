@@ -51,7 +51,8 @@ TAKE pigeon
 USE pigeon WITH opening  
 HIT guard  
 SEARCH guard  
-TAKE cell key  
+TAKE cell key 
+TAKE sword   
 DROP bar  
 DROP breadcrumbs  
 GO east  
@@ -82,17 +83,19 @@ GO north
 **Start: AISLE 2**     
 GO east   
 
-**Start: AISLE 3**       
+**Start: AISLE 3 (starting point for Exit 2 sequence )**       
 GO south  
 
 **Start: TOOLROOM**    
-HIT guard   
+HIT guard  
+DROP sword   
 OPEN closet   
 TAKE rope   
 TAKE mace   
 GO north   
 
-**Start: AISLE 3  (Here starts Exit 2 sequence )**     
+**Start: AISLE 3**
+
 GO west   
 
 **Start: AISLE 2**     
@@ -109,7 +112,7 @@ USE rope
 You are free in the woods.   
 
 **Exit 2 commands sequence**  
-Repeat steps from the first sequence until Start: AISLE 3   
+Repeat steps from the first sequence until starting point for Exit 2      
 
 **Start: AISLE 3**   
 GO north    
