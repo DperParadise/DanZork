@@ -8,13 +8,12 @@ class Item : public Entity
 {
 public:
 
-	typedef std::shared_ptr<Item> ptrParentItem;
+	typedef std::shared_ptr<Item> ptrItem;
 
-	Item(ptrParentItem parentItem, bool isOpen, bool isVisible, Type type, std::string name, std::string desc, std::list<ptrEntity> list);
-
-	ptrParentItem parentItem;
+	Item(bool isOpen, Type type, std::string name, std::string desc, std::list<ptrEntity> list);
+	virtual ~Item();
+	
 	bool isOpen;
-	bool isVisible;
 
 };
 

@@ -2,8 +2,11 @@
 
 Npc::Npc(
 	bool isBoss,
-	ptrParentItem parentItem,
 	ptrRoom loc,
+	int hp,
+	int defense,
+	int attack,
 	Type type,
 	std::string name,
-	std::string desc, std::list<ptrEntity> list) : isBoss(isBoss), Creature(loc, parentItem, type, name, desc, list) {}
+	std::string desc,
+	std::list<ptrEntity> list) : isBoss(isBoss), Creature(loc, hp, defense, attack, type, name, desc, list) {}

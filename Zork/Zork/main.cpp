@@ -1,23 +1,45 @@
 #include "globals.h"
+#include "application.h"
 #include <iostream>
 #include <string>
 #include <vector>
 #include <map>
+#include <memory>
 
 using namespace std;
 
 int main() 
 {
-	string input;
-	vector<string> wordsVector;
-	map<Scenario, string> scenarioNames;
+	
+	Scenario scenario = Scenario::START;
+	bool play = true;
+	std::unique_ptr<Application> ptrApp(new Application);
+	
+	ptrApp->Init();
 
+	while (play)
+	{
+		switch (scenario)
+		{
+		case Scenario::START:
+			std::cout << "Hello World!\n";
+		}
+	}
 	
 
 
 
 
-	/*cout << "> ";
+
+
+
+
+
+	/*
+	string input;
+	vector<string> wordsVector;
+	
+	cout << "> ";
 	getline(cin, input);
 
 	if (input.length() == 0)

@@ -3,10 +3,12 @@
 
 Creature::Creature(
 	ptrRoom location,
-	ptrParentItem parentItem,
+	int hp,
+	int defense, 
+	int attack,
 	Type type,
 	std::string name,
 	std::string desc,
-	std::list<ptrEntity> list) : location(location), parentItem(parentItem), Entity(type, name, desc, list) {}
+	std::list<ptrEntity> list) : location(location), hp(hp), defense(defense), attack(attack), Entity(type, name, desc, list) {}
 
 Creature::~Creature() {}
