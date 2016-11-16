@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="commands.h" />
     <ClInclude Include="world.h" />
     <ClInclude Include="armor.h" />
     <ClInclude Include="creature.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="weapon.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="commands.cpp" />
     <ClCompile Include="world.cpp" />
     <ClCompile Include="armor.cpp" />
     <ClCompile Include="creature.cpp" />

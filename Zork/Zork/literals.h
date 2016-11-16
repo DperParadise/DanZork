@@ -22,7 +22,7 @@ std::string CELL_LOOK_WINDOW_NO_BARS = "A window hole.";
 std::string CELL_WINDOW = "Window";
 std::string CELL_LOOK_WINDOW = "A barred window.\nThe bars are old and rusty, one of them seems to be a bit loose.\nYou can hear birds singing outside near the window. You see treetops.";
 std::string CELL_LOOK_DOOR_OPENING = "Door opening to give meals to prisoners.\nA guard is sitting in a desk in the middle of an aisle. He wanders around and sits back again";
-std::string CELL_LOOK_DOOR = "The door is made of iron. It has a small squared opening";
+std::string CELL_LOOK_DOOR = "The door is made of iron. It has a small opening";
 std::string CELL_LOOK_GUARD = "A cell guard. Was he the one who pushed me into the cell? Grgrgr.";
 std::string CELL_LOOK_DEAD_GUARD = "A dead guard lays on the floor.";
 std::string CELL_SEARCH_GUARD_DEAD = "He has a cell key in his pocket";
@@ -140,7 +140,7 @@ std::string MAIN_HALL_BRIBE_SUCCESS = "The guard accepts the bag\nGuard: Get out
 std::string MAIN_HALL_BRIBE_FAILURE = "The guard refuses your money and hits you with his sword. You were so close to freedom but now it's time to sleep. Rest in peace.";
 std::string MAIN_HALL_EXIT_GUARD_CLOTHES = "You open the door an a guard standing next to the entrance notices you: \nGuard:Hey! How are you? You are the new one, aren't you?\nYou: Ehhmm yes, it's my break time.\nGuard: OK boy, take it easy, see you.";
 std::string MAIN_HALL_EXIT_SUCCESS = "You walk away taking a deep breath. At last you are free. Well done!";
-
+std::string MAIN_HALL_KEY = "Main Hall Key";
 
 // GENERAL
 std::string BAD_IDEA = "That's not a good idea.";
@@ -157,6 +157,13 @@ std::string CHAIR = "Chair";
 std::string LOOK_CHAIR = "A pine wood chair.";
 std::string GUARD = "Cell guard";
 std::string OFFICER = "Prison officer";
+std::string PLAYER = "Player";
+std::string LOOK_PLAYER = "It's me!.";
+std::string HIT_MESSAGE = "Your hit damage: ";
 
-
+// COMMANDS LIST
+std::string COMMANDS_LIST = "I: Shows your inventory\nQ: Quit the game\nTAKE something: you pick up something\nDROP something\nPUT something INTO something\nHIT someone\nLOOk something/someone\nSEARCH someone\nOPEN something\nCLOSE something\nTIE something TO something\nDETACH something FROM something\nGO north,n\nGO south,s\nGO east,e\nGO west,w\n";
+std::string PLAYER_NO_ITEMS = "You don't have any items.";
+std::string TAKE_ITEM = "You have taken an item.";
+std::string MAX_INV = "You can't carry more than five objects";
 #endif //LITERALS_H

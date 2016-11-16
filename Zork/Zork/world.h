@@ -36,8 +36,10 @@ private:
 
 	std::map<Scenario, std::string> scenarioNames;
 	std::map<std::string, std::string> literalsMap;
+	std::vector<std::string> playerWordsVector;
+	std::string playerCleanInput;
 
-	void LoadLiterals();
+	//void LoadLiterals();
 	ptrEntity GetLocation(const Scenario& sc) const;
 
 ;	////ITEMS (including weapons and armors)
@@ -99,7 +101,7 @@ private:
 	ptrRoom guardroom;
 	ptrRoom toolroom;
 	ptrRoom upstairs;
-	ptrRoom guardsBedroom;
+	ptrRoom guardsBedroom ;
 	ptrRoom meetingsRoom;
 	ptrRoom mainHall;
 	

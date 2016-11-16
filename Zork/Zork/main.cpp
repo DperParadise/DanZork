@@ -12,7 +12,7 @@ int main()
 {
 	
 	std::unique_ptr<World> ptrWorld = std::unique_ptr<World>(new World());
-	ReturnState ret = ReturnState::CONTINUE;
+	ReturnState ret = ReturnState::STAY;
 	ptrWorld->Init();
 	
 	while (ret != ReturnState::ERROR && ret != ReturnState::QUIT)
@@ -21,16 +21,22 @@ int main()
 		{
 		case Scenario::CELL:
 			ret = ptrWorld->Start();
-			if (ret == ReturnState::CONTINUE)
+			while (ret == ReturnState::STAY)
 			{
 				ret = ptrWorld->Update();
-				getchar(); //wait
+
+
+				//getchar(); //wait
 			}
 			break;
 		
 		}
 	}
 	// Miro si salgo por un error o por Q
+	if (ret == ReturnState::QUIT)
+		std::cout << "Thanks for Playing Zorky\n" << std::endl;
+	if (ret == ReturnState::ERROR)
+		std::cout << "Error" << std::endl;
 
 	return 0;
 }

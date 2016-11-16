@@ -2,11 +2,14 @@
 #define GLOBALS_H
 
 #include <string>
+#include <algorithm>
 #include <vector>
 #include <memory>
 
 
 void ParseInput(const std::string &inputString, std::vector<std::string> &inputWordsVector);
+std::string ToUpper(std::string s1);
+
 
 enum class Type { NPC, PLAYER, EXIT, ROOM, ITEM, WEAPON, ARMOR };
 
@@ -32,7 +35,7 @@ extern Scenario scenarioGlobal;
 
 enum class ReturnState {
 	STAY,
-	CONTINUE,
+	NEXT_ROOM,
 	ERROR,
 	QUIT
 };

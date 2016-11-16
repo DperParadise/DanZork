@@ -18,6 +18,7 @@ public:
 	Entity(Type type, const std::string &name, const std::string &description, std::list<ptrEntity> &&list);
 	virtual ~Entity();
 
+
 	Type type;
 	std::string name;
 	std::string description;
