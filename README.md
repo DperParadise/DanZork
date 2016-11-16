@@ -12,7 +12,7 @@ GitHub link: https://github.com/DperParadise/Zork
 
 **H**: Shows you a list of accepted commands in game  
 **I**: Shows your inventory  
-**Q**: Quit Menu. You can either restart or quit the game.  
+**Q**: Quit the game.   
 **TAKE** "something/someone": you pick up "something/someone".  
 **DROP** "something/someone": you drop the item right where you are.  
 **PUT** "something/someone" **INTO** "something": punt one item into another.  
@@ -21,9 +21,9 @@ GitHub link: https://github.com/DperParadise/Zork
 **SEARCH** "someone": you search someone's belongings.  
 **OPEN** "something".   
 **CLOSE** "something".  
-**USE** "something".  
-**COMBINE** "something" **WITH** "something".  
-**DETACH** "something" **FROM** "something": splits two combined objects.  
+**USE** "something" **WITH** "something".  
+**TIE** "something" **TO** "something".  
+**DETACH** "something" **FROM** "something": splits two tied objects.  
 **GO NORTH**: move towards north.      
 **N**: move towards north.      
 **GO SOUTH**: move towards south.      
