@@ -51,7 +51,7 @@ TAKE pigeon
 USE pigeon WITH opening  
 HIT guard  
 SEARCH guard  
-TAKE cell key 
+TAKE cell key   
 TAKE sword   
 DROP bar  
 DROP breadcrumbs  
@@ -75,8 +75,7 @@ OPEN south door
 
 **Start: ARMORY**    
 USE chair  
-TAKE shield   
-TAKE sword   
+TAKE shield     
 DROP armory key   
 GO north  
 
