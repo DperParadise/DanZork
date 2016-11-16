@@ -7,6 +7,6 @@ Npc::Npc(
 	int defense,
 	int attack,
 	Type type,
-	std::string name,
-	std::string desc,
-	std::list<ptrEntity> list) : isBoss(isBoss), Creature(loc, hp, defense, attack, type, name, desc, list) {}
+	const std::string &name,
+	const std::string &desc,
+	std::list<ptrEntity> &&list) : isBoss(isBoss), Creature(loc, hp, defense, attack, type, name, desc, std::move(list)) {}

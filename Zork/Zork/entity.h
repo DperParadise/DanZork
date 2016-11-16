@@ -15,7 +15,7 @@ public:
 	typedef std::shared_ptr<Entity> ptrEntity;
 	
 	Entity();
-	Entity(Type type, std::string name, std::string description, std::list<ptrEntity> list);
+	Entity(Type type, const std::string &name, const std::string &description, std::list<ptrEntity> &&list);
 	virtual ~Entity();
 
 	Type type;

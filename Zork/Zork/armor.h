@@ -10,7 +10,7 @@ public:
 
 	typedef std::shared_ptr<Armor> ptrArmor;
 
-	Armor(int defense, bool isOpen, Type type, std::string name, std::string description, std::list<ptrEntity> list);
+	Armor(int defense, ptrEntity parentEntity, bool isOpen, Type type, const std::string &name, const std::string &description, std::list<ptrEntity> &&list);
 
 	int defense;
 

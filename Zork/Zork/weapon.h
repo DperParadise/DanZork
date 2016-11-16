@@ -8,10 +8,10 @@ class Weapon : public Item
 {
 public:
 	
-	Weapon(int attack, bool isOpen, Type type, std::string name, std::string description, std::list<ptrEntity> list);
+	Weapon(bool isAttachedToRope, int attack, ptrEntity parentEntity, bool isOpen, Type type, const std::string &name, const std::string &description, std::list<ptrEntity> &&list);
 
 	int attack;
-	
+	bool isAttachedToRope;
 
 };
 

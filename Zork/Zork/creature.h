@@ -15,7 +15,7 @@ public:
 
 	typedef std::shared_ptr<Room> ptrRoom;
 	
-	Creature(ptrRoom location, int hp, int defense, int attack, Type type, std::string name, std::string desc, std::list<ptrEntity> list);
+	Creature(ptrRoom location, int hp, int defense, int attack, Type type, const std::string &name, const std::string &desc, std::list<ptrEntity> &&list);
 	virtual ~Creature();
 
 	ptrRoom location;

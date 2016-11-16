@@ -2,6 +2,6 @@
 
 Room::Room(
 	Type type,
-	std::string name,
-	std::string desc,
-	std::list<ptrEntity> list) : Entity(type, name, desc, list) {}
+	const std::string &name,
+	const std::string &desc,
+	std::list<ptrEntity> &&list) : Entity(type, name, desc, std::move(list)) {}

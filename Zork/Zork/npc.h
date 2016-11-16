@@ -7,7 +7,7 @@ class Npc : public Creature
 {
 public:
 
-	Npc(bool isBoss, ptrRoom loc, int hp, int defense, int attack, Type type, std::string name, std::string desc, std::list<ptrEntity> list);
+	Npc(bool isBoss, ptrRoom loc, int hp, int defense, int attack, Type type, const std::string &name, const std::string &desc, std::list<ptrEntity> &&list);
 
 	bool isBoss;
 };

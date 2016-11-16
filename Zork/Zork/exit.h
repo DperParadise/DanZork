@@ -12,7 +12,7 @@ public:
 
 	typedef std::shared_ptr<Room> ptrRoom;
 
-	Exit(Direction dir, ptrRoom src, ptrRoom dest, bool isOpen, Type type, std::string name, std::string desc, std::list<ptrEntity> list);
+	Exit(Direction dir, ptrRoom src, ptrRoom dest, bool isOpen, Type type, const std::string &name, const std::string &desc, std::list<ptrEntity> &&list);
 
 	Direction direction;
 	ptrRoom source;

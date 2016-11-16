@@ -7,8 +7,8 @@ Creature::Creature(
 	int defense, 
 	int attack,
 	Type type,
-	std::string name,
-	std::string desc,
-	std::list<ptrEntity> list) : location(location), hp(hp), defense(defense), attack(attack), Entity(type, name, desc, list) {}
+	const std::string &name,
+	const std::string &desc,
+	std::list<ptrEntity> &&list) : location(location), hp(hp), defense(defense), attack(attack), Entity(type, name, desc, std::move(list)) {}
 
 Creature::~Creature() {}

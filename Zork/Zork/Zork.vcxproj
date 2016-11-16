@@ -142,21 +142,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="application.h" />
+    <ClInclude Include="world.h" />
     <ClInclude Include="armor.h" />
     <ClInclude Include="creature.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="exit.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="item.h" />
+    <ClInclude Include="literals.h" />
     <ClInclude Include="npc.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="room.h" />
     <ClInclude Include="weapon.h" />
-    <ClInclude Include="world.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="application.cpp" />
+    <ClCompile Include="world.cpp" />
     <ClCompile Include="armor.cpp" />
     <ClCompile Include="creature.cpp" />
     <ClCompile Include="entity.cpp" />
@@ -168,7 +168,6 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="room.cpp" />
     <ClCompile Include="weapon.cpp" />
-    <ClCompile Include="world.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
