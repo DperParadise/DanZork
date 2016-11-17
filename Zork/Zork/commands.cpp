@@ -4,11 +4,8 @@ void TransferItem(ptrItem ptrSrc, ptrEntity ptrDst)
 {
 	ptrDst->contains.push_back(ptrSrc);
 
-	ptrEntity  parentEntity = ptrSrc->parentEntity;
-	std::list<ptrEntity> listParent = parentEntity->contains;
-
-	listIter found = FindEntity(ptrSrc, listParent);
-	listParent.erase(found);
+	listIter found = FindEntity(ptrSrc, ptrSrc->parentEntity->contains);
+	ptrSrc->parentEntity->contains.erase(found);
 	ptrSrc->parentEntity = ptrDst;
 }
 
@@ -28,6 +25,10 @@ void Take(ptrPlayer player, ptrItem item) {
 	TransferItem(item, player);
 }
 
+void Drop(ptrPlayer player, ptrItem item) {
+	TransferItem(item, player->location);
+}
+//only if item isOpen
 void PutInto(ptrItem playerItem, ptrItem item) {
 	TransferItem(playerItem, item);
 }
@@ -36,10 +37,11 @@ void OpenExit(ptrExit exit)
 {
 	exit->isOpen = true;
 }
-
-void OpenItem(ptrItem item)
+//take items to the room
+void OpenItem(ptrItem item, ptrPlayer player)
 {
 	item->isOpen = true;
+	TransferItem(item, player->location);
 }
 
 void CloseExit(ptrExit exit)
@@ -55,10 +57,26 @@ void CloseItem(ptrItem item)
 listIter FindEntity(ptrEntity entity, std::list<ptrEntity> &list)
 {
 	bool found = false;
-	listIter iterator;
+	listIter iterator = list.end();
 	for (listIter it = list.begin(); it != list.end() && !found; std::advance(it, 1))
 	{
 		if ((*it)->name == entity->name)
+		{
+			found = true;
+			iterator = it;
+		}
+	}
+
+	return iterator;
+}
+
+listIter FindEntityByName(std::string entityName, std::list<ptrEntity> &list)
+{
+	bool found = false;
+	listIter iterator = list.end();
+	for (listIter it = list.begin(); it != list.end() && !found; std::advance(it, 1))
+	{
+		if (ToUpper((*it)->name) == entityName)
 		{
 			found = true;
 			iterator = it;
@@ -109,5 +127,8 @@ void Search(ptrNpc npc, ptrPlayer player)
 
 void Look(ptrEntity entity)
 {
-	std::cout << entity->description << std::endl;
+	for (ptrEntity elem : entity->contains)
+	{	
+		std::cout << elem->description << std::endl;
+	}
 }

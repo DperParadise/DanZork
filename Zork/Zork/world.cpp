@@ -29,10 +29,10 @@ void World::Init()
 	//INSTANTIATE EXITS
 	//cell
 	windowExit = ptrExit(new Exit(Direction::WEST, cell, nullptr, false, Type::EXIT, CELL_WINDOW, CELL_LOOK_WINDOW, {}));
-	cellDoorExit = ptrExit(new Exit(Direction::EAST, cell, aisle1, false, Type::EXIT, CELL_LOOK_DOOR, CELL_LOOK_DOOR, {}));
+	cellDoorExit = ptrExit(new Exit(Direction::EAST, cell, aisle1, false, Type::EXIT, CELL_DOOR, CELL_LOOK_DOOR, {}));
 
 	//aisle1
-	aisle1DoorExit = ptrExit(new Exit(Direction::EAST, aisle1, aisle2, false, Type::EXIT, DOOR, DOOR_DESC, {}));
+	aisle1DoorExit = ptrExit(new Exit(Direction::EAST, aisle1, aisle2, false, Type::EXIT, AISLE1_DOOR, DOOR_DESC, {}));
 	aisle1WestExit = ptrExit(new Exit(Direction::WEST, aisle1, cell, false, Type::EXIT, EXIT_DESC, EXIT_DESC, {}));
 
 	//aisle2
@@ -152,11 +152,12 @@ void World::Init()
 	//cell
 	mattress = ptrItem(new Item(cell, false, Type::ITEM, CELL_MATTRESS, CELL_LOOK_MATTRESS, {}));
 	breadcrumbs = ptrItem(new Item(cell, false, Type::ITEM, CELL_BREADCRUMBS, CELL_LOOK_BREADCRUMBS, {}));
-	bowl = ptrItem(new Item(cell, false, Type::ITEM, CELL_BOWL, CELL_LOOK_BOWL, {breadcrumbs}));
+	bowl = ptrItem(new Item(cell, false, Type::ITEM, CELL_BOWL, CELL_LOOK_BOWL, {}));
 	pigeon = ptrItem(new Item({}, false, Type::ITEM, CELL_PIGEON, CELL_LOOK_PIGEON, {}));
-	bar = ptrItem(new Item({}, false, Type::ITEM, CELL_IRON_BAR, CELL_LOOK_IRON_BAR, {}));
-	window = ptrItem(new Item(cell, false, Type::ITEM, CELL_WINDOW, CELL_LOOK_WINDOW, {bar,pigeon, windowExit}));
-	pigeon->parentEntity = window;
+	bar = ptrItem(new Item({}, false, Type::ITEM, CELL_BAR, CELL_LOOK_IRON_BAR, {}));
+	window = ptrItem(new Item(cell, false, Type::ITEM, CELL_WINDOW, CELL_LOOK_WINDOW, {bar, windowExit}));
+	//pigeon outside
+	pigeon->parentEntity = ptrEntity(nullptr);
 	bar->parentEntity = window;
 
 	//aisle1
@@ -203,7 +204,7 @@ void World::Init()
 	mainHallDoorKey = ptrItem(new Item(nullptr, false, Type::ITEM, MAIN_HALL_KEY, MAIN_HALL_KEY, {}));
 
 	//UPDATE ROOMS' ITEMS
-	cell->contains = { mattress, bowl, cellDoorExit, window };
+	cell->contains = { mattress, bowl, breadcrumbs, cellDoorExit, window };
 	aisle1->contains = { aisle1WestExit, aisle1DoorExit };
 	aisle2->contains = { aisle2WestExit, aisle2ArmoryExit, aisle2GuadroomExit, aisle2EastExit };
 	aisle3->contains = { aisle3WestExit, aisle3NorthExit, aisle3ToolroomExit };
@@ -250,121 +251,169 @@ ReturnState World::Update()
 {
 	std::string inputCommand;
 	std::getline(std::cin, inputCommand);
-
+	fflush(stdin);
 	ParseInput(inputCommand, playerWordsVector);
 	
-	playerCleanInput = "";
-	for (std::string elem : playerWordsVector)
+	if (playerWordsVector.size() == 1) 
 	{
-		playerCleanInput += elem + " ";
-	}
-	
-	if (playerCleanInput == "H ")
-	{
-		std::cout << COMMANDS_LIST << std::endl << std::endl;
 
-	}
-
-	if (playerCleanInput == "I ")
-	{	
-		if ((player->contains).size() != 0)
+		if (playerWordsVector[0] == "H")
 		{
-			for (ptrEntity elem : player->contains)
+			std::cout << COMMANDS_LIST << std::endl;
+			return ReturnState::STAY;
+		}
+		else if (playerWordsVector[0] == "I")
+		{
+			if ((player->contains).size() != 0)
 			{
-				ptrItem item = std::dynamic_pointer_cast<Item>(elem);
-				std::cout << item->name << std::endl;
-				
+				for (ptrEntity elem : player->contains)
+				{
+					ptrItem item = std::dynamic_pointer_cast<Item>(elem);
+					std::cout << item->name << std::endl;
+
+				}
+				std::cout << std::endl << std::endl;
+				return ReturnState::STAY;
+			}
+			else {
+				std::cout << PLAYER_NO_ITEMS << std::endl << std::endl;
+				return ReturnState::STAY;
 			}
 		}
-		else {
-			std::cout << PLAYER_NO_ITEMS << std::endl << std::endl;
-			
+		else if (playerWordsVector[0] == "Q")
+		{
+			return ReturnState::QUIT;
+		}
+		else
+		{
+			std::cout << DONT_UNDERSTAND << std::endl << std::endl;
+			return ReturnState::STAY;
 		}
 	}
-
-	if (playerCleanInput == "Q ")
+	if (playerWordsVector.size() == 2 && playerWordsVector[0] == "LOOK")
 	{
-		return ReturnState::QUIT;
+		if (playerWordsVector[1] == "PLAYER" || playerWordsVector[1] == "ME" || playerWordsVector[1] == "MYSELF")
+		{
+			std::cout << LOOK_PLAYER << std::endl << std::endl;
+			return ReturnState::STAY;
+		}
 	}
 	switch (scenarioGlobal)
 	{
 		case Scenario::CELL:
-			if (playerCleanInput == "LOOK CELL ")
-			{
-				std::cout << CELL_INIT_DESC << std::endl << std::endl;
-				return ReturnState::STAY;
-			}
-			if (playerCleanInput == "LOOK MATTRESS ")
-			{
-				std::cout << CELL_LOOK_MATTRESS << std::endl << std::endl;
-				return ReturnState::STAY;
-			}
-			if (playerCleanInput == "LOOK BOWL ")
-			{
-				std::cout << CELL_LOOK_BOWL << std::endl << std::endl;
-				return ReturnState::STAY;
-			}
-			if (playerCleanInput == "LOOK WINDOW ")
-			{
-				std::cout << CELL_LOOK_WINDOW << std::endl << std::endl;
-				return ReturnState::STAY;
-			}
-			if (playerCleanInput == "LOOK DOOR ")
-			{
-				std::cout << CELL_LOOK_DOOR << std::endl << std::endl;
-				return ReturnState::STAY;
-			}
-			if (playerCleanInput == "LOOK DOOR OPENING " || playerCleanInput == "LOOK SMALL OPENING ")
-			{
-				std::cout << CELL_LOOK_DOOR_OPENING << std::endl << std::endl;
-				return ReturnState::STAY;
-			}
-			if (playerCleanInput == "LOOK GUARD ")
-			{
-				if (guardAisle1->hp > 0)
-					std::cout << CELL_LOOK_GUARD << std::endl << std::endl;
-				if (guardAisle1->hp <= 0)
-					std::cout << CELL_LOOK_DEAD_GUARD << std::endl << std::endl;
-					
-				return ReturnState::STAY;
-			}			
-			if (playerCleanInput == "TAKE BOWL ")
-			{
-				if (player->contains.size() < 5)
-					Take(std::dynamic_pointer_cast<Player>(player), bowl);
-				else
+			if (playerWordsVector.size() == 2 && playerWordsVector[0] == "LOOK")
+			{ 
+				if (playerWordsVector[1] == "CELL")
 				{
-					std::cout << MAX_INV << std::endl;
+					Look(cell);
+					std::cout << std::endl;
 					return ReturnState::STAY;
 				}
+				
+
+				listIter iterItemInRoom= FindEntityByName(playerWordsVector[1], cell->contains);
+				listIter iterItemInPlayer = FindEntityByName(playerWordsVector[1], player->contains);
+
+				if (iterItemInRoom != cell->contains.end())
+				{
+					std::cout << (*iterItemInRoom)->description << std::endl << std::endl;
+					return ReturnState::STAY;
+				}
+				if (iterItemInPlayer != player->contains.end())
+				{
+					std::cout << (*iterItemInPlayer)->description << std::endl << std::endl;
+					return ReturnState::STAY;
+				}
+				else
+				{
+					std::cout << NO_ITEM_IN_ROOM << std::endl << std::endl;
+					return ReturnState::STAY;
+				}
+			}
+			else if (playerWordsVector.size() == 2 && playerWordsVector[0] == "TAKE")
+			{
+				//Revisar, no funciona para bar dentro de window dentro de cell. Habrá que buscar el item en la lista del world, hay que crearla
+				listIter iter = FindEntityByName(playerWordsVector[1], cell->contains);
+				if (iter != cell->contains.end())
+				{
+					Take(std::dynamic_pointer_cast<Player>(player), std::dynamic_pointer_cast<Item>(*iter));
+					std::cout << TAKE_ITEM << std::endl << std::endl;
+					return ReturnState::STAY;
+				}
+				else
+				{
+					std::cout << NO_ITEM_IN_ROOM << std::endl << std::endl;
+					return ReturnState::STAY;
+				}
+			}
+			else if (playerWordsVector.size() == 2 && playerWordsVector[0] == "DROP")
+			{
+				listIter iter = FindEntityByName(playerWordsVector[1], player->contains);
+
+				if (iter != player->contains.end())
+				{
+					Drop(std::dynamic_pointer_cast<Player>(player), std::dynamic_pointer_cast<Item>(*iter));
+					std::cout << DROP_ITEM << std::endl << std::endl;
+					return ReturnState::STAY;
+				}
+				else
+				{
+					std::cout << NO_ITEM_IN_INV << std::endl << std::endl;
+					return ReturnState::STAY;
+				}
+			}
+			else {
+				std::cout << DONT_UNDERSTAND << std::endl << std::endl;
+				return ReturnState::STAY;
 			}
 
-			if (playerCleanInput == "TAKE BAR ")
-			{
-				if (player->contains.size() < 5)
-					Take(std::dynamic_pointer_cast<Player>(player), bar);
-				else
-				{
-					std::cout << MAX_INV << std::endl;
-					return ReturnState::STAY;
-				}
-			}
+			///////
+						
 			
-			if (playerCleanInput == "TAKE BREADCRUMBS ")
-			{
-				if (player->contains.size() < 5)
-					Take(std::dynamic_pointer_cast<Player>(player), breadcrumbs);
-				else
-				{
-					std::cout << MAX_INV << std::endl;
-					return ReturnState::STAY;
-				}
-			}
-			
-			
-			else {
-				std::cout << BAD_IDEA << std::endl << std::endl;
-			}
+			//
+			//else if (playerCleanInput == "DROP BOWL ")
+			//{
+			//	listIter iterator = FindEntity(bowl, player->contains);
+			//	if (iterator != player->contains.end())
+			//	{
+			//		Drop(std::dynamic_pointer_cast<Player>(player), std::dynamic_pointer_cast<Item>(*iterator));
+			//		std::cout << DROP_ITEM << std::endl << std::endl;
+			//	}
+			//	else
+			//	{
+			//		std::cout << NO_ITEM_IN_INV << std::endl << std::endl;
+			//	}
+			//	return ReturnState::STAY;
+			//}
+
+			//else if (playerCleanInput == "DROP BAR ")
+			//{
+			//	listIter iterator = FindEntity(bar, player->contains);
+			//	if (iterator != player->contains.end())
+			//	{
+			//		Drop(std::dynamic_pointer_cast<Player>(player), std::dynamic_pointer_cast<Item>(*iterator));
+			//		std::cout << DROP_ITEM << std::endl << std::endl;
+			//	}
+			//	else
+			//	{
+			//		std::cout << NO_ITEM_IN_INV << std::endl << std::endl;
+			//	}
+			//	return ReturnState::STAY;
+			//}
+			//else if (playerCleanInput == "DROP BREADCRUMBS ")
+			//{
+			//	listIter iterator = FindEntity(breadcrumbs, player->contains);
+			//	if (iterator != player->contains.end())
+			//	{
+			//		Drop(std::dynamic_pointer_cast<Player>(player), std::dynamic_pointer_cast<Item>(*iterator));
+			//		std::cout << DROP_ITEM << std::endl << std::endl;
+			//	}
+			//	else
+			//	{
+			//		std::cout << NO_ITEM_IN_INV << std::endl << std::endl;
+			//	}
+			//	return ReturnState::STAY;
+			//}
 	}
 	return ReturnState::STAY;
 }

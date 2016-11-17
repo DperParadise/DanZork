@@ -7,14 +7,15 @@
 
 // CELL SCENARIO
 std::string CELL_TITLE = "Cell";
-std::string CELL_INIT_DESC = "There's an old dirty mattress and a bowl on the floor,\na window to the west and an door to the east with a small opening.";
+std::string CELL_INIT_DESC = "There's an old dirty mattress, a bowl and a breadcrumbs on the floor,\na window to the west and an door to the east with a small opening.";
 std::string CELL_MATTRESS = "Mattress";
 std::string CELL_LOOK_MATTRESS = "And old dirty mattres. I'm not going to lay on that.";
 std::string CELL_BOWL = "Bowl";
-std::string CELL_LOOK_BOWL = "It's a wood bowl with breadcrumbs. It smells like rancid nuts.";
+std::string CELL_DOOR = "Door";
+std::string CELL_LOOK_BOWL = "A wood bowl. It smells like rancid nuts.";
 std::string CELL_PIGEON = "Pigeon";
 std::string CELL_LOOK_PIGEON = "It's a young rock pigeon. It was easy to catch.";
-std::string CELL_IRON_BAR = "Bar";
+std::string CELL_BAR = "Bar";
 std::string CELL_LOOK_IRON_BAR = "It's a slightly rusty iron bar.";
 std::string CELL_BREADCRUMBS = "breadcrumbs";
 std::string CELL_LOOK_BREADCRUMBS = "Dry breadcrumbs. Only an animal would eat this.";
@@ -22,7 +23,7 @@ std::string CELL_LOOK_WINDOW_NO_BARS = "A window hole.";
 std::string CELL_WINDOW = "Window";
 std::string CELL_LOOK_WINDOW = "A barred window.\nThe bars are old and rusty, one of them seems to be a bit loose.\nYou can hear birds singing outside near the window. You see treetops.";
 std::string CELL_LOOK_DOOR_OPENING = "Door opening to give meals to prisoners.\nA guard is sitting in a desk in the middle of an aisle. He wanders around and sits back again";
-std::string CELL_LOOK_DOOR = "The door is made of iron. It has a small opening";
+std::string CELL_LOOK_DOOR = "A door made of iron. It has a small opening";
 std::string CELL_LOOK_GUARD = "A cell guard. Was he the one who pushed me into the cell? Grgrgr.";
 std::string CELL_LOOK_DEAD_GUARD = "A dead guard lays on the floor.";
 std::string CELL_SEARCH_GUARD_DEAD = "He has a cell key in his pocket";
@@ -43,6 +44,7 @@ std::string CELL_EXIT_SUCCESS = "You enter the woods.\nAt last you are free. Goo
 std::string AISLE1_TITLE = "Cells Aisle";
 std::string AISLE1_INIT_DESC = "Light come through small holes along the walls. To the east stands a door. To the west, your cell.";
 std::string AISLE1_LOOK_DOOR = "The door is made of iron.";
+std::string AISLE1_DOOR = "Door";
 std::string AISLE1_DESK = "Desk";
 std::string AISLE1_LOOK_DESK = "A wood desk. There's something carved on it: DUMB WHO READS IT";
 
@@ -51,12 +53,16 @@ std::string AISLE2_TITLE = "Armoy Aisle";
 std::string AISLE2_INIT_DESC = "There's a door to the north, another to the south and the cells aisle to the west.\nTo the east the intendence aisle leeds to the upstairs floor";
 std::string AISLE2_LOOK_NORTH_DOOR = "An iron door.";
 std::string AISLE2_LOOK_SOUTH_DOOR = "An iron door.";
+std::string AISLE2_DOOR = "Door";
+std::string AISLE2_EXIT = "Exit";
 
 // AISLE 3 SCENARIO
 std::string AISLE3_TITLE = "Intendence Aisle";
 std::string AISLE3_INIT_DESC = "To the north you can see stairs going up the upper floor.\nTo the south there's a half opened door. To the west, the armory aisle.";
 std::string AISLE3_LOOK_UPSTAIRS = "Stairs leading to the upper floor.";
 std::string AISLE3_LOOK_SOUTH_DOOR = "An iron door.";
+std::string AISLE3_DOOR = "Door";
+std::string AISLE3_EXIT = "Exit";
 
 // ARMORY SCENARIO
 std::string ARMORY_TITLE = "Armory";
@@ -165,5 +171,9 @@ std::string HIT_MESSAGE = "Your hit damage: ";
 std::string COMMANDS_LIST = "I: Shows your inventory\nQ: Quit the game\nTAKE something: you pick up something\nDROP something\nPUT something INTO something\nHIT someone\nLOOk something/someone\nSEARCH someone\nOPEN something\nCLOSE something\nTIE something TO something\nDETACH something FROM something\nGO north,n\nGO south,s\nGO east,e\nGO west,w\n";
 std::string PLAYER_NO_ITEMS = "You don't have any items.";
 std::string TAKE_ITEM = "You have taken an item.";
+std::string NO_ITEM_IN_INV = "You don't have the item.";
+std::string NO_ITEM_IN_ROOM = "No such an item in the room.";
+std::string DROP_ITEM = "You have dropped an item.";
 std::string MAX_INV = "You can't carry more than five objects";
+std::string ENEMY_NOT_HERE = "There's no one to fight here";
 #endif //LITERALS_H
