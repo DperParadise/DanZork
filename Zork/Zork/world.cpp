@@ -155,10 +155,10 @@ void World::Init()
 	bowl = ptrItem(new Item(cell, false, Type::ITEM, CELL_BOWL, CELL_LOOK_BOWL, {}));
 	pigeon = ptrItem(new Item({}, false, Type::ITEM, CELL_PIGEON, CELL_LOOK_PIGEON, {}));
 	bar = ptrItem(new Item({}, false, Type::ITEM, CELL_BAR, CELL_LOOK_IRON_BAR, {}));
-	window = ptrItem(new Item(cell, false, Type::ITEM, CELL_WINDOW, CELL_LOOK_WINDOW, {bar, windowExit}));
+	//window = ptrItem(new Item(cell, true, Type::ITEM, CELL_WINDOW, CELL_LOOK_WINDOW, {bar, windowExit}));
 	//pigeon outside
 	pigeon->parentEntity = ptrEntity(nullptr);
-	bar->parentEntity = window;
+	bar->parentEntity = cell;
 
 	//aisle1
 	chairAisle1 = ptrItem(new Item(aisle1, false, Type::ITEM, CHAIR, LOOK_CHAIR, {}));
@@ -204,7 +204,7 @@ void World::Init()
 	mainHallDoorKey = ptrItem(new Item(nullptr, false, Type::ITEM, MAIN_HALL_KEY, MAIN_HALL_KEY, {}));
 
 	//UPDATE ROOMS' ITEMS
-	cell->contains = { mattress, bowl, breadcrumbs, cellDoorExit, window };
+	cell->contains = { mattress, bowl, breadcrumbs, cellDoorExit, windowExit, bar };
 	aisle1->contains = { aisle1WestExit, aisle1DoorExit };
 	aisle2->contains = { aisle2WestExit, aisle2ArmoryExit, aisle2GuadroomExit, aisle2EastExit };
 	aisle3->contains = { aisle3WestExit, aisle3NorthExit, aisle3ToolroomExit };
@@ -370,50 +370,7 @@ ReturnState World::Update()
 			///////
 						
 			
-			//
-			//else if (playerCleanInput == "DROP BOWL ")
-			//{
-			//	listIter iterator = FindEntity(bowl, player->contains);
-			//	if (iterator != player->contains.end())
-			//	{
-			//		Drop(std::dynamic_pointer_cast<Player>(player), std::dynamic_pointer_cast<Item>(*iterator));
-			//		std::cout << DROP_ITEM << std::endl << std::endl;
-			//	}
-			//	else
-			//	{
-			//		std::cout << NO_ITEM_IN_INV << std::endl << std::endl;
-			//	}
-			//	return ReturnState::STAY;
-			//}
-
-			//else if (playerCleanInput == "DROP BAR ")
-			//{
-			//	listIter iterator = FindEntity(bar, player->contains);
-			//	if (iterator != player->contains.end())
-			//	{
-			//		Drop(std::dynamic_pointer_cast<Player>(player), std::dynamic_pointer_cast<Item>(*iterator));
-			//		std::cout << DROP_ITEM << std::endl << std::endl;
-			//	}
-			//	else
-			//	{
-			//		std::cout << NO_ITEM_IN_INV << std::endl << std::endl;
-			//	}
-			//	return ReturnState::STAY;
-			//}
-			//else if (playerCleanInput == "DROP BREADCRUMBS ")
-			//{
-			//	listIter iterator = FindEntity(breadcrumbs, player->contains);
-			//	if (iterator != player->contains.end())
-			//	{
-			//		Drop(std::dynamic_pointer_cast<Player>(player), std::dynamic_pointer_cast<Item>(*iterator));
-			//		std::cout << DROP_ITEM << std::endl << std::endl;
-			//	}
-			//	else
-			//	{
-			//		std::cout << NO_ITEM_IN_INV << std::endl << std::endl;
-			//	}
-			//	return ReturnState::STAY;
-			//}
+			
 	}
 	return ReturnState::STAY;
 }

@@ -130,5 +130,12 @@ void Look(ptrEntity entity)
 	for (ptrEntity elem : entity->contains)
 	{	
 		std::cout << elem->description << std::endl;
+		if (elem->contains.size() != 0 && elem->type == Type::ITEM)
+		{
+			if(std::dynamic_pointer_cast<Item>(elem)->isOpen)
+			for (ptrEntity innerPtr : elem->contains) {
+				std::cout << innerPtr->description << std::endl;
+			}
+		}
 	}
 }
