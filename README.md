@@ -1,4 +1,4 @@
-# Zork Inspired Game
+# Zork Inspired Game - UNDER REVIEW & DEVELOPMENT - NOT PLAYABLE
 
 ## Synopsis
 
