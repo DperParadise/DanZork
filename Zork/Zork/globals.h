@@ -1,53 +1,25 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#include <string>
-#include <algorithm>
-#include <vector>
-#include <memory>
-
-
 void ParseInput(const char *input, char *output);
-std::string ToUpper(std::string s1);
 
-
-enum class Type { NPC, PLAYER, EXIT, ROOM, ITEM, WEAPON, ARMOR };
+enum class Type { NPC, PLAYER, EXIT, ROOM, ITEM };
 
 enum class Direction { NORTH, EAST, SOUTH, WEST };
 
 enum class Scenario {
 	CELL,
-	AISLE1,
-	AISLE2,
-	AISLE3,
-	ARMORY,
-	GUARDROOM,
-	TOOLROOM,
-	UPSTAIRS,
-	GUARDS_BEDROOM,
-	MEETINGS_ROOM,
-	MAIN_HALL,
-	MAIN_HALL_EXIT,
-	CELL_EXIT
+	AISLE,
+	WARDROBE,
+	MAIN_HALL,	
 };
-
-extern Scenario scenarioGlobal;
 
 enum class ReturnState {
-	STAY,
-	NEXT_ROOM,
-	ERROR,
+	CONTINUE,
+	RESTART,
 	QUIT,
-	FREEDOM
-};
-
-enum HitArea {
-	HEAD,
-	LEFT_ARM,
-	RIGHT_ARM,
-	TORSE,
-	LEFT_LEG,
-	RIGHT_LEG
+	ENDGAME,
+	ERROR
 };
 
 enum class GoDirection {

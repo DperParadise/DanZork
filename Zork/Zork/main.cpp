@@ -11,35 +11,32 @@ Scenario scenarioGlobal = Scenario::CELL;
 
 int main() 
 {
-	
+	World *world = new World();
+	world->Init();
+	world->Start();
+	ReturnState ret = ReturnState::CONTINUE;
 
-	/*std::unique_ptr<World> ptrWorld = std::unique_ptr<World>(new World());
-	ReturnState ret = ReturnState::STAY;
-	ptrWorld->Init();
-	
-	while (ret != ReturnState::ERROR && ret != ReturnState::QUIT && ret != ReturnState::FREEDOM)
+	while (ret != ReturnState::CONTINUE || ret != ReturnState::RESTART)
 	{	
-		ret = ptrWorld->Start();
-		while (ret == ReturnState::STAY)
+		if (ret == ReturnState::CONTINUE)
 		{
-			ret = ptrWorld->Update();
-
-		}	
+			ret = world->Update();
+		}
+		if (ret == ReturnState::RESTART)
+		{
+			world->Start();
+			ret = ReturnState::CONTINUE;
+		}
 	}
 	
 	if (ret == ReturnState::QUIT)
 		std::cout << "Thanks for Playing Danzork\n" << std::endl;
 	if (ret == ReturnState::ERROR)
 		std::cout << "Error" << std::endl;
-	if (ret == ReturnState::FREEDOM)
-		std::cout << "You enter the woods.\nAt last you are free. Good job!" << std::endl;*/
+	if (ret == ReturnState::ENDGAME)
+		std::cout << "At last you are free. Good job!" << std::endl;
 
-	char *input = "abc  def";
-	char output[20];
-
-	ParseInput(input, output);
-
-	std::cout << output << std::endl;
+	RELEASE(world);
 
 	return 0;
 }

@@ -26,6 +26,7 @@ void ParseInput(const char *input, char *output)
 		}
 		i++;
 	}
+	//Add end of string character
 	if (output[last_pos - 1] == ' ')
 		output[last_pos - 1] = '\0';
 	else
