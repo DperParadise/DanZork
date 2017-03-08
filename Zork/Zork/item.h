@@ -11,10 +11,12 @@ public:
 	typedef std::shared_ptr<Item> ptrItem;
 	typedef std::shared_ptr<Entity> ptrEntity;
 
-	Item(ptrEntity parentEntity, bool isOpen, Type type, const std::string &name, const std::string &desc, std::list<ptrEntity> &&list);
+	Item(ptrEntity parentEntity, ItemSize size, bool isOpen, bool canBeOpened, Type type, const std::string &name, const std::string &desc, std::list<ptrEntity> &&list);
 	virtual ~Item();
 	
 	bool isOpen;
+	bool canBeOpened;
+	ItemSize size;
 	ptrEntity parentEntity;
 
 };

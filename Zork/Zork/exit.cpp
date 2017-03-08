@@ -5,7 +5,8 @@ Exit::Exit(
 	ptrRoom src,
 	ptrRoom dest,
 	bool isOpen,
+	bool isLocked,
 	Type type,
 	const std::string &name,
 	const std::string &desc,
-	std::list<ptrEntity> &&list) : direction(dir), source(src), destination(dest), isOpen(0), Entity(type, name, desc, std::move(list)) {}
+	std::list<ptrEntity> &&list) : direction(dir), source(src), destination(dest), isOpen(), isLocked(isLocked), Entity(type, name, desc, std::move(list)) {}

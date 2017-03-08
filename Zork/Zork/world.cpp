@@ -3,73 +3,72 @@
 #include "world.h"
 #include <iostream>
 #include <list>
+#include <utility>
 #include "literals.h"
 
-
-World::World(){}
 
 void World::Init()
 {
 	//Init scenario names
-	scenarioNames[Scenario::CELL] = std::string("CELL");
-	scenarioNames[Scenario::AISLE1] = std::string("AISLE1");
-	scenarioNames[Scenario::AISLE2] = std::string("AISLE2");
-	scenarioNames[Scenario::AISLE3] = std::string("AISLE3");
-	scenarioNames[Scenario::ARMORY] = std::string("ARMORY");
-	scenarioNames[Scenario::GUARDROOM] = std::string("GUARDROOM");
-	scenarioNames[Scenario::TOOLROOM] = std::string("TOOLROOM");
-	scenarioNames[Scenario::UPSTAIRS] = std::string("UPSTAIRS");
-	scenarioNames[Scenario::GUARDS_BEDROOM] = std::string("GUARDS_BEDROOM");
-	scenarioNames[Scenario::MEETINGS_ROOM] = std::string("MEETINGS_ROOM");
-	scenarioNames[Scenario::MAIN_HALL] = std::string("MAIN_HALL");
+	//scenarioNames[Scenario::CELL] = std::string("CELL");
+	//scenarioNames[Scenario::AISLE1] = std::string("AISLE1");
+	//scenarioNames[Scenario::AISLE2] = std::string("AISLE2");
+	//scenarioNames[Scenario::AISLE3] = std::string("AISLE3");
+	//scenarioNames[Scenario::ARMORY] = std::string("ARMORY");
+	//scenarioNames[Scenario::GUARDROOM] = std::string("GUARDROOM");
+	//scenarioNames[Scenario::TOOLROOM] = std::string("TOOLROOM");
+	//scenarioNames[Scenario::UPSTAIRS] = std::string("UPSTAIRS");
+	//scenarioNames[Scenario::GUARDS_BEDROOM] = std::string("GUARDS_BEDROOM");
+	//scenarioNames[Scenario::MEETINGS_ROOM] = std::string("MEETINGS_ROOM");
+	//scenarioNames[Scenario::MAIN_HALL] = std::string("MAIN_HALL");
 
 	//Load literals
 	//LoadLiterals();
 
 	//INSTANTIATE EXITS
 	//cell
-	windowExit = ptrExit(new Exit(Direction::WEST, cell, nullptr, false, Type::EXIT, CELL_WINDOW, CELL_LOOK_WINDOW, {}));
-	cellDoorExit = ptrExit(new Exit(Direction::EAST, cell, aisle1, false, Type::EXIT, CELL_DOOR, CELL_LOOK_DOOR, {}));
+	windowExit = ptrExit(new Exit(Direction::WEST, cell, nullptr, false, true, Type::EXIT, CELL_EXIT_WINDOW, CELL_EXIT_WINDOW, {}));
+	cellDoorExit = ptrExit(new Exit(Direction::EAST, cell, aisle1, false, true, Type::EXIT, CELL_DOOR, CELL_LOOK_DOOR, {}));
 
 	//aisle1
-	aisle1DoorExit = ptrExit(new Exit(Direction::EAST, aisle1, aisle2, false, Type::EXIT, AISLE1_DOOR, DOOR_DESC, {}));
-	aisle1WestExit = ptrExit(new Exit(Direction::WEST, aisle1, cell, false, Type::EXIT, EXIT_DESC, EXIT_DESC, {}));
+	aisle1DoorExit = ptrExit(new Exit(Direction::EAST, aisle1, aisle2, false, true, Type::EXIT, AISLE1_DOOR, DOOR_DESC, {}));
+	aisle1WestExit = ptrExit(new Exit(Direction::WEST, aisle1, cell, false, true, Type::EXIT, EXIT_DESC, EXIT_DESC, {}));
 
 	//aisle2
-	aisle2WestExit = ptrExit(new Exit(Direction::WEST, aisle2, aisle1, false, Type::EXIT, DOOR, DOOR_DESC, {}));
-	aisle2ArmoryExit = ptrExit(new Exit(Direction::SOUTH, aisle2, armory, false, Type::EXIT, DOOR, DOOR_DESC, {}));
-	aisle2GuadroomExit = ptrExit(new Exit(Direction::NORTH, aisle2, guardroom, false, Type::EXIT, DOOR, DOOR_DESC, {}));
-	aisle2EastExit = ptrExit(new Exit(Direction::EAST, aisle2, aisle3, true, Type::EXIT, EXIT_DESC, EXIT_DESC, {}));
+	aisle2WestExit = ptrExit(new Exit(Direction::WEST, aisle2, aisle1, false, true, Type::EXIT, DOOR, DOOR_DESC, {}));
+	aisle2ArmoryExit = ptrExit(new Exit(Direction::SOUTH, aisle2, armory, false, true, Type::EXIT, DOOR, DOOR_DESC, {}));
+	aisle2GuadroomExit = ptrExit(new Exit(Direction::NORTH, aisle2, guardroom, false, true, Type::EXIT, DOOR, DOOR_DESC, {}));
+	aisle2EastExit = ptrExit(new Exit(Direction::EAST, aisle2, aisle3, false, false, Type::EXIT, EXIT_DESC, EXIT_DESC, {}));
 
 	//armory
-	armoryDoorExit = ptrExit(new Exit(Direction::NORTH, armory, aisle2, false, Type::EXIT, DOOR, DOOR_DESC, {}));
+	armoryDoorExit = ptrExit(new Exit(Direction::NORTH, armory, aisle2, false, true,Type::EXIT, DOOR, DOOR_DESC, {}));
 
 	//guardroom
-	guardroomExit = ptrExit(new Exit(Direction::SOUTH, guardroom, aisle2, false, Type::EXIT, DOOR, DOOR_DESC, {}));
+	guardroomExit = ptrExit(new Exit(Direction::SOUTH, guardroom, aisle2, false, true, Type::EXIT, DOOR, DOOR_DESC, {}));
 
 	//aisle3
-	aisle3WestExit = ptrExit(new Exit(Direction::WEST, aisle3, aisle2, true, Type::EXIT, EXIT_DESC, EXIT_DESC, {}));
-	aisle3NorthExit = ptrExit(new Exit(Direction::NORTH, aisle3, upstairs, true, Type::EXIT, EXIT_STAIRS_DESC, EXIT_STAIRS_DESC, {}));
-	aisle3ToolroomExit = ptrExit(new Exit(Direction::SOUTH, aisle3, toolroom, true, Type::EXIT, DOOR, DOOR_DESC, {}));
+	aisle3WestExit = ptrExit(new Exit(Direction::WEST, aisle3, aisle2, true, false, Type::EXIT, EXIT_DESC, EXIT_DESC, {}));
+	aisle3NorthExit = ptrExit(new Exit(Direction::NORTH, aisle3, upstairs, true, false, Type::EXIT, EXIT_STAIRS_DESC, EXIT_STAIRS_DESC, {}));
+	aisle3ToolroomExit = ptrExit(new Exit(Direction::SOUTH, aisle3, toolroom, true, false, Type::EXIT, DOOR, DOOR_DESC, {}));
 
 	//toolroom
-	toolroomExit = ptrExit(new Exit(Direction::NORTH, toolroom, aisle3, true, Type::EXIT, DOOR, DOOR_DESC, {}));
+	toolroomExit = ptrExit(new Exit(Direction::NORTH, toolroom, aisle3, true, false, Type::EXIT, DOOR, DOOR_DESC, {}));
 
 	//upstairs floor
-	upstairsSouthExit = ptrExit(new Exit(Direction::SOUTH, upstairs, aisle3, true, Type::EXIT, EXIT_STAIRS_DESC, EXIT_STAIRS_DESC, {}));
-	upstairsNorthExit = ptrExit(new Exit(Direction::NORTH, upstairs, meetingsRoom, false, Type::EXIT, DOOR, DOOR_DESC, {}));
-	upstairsWestExit = ptrExit(new Exit(Direction::WEST, upstairs, guardsBedroom, false, Type::EXIT, DOOR, DOOR_DESC, {}));
-	upstairsEastExit = ptrExit(new Exit(Direction::EAST, upstairs, mainHall, true, Type::EXIT, EXIT_DESC, EXIT_DESC, {}));
+	upstairsSouthExit = ptrExit(new Exit(Direction::SOUTH, upstairs, aisle3, true, false,Type::EXIT, EXIT_STAIRS_DESC, EXIT_STAIRS_DESC, {}));
+	upstairsNorthExit = ptrExit(new Exit(Direction::NORTH, upstairs, meetingsRoom, false, false, Type::EXIT, DOOR, DOOR_DESC, {}));
+	upstairsWestExit = ptrExit(new Exit(Direction::WEST, upstairs, guardsBedroom, false, false,Type::EXIT, DOOR, DOOR_DESC, {}));
+	upstairsEastExit = ptrExit(new Exit(Direction::EAST, upstairs, mainHall, true, false,Type::EXIT, EXIT_DESC, EXIT_DESC, {}));
 
 	//Guards bedroom 
-	guardsBedroomExit = ptrExit(new Exit(Direction::EAST, guardsBedroom, upstairs, false, Type::EXIT, DOOR, DOOR_DESC, {}));
+	guardsBedroomExit = ptrExit(new Exit(Direction::EAST, guardsBedroom, upstairs, false, true, Type::EXIT, DOOR, DOOR_DESC, {}));
 
 	//meetings room
-	meetingsRoomExit = ptrExit(new Exit(Direction::SOUTH, meetingsRoom, upstairs, false, Type::EXIT, DOOR, DOOR_DESC, {}));
+	meetingsRoomExit = ptrExit(new Exit(Direction::SOUTH, meetingsRoom, upstairs, false, true, Type::EXIT, DOOR, DOOR_DESC, {}));
 
 	//main hall
-	mainHallWestExit = ptrExit(new Exit(Direction::WEST, mainHall, upstairs, false, Type::EXIT, EXIT_DESC, EXIT_DESC, {}));
-	mainHallDoorExit = ptrExit(new Exit(Direction::EAST, mainHall, nullptr, false, Type::EXIT, MAIN_HALL_STREET_EXIT, MAIN_HALL_STREET_EXIT, {}));
+	mainHallWestExit = ptrExit(new Exit(Direction::WEST, mainHall, upstairs, true, false, Type::EXIT, EXIT_DESC, EXIT_DESC, {}));
+	mainHallDoorExit = ptrExit(new Exit(Direction::EAST, mainHall, nullptr, false, true, Type::EXIT, MAIN_HALL_STREET_EXIT, MAIN_HALL_STREET_EXIT, {}));
 
 	//INSTANTIATE ROOMS
 	cell = ptrRoom(new Room(Type::ROOM, CELL_TITLE, CELL_INIT_DESC, {}));
@@ -150,92 +149,103 @@ void World::Init()
 	
 	//INSTANTIATE ITEMS (including weapons and armors)
 	//cell
-	mattress = ptrItem(new Item(cell, false, Type::ITEM, CELL_MATTRESS, CELL_LOOK_MATTRESS, {}));
-	breadcrumbs = ptrItem(new Item(cell, false, Type::ITEM, CELL_BREADCRUMBS, CELL_LOOK_BREADCRUMBS, {}));
-	bowl = ptrItem(new Item(cell, false, Type::ITEM, CELL_BOWL, CELL_LOOK_BOWL, {}));
-	pigeon = ptrItem(new Item({}, false, Type::ITEM, CELL_PIGEON, CELL_LOOK_PIGEON, {}));
-	bar = ptrItem(new Item({}, false, Type::ITEM, CELL_BAR, CELL_LOOK_IRON_BAR, {}));
-	//window = ptrItem(new Item(cell, true, Type::ITEM, CELL_WINDOW, CELL_LOOK_WINDOW, {bar, windowExit}));
-	//pigeon outside
-	pigeon->parentEntity = ptrEntity(nullptr);
+	mattress = ptrItem(new Item(cell, ItemSize::EXTRA_LARGE, false, false, Type::ITEM, CELL_MATTRESS, CELL_LOOK_MATTRESS, {}));
+	breadcrumbs = ptrItem(new Item(cell, ItemSize::EXTRA_SMALL, false, false, Type::ITEM, CELL_BREADCRUMBS, CELL_LOOK_BREADCRUMBS, {}));
+	//bowl = ptrItem(new Item(cell, ItemSize::SMALL, false, false, Type::ITEM, CELL_BOWL, CELL_LOOK_BOWL, {}));
+	pigeon = ptrItem(new Item(nullptr, ItemSize::SMALL, false, false, Type::ITEM, CELL_PIGEON, CELL_LOOK_PIGEON, {}));
+	bar = ptrItem(new Item(cell, ItemSize::MEDIUM, false, false, Type::ITEM, CELL_BAR, CELL_LOOK_IRON_BAR, {}));
+	window = ptrItem(new Item(cell, ItemSize::SMALL, true, true, Type::ITEM, CELL_WINDOW, CELL_LOOK_WINDOW, {windowExit}));
 	bar->parentEntity = cell;
+	doorOpening = ptrItem(new Item(cell, ItemSize::EXTRA_LARGE, true, true, Type::ITEM, CELL_DOOR_OPENING, CELL_LOOK_DOOR_OPENING, {}));
 
 	//aisle1
-	chairAisle1 = ptrItem(new Item(aisle1, false, Type::ITEM, CHAIR, LOOK_CHAIR, {}));
-	desk = ptrItem(new Item(aisle1, false, Type::ITEM, AISLE1_DESK, AISLE1_LOOK_DESK, {}));
-	cellKey = ptrItem(new Item(nullptr, false, Type::ITEM, CELL_KEY, CELL_LOOK_KEY, {}));
-	aisle1GuardSword = ptrWeapon(new Weapon(false, 5, nullptr, false, Type::WEAPON, CELL_GUARD_SWORD, CELL_GUARD_SWORD, {}));
+	chairAisle1 = ptrItem(new Item(aisle1, ItemSize::LARGE, false, false, Type::ITEM, CHAIR, LOOK_CHAIR, {}));
+	desk = ptrItem(new Item(aisle1, ItemSize::LARGE, false, false, Type::ITEM, AISLE1_DESK, AISLE1_LOOK_DESK, {}));
+	cellKey = ptrItem(new Item(nullptr, ItemSize::SMALL, false, false, Type::ITEM, CELL_KEY, CELL_LOOK_KEY, {}));
+	aisle1GuardSword = ptrWeapon(new Weapon(100, nullptr,ItemSize::LARGE, Type::WEAPON, CELL_GUARD_SWORD, CELL_GUARD_SWORD, {}));
 
 	//armory
-	shield = ptrArmor(new Armor(0, armory, false, Type::ITEM, ARMORY_SHIELD, ARMORY_LOOK_SHIELD, {}));
-	armoryCloset = ptrItem(new Item(armory, false, Type::ITEM, ARMORY_CLOSET, ARMORY_LOOK_CLOSET, {}));
+	shield = ptrArmor(new Armor(0, armory, ItemSize::LARGE, Type::ITEM, ARMORY_SHIELD, ARMORY_LOOK_SHIELD, {}));
+	armoryCloset = ptrItem(new Item(armory, ItemSize::EXTRA_LARGE, false, true, Type::ITEM, ARMORY_CLOSET, ARMORY_LOOK_CLOSET, {}));
+	leatherCuirass = ptrArmor(new Armor(5, armory, ItemSize::LARGE, Type::ITEM, GUARDS_BEDROOM_CUIRASS, GUARDS_BEDROOM_LOOK_CUIRASS, {}));
+	helmet = ptrArmor(new Armor(2, armory, ItemSize::MEDIUM, Type::ITEM, GUARDS_BEDROOM_HELMET, GUARDS_BEDROOM_LOOK_HELMET, {}));
 
 	//guardroom
-	chairGuardroom = ptrItem(new Item(guardroom, false, Type::ITEM, CHAIR, LOOK_CHAIR, {}));
-	smallClosetGuardRoom = ptrItem(new Item(guardroom, false, Type::ITEM, GUARDROOM_CLOSED_CLOSET, GUARDROOM_LOOK_CLOSED_CLOSET, {}));
-	armoryKey = ptrItem(new Item(smallClosetGuardRoom, false, Type::ITEM, GUARDROOM_KEY, GUARDROOM_KEY, {}));
-	cleaningStaffKey = ptrItem(new Item(smallClosetGuardRoom, false, Type::ITEM,  GUARDROOM_KEY, GUARDROOM_KEY, {}));
+	chairGuardroom = ptrItem(new Item(guardroom, ItemSize::LARGE, false, false, Type::ITEM, CHAIR, LOOK_CHAIR, {}));
+	smallClosetGuardRoom = ptrItem(new Item(guardroom, ItemSize::MEDIUM, false, true, Type::ITEM, GUARDROOM_CLOSED_CLOSET, GUARDROOM_LOOK_CLOSED_CLOSET, {}));
+	armoryKey = ptrItem(new Item(smallClosetGuardRoom, ItemSize::SMALL, false, false, Type::ITEM, GUARDROOM_KEY, GUARDROOM_KEY, {}));
+	cleaningStaffKey = ptrItem(new Item(smallClosetGuardRoom, ItemSize::SMALL, false, false, Type::ITEM, CLEANING_STAFF_KEY, CLEANING_STAFF_KEY, {}));
 	smallClosetGuardRoom->contains = { armoryKey,cleaningStaffKey };
+	rope = ptrItem(new Item(guardroom, ItemSize::LARGE, false, false, Type::ITEM, TOOLROOM_ROPE, TOOLROOM_LOOK_ROPE, {}));
+	twoHandedMace = ptrItem(new Item(guardroom, ItemSize::LARGE, false, false, Type::ITEM, GUARDROOM_TWOHANDED_MACE, GUARDROOM_LOOK_TWOHANDED_MACE, {}));
 
 	//toolroom
-	toolsCloset = ptrItem(new Item(toolroom, false, Type::ITEM, TOOLROOM_CLOSET, TOOLROOM_CLOSET, {}));
-	rope = ptrItem(new Item(toolsCloset, false, Type::ITEM, TOOLROOM_ROPE, TOOLROOM_LOOK_ROPE, {}));
-	twoHandedMace = ptrWeapon(new Weapon(false, 8, toolroom, false, Type::ITEM, TOOLROOM_TWOHANDED_MACE, TOOLROOM_LOOK_TWOHANDED_MACE, {}));
+	toolsCloset = ptrItem(new Item(toolroom, ItemSize::EXTRA_LARGE, false, true,Type::ITEM, TOOLROOM_CLOSET, TOOLROOM_CLOSET, {}));
+	/*rope = ptrItem(new Item(toolsCloset, false, Type::ITEM, TOOLROOM_ROPE, TOOLROOM_LOOK_ROPE, {}));
+	twoHandedMace = ptrWeapon(new Weapon(false, 8, toolroom, false, Type::ITEM, TOOLROOM_TWOHANDED_MACE, TOOLROOM_LOOK_TWOHANDED_MACE, {}));*/
 	toolsCloset->contains = { rope };
 
 	//guards bedroom
-	wardrobe = ptrItem(new Item(guardsBedroom, false, Type::ITEM, GUARDS_BEDROOM_CLOSED_WARDROBE, GUARDS_BEDROOM_LOOK_CLOSED_WARDROBE, {}));
-	guardClothes = ptrItem(new Item(wardrobe, false, Type::ITEM, GUARDS_BEDROOM_LOOK_CLOTHES, GUARDS_BEDROOM_LOOK_CLOTHES, {}));
+	wardrobe = ptrItem(new Item(guardsBedroom, ItemSize::EXTRA_LARGE, false, true, Type::ITEM, GUARDS_BEDROOM_CLOSED_WARDROBE, GUARDS_BEDROOM_LOOK_CLOSED_WARDROBE, {}));
+	guardClothes = ptrItem(new Item(wardrobe, ItemSize::LARGE, false, false, Type::ITEM, GUARDS_BEDROOM_LOOK_CLOTHES, GUARDS_BEDROOM_LOOK_CLOTHES, {}));
 	wardrobe->contains = {guardClothes};
-	bagOfCoins = ptrItem(new Item(nullptr, false, Type::ITEM, GUARDS_BEDROOM_LOOK_BAG_OF_COINS, GUARDS_BEDROOM_LOOK_BAG_OF_COINS, {}));
-	coins = ptrItem(new Item(bagOfCoins, false, Type::ITEM, GUARDS_BEDROOM_LOOK_COINS, GUARDS_BEDROOM_LOOK_COINS, {}));
+	bagOfCoins = ptrItem(new Item(nullptr, ItemSize::SMALL, false, true, Type::ITEM, GUARDS_BEDROOM_LOOK_BAG_OF_COINS, GUARDS_BEDROOM_LOOK_BAG_OF_COINS, {}));
+	coins = ptrItem(new Item(bagOfCoins, ItemSize::SMALL, false, false, Type::ITEM, GUARDS_BEDROOM_LOOK_COINS, GUARDS_BEDROOM_LOOK_COINS, {}));
 	bagOfCoins->contains = { coins };
 	
-	leatherCuirass = ptrArmor(new Armor(5,nullptr, false, Type::ITEM, GUARDS_BEDROOM_CUIRASS, GUARDS_BEDROOM_LOOK_CUIRASS, {}));
-	helmet = ptrArmor(new Armor(2, guardsBedroom, false, Type::ITEM, GUARDS_BEDROOM_HELMET, GUARDS_BEDROOM_LOOK_HELMET, {}));
+	/*leatherCuirass = ptrArmor(new Armor(5,nullptr, false, Type::ITEM, GUARDS_BEDROOM_CUIRASS, GUARDS_BEDROOM_LOOK_CUIRASS, {}));*/
+	/*helmet = ptrArmor(new Armor(2, guardsBedroom, false, Type::ITEM, GUARDS_BEDROOM_HELMET, GUARDS_BEDROOM_LOOK_HELMET, {}));*/
 
 	//meetings room
-	tableMeetingsRoom = ptrItem(new Item(meetingsRoom, false, Type::ITEM, MEETINGS_ROOM_LOOK_LARGE_TABLE, MEETINGS_ROOM_LOOK_LARGE_TABLE, {}));
-	chairMeetingsRoom1 = ptrItem(new Item(meetingsRoom, false, Type::ITEM, CHAIR + "MeetingsRoom1", CHAIR, {}));
-	chairMeetingsRoom2 = ptrItem(new Item(meetingsRoom, false, Type::ITEM, CHAIR + "MeetingsRoom2", CHAIR, {}));
-	chairMeetingsRoom3 = ptrItem(new Item(meetingsRoom, false, Type::ITEM, CHAIR + "MeetingsRoom3", CHAIR, {}));
-	chairMeetingsRoom4 = ptrItem(new Item(meetingsRoom, false, Type::ITEM, CHAIR + "MeetingsRoom4", CHAIR, {}));
-	officerSword = ptrWeapon(new Weapon(false, 5, officerMeetingRoom, false, Type::WEAPON, MEETINGS_ROOM_OFFICER_SWORD, MEETINGS_ROOM_LOOK_OFFICER_SWORD, {}));
-	mainHallDoorKey = ptrItem(new Item(nullptr, false, Type::ITEM, MAIN_HALL_KEY, MAIN_HALL_KEY, {}));
+	tableMeetingsRoom = ptrItem(new Item(meetingsRoom, ItemSize::EXTRA_LARGE, false, false, Type::ITEM, MEETINGS_ROOM_LOOK_LARGE_TABLE, MEETINGS_ROOM_LOOK_LARGE_TABLE, {}));
+	chairMeetingsRoom1 = ptrItem(new Item(meetingsRoom, ItemSize::LARGE, false, false, Type::ITEM, CHAIR + "MeetingsRoom1", CHAIR, {}));
+	chairMeetingsRoom2 = ptrItem(new Item(meetingsRoom, ItemSize::LARGE, false, false, Type::ITEM, CHAIR + "MeetingsRoom2", CHAIR, {}));
+	chairMeetingsRoom3 = ptrItem(new Item(meetingsRoom, ItemSize::LARGE, false, false, Type::ITEM, CHAIR + "MeetingsRoom3", CHAIR, {}));
+	chairMeetingsRoom4 = ptrItem(new Item(meetingsRoom, ItemSize::LARGE, false, false, Type::ITEM, CHAIR + "MeetingsRoom4", CHAIR, {}));
+	officerSword = ptrWeapon(new Weapon(5, officerMeetingRoom, ItemSize::LARGE, Type::WEAPON, MEETINGS_ROOM_OFFICER_SWORD, MEETINGS_ROOM_LOOK_OFFICER_SWORD, {}));
+	mainHallDoorKey = ptrItem(new Item(nullptr, ItemSize::SMALL, false, false, Type::ITEM, MAIN_HALL_KEY, MAIN_HALL_KEY, {}));
 
 	//UPDATE ROOMS' ITEMS
-	cell->contains = { mattress, bowl, breadcrumbs, cellDoorExit, windowExit, bar };
+	cell->contains = { mattress, breadcrumbs, cellDoorExit, window, bar, doorOpening };
 	aisle1->contains = { aisle1WestExit, aisle1DoorExit };
-	aisle2->contains = { aisle2WestExit, aisle2ArmoryExit, aisle2GuadroomExit, aisle2EastExit };
+	aisle2->contains = { aisle2WestExit, aisle2EastExit, aisle2ArmoryExit, aisle2GuadroomExit };
 	aisle3->contains = { aisle3WestExit, aisle3NorthExit, aisle3ToolroomExit };
-	armory->contains = { shield, armoryCloset, armoryDoorExit };
+	armory->contains = { shield, armoryCloset, armoryDoorExit, helmet, leatherCuirass };
 	guardroom->contains = { chairGuardroom, smallClosetGuardRoom, armoryKey, cleaningStaffKey, guardroomExit };
 	toolroom->contains = { twoHandedMace, toolsCloset, toolroomExit };
 	upstairs->contains = { upstairsSouthExit,upstairsNorthExit, upstairsWestExit, upstairsEastExit };
-	guardsBedroom->contains = { wardrobe, leatherCuirass, helmet, guardsBedroomExit };
+	guardsBedroom->contains = { wardrobe, guardsBedroomExit };
 	meetingsRoom->contains = { tableMeetingsRoom, chairMeetingsRoom1, chairMeetingsRoom2, chairMeetingsRoom3, chairMeetingsRoom4, meetingsRoomExit };
 	mainHall->contains = { mainHallWestExit, mainHallDoorExit };
 
 	//INSTANTIATE CREATURES
-	guardAisle1 = ptrCreature(new Npc(false, aisle1, 15, 5, 0, Type::NPC, GUARD, CELL_LOOK_GUARD, { cellKey, aisle1GuardSword}));
+	guardAisle1 = ptrNpc(new Npc(false, aisle1, 300, 0, 0, Type::NPC, GUARD, CELL_LOOK_GUARD, { cellKey, aisle1GuardSword}));
 	cellKey->parentEntity = guardAisle1;
 	aisle1GuardSword->parentEntity = guardAisle1;
-	guardToolRoom = ptrCreature(new Npc(false, toolroom, 15, 5, 8, Type::NPC, GUARD, TOOLROOM_GUARD_ALIVE, {}));
-	guardSleeping = ptrCreature(new Npc(false, guardsBedroom, 15, 5, 0, Type::NPC, GUARD, GUARDS_BEDROOM_LOOK_GUARD_ALIVE, {bagOfCoins}));
+
+	guardToolRoom = ptrNpc(new Npc(false, toolroom, 15, 5, 8, Type::NPC, GUARD, TOOLROOM_GUARD_ALIVE, {}));
+	guardGuardroom = ptrNpc(new Npc(false, guardroom, 300, 0, 100, Type::NPC, GUARD, TOOLROOM_GUARD_ALIVE, {}));
+	
+	guardSleeping = ptrNpc(new Npc(false, guardsBedroom, 15, 5, 0, Type::NPC, GUARD, GUARDS_BEDROOM_LOOK_GUARD_ALIVE, {bagOfCoins}));
 	bagOfCoins->parentEntity = guardSleeping;
-	leatherCuirass->parentEntity = guardSleeping;
-	officerMeetingRoom = ptrCreature(new Npc(false, meetingsRoom, 20, 10, 5, Type::NPC, OFFICER, MEETINGS_ROOM_LOOK_OFFICER_ALIVE, { mainHallDoorKey, officerSword }));
+	//leatherCuirass->parentEntity = guardSleeping;
+	
+	officerMeetingRoom = ptrNpc(new Npc(false, meetingsRoom, 20, 10, 5, Type::NPC, OFFICER, MEETINGS_ROOM_LOOK_OFFICER_ALIVE, { mainHallDoorKey, officerSword }));
 	mainHallDoorKey->parentEntity = officerMeetingRoom;
 	officerSword->parentEntity = officerMeetingRoom;
-	player = ptrCreature(new Player(cell, 20, 10, 0, Type::PLAYER, PLAYER, LOOK_PLAYER, {}, nullptr, 3, 0));
 	
+	player = ptrPlayer(new Player(cell, 20, 10, 0, Type::PLAYER, PLAYER, LOOK_PLAYER, {}, nullptr, 3, 0));
+
+	listCreatures = { guardAisle1 , guardToolRoom , guardGuardroom, guardSleeping, player};
+
+
 	std::cout << "<><><><>  WELCOME TO ZORKY <><><><>" << std::endl;
 	std::cout <<  GAME_INTRO  << std::endl << std::endl;
 }
 
 ReturnState World::Start()
 {	
-	ptrEntity location = GetLocation(scenarioGlobal);
+	ptrEntity location = player->location;
 	if (nullptr == location)
 	{
 		std::cout << "Error on Start()\n";
@@ -252,9 +262,10 @@ ReturnState World::Update()
 	std::string inputCommand;
 	std::getline(std::cin, inputCommand);
 	fflush(stdin);
-	ParseInput(inputCommand, playerWordsVector);
-	
-	if (playerWordsVector.size() == 1) 
+	std::vector<std::string> playerWordsVector = {};
+//	ParseInput(inputCommand, playerWordsVector);
+
+	if (playerWordsVector.size() == 1)
 	{
 
 		if (playerWordsVector[0] == "H")
@@ -298,269 +309,411 @@ ReturnState World::Update()
 			return ReturnState::STAY;
 		}
 	}
-	switch (scenarioGlobal)
+
+	if (playerWordsVector.size() == 2 && playerWordsVector[0] == "LOOK")
 	{
-		case Scenario::CELL:
-			if (playerWordsVector.size() == 2 && playerWordsVector[0] == "LOOK")
-			{ 
-				if (playerWordsVector[1] == "CELL")
+		if (playerWordsVector[1] == "CELL")
+		{
+			Look(cell, listCreatures);
+			std::cout << std::endl;
+			return ReturnState::STAY;
+		}
+		if (playerWordsVector[1] == "CELLS AISLE")
+		{
+			Look(aisle1, listCreatures);
+			std::cout << std::endl;
+			return ReturnState::STAY;
+		}
+		if (playerWordsVector[1] == "ARMORY AISLE")
+		{
+			Look(aisle2, listCreatures);
+			std::cout << std::endl;
+			return ReturnState::STAY;
+		}
+		if (playerWordsVector[1] == "ARMORY")
+		{
+			Look(armory, listCreatures);
+			std::cout << std::endl;
+			return ReturnState::STAY;
+		}
+		if (playerWordsVector[1] == "GUARDROOM")
+		{
+			Look(guardroom, listCreatures);
+			std::cout << std::endl;
+			return ReturnState::STAY;
+		}
+
+		listIter iterItemInPlayer = FindEntityByName(playerWordsVector[1], player->contains);
+		if (iterItemInPlayer == player->contains.end())
+		{
+			for (ptrEntity itemInPlayer : player->contains)
+			{
+				if (itemInPlayer->type == Type::ITEM)
 				{
-					Look(cell);
-					std::cout << std::endl;
-					return ReturnState::STAY;
+					if (std::dynamic_pointer_cast<Item>(itemInPlayer)->isOpen)
+					{
+						listIter iterInside = FindEntityByName(playerWordsVector[1], itemInPlayer->contains);
+						if (iterInside != player->location->contains.end())
+						{
+							std::cout << (*iterInside)->description << std::endl << std::endl;
+							return ReturnState::STAY;
+						}
+					}
 				}
+			}
+		}
+		else
+		{
+			std::cout << (*iterItemInPlayer)->description << std::endl << std::endl;
+			return ReturnState::STAY;
+		}
 				
-
-				listIter iterItemInRoom= FindEntityByName(playerWordsVector[1], cell->contains);
-				listIter iterItemInPlayer = FindEntityByName(playerWordsVector[1], player->contains);
-
-				if (iterItemInRoom != cell->contains.end())
-				{
-					std::cout << (*iterItemInRoom)->description << std::endl << std::endl;
-					return ReturnState::STAY;
-				}
-				if (iterItemInPlayer != player->contains.end())
-				{
-					std::cout << (*iterItemInPlayer)->description << std::endl << std::endl;
-					return ReturnState::STAY;
-				}
-				else
-				{
-					std::cout << NO_ITEM_IN_ROOM << std::endl << std::endl;
-					return ReturnState::STAY;
-				}
-			}
-			else if (playerWordsVector.size() == 2 && playerWordsVector[0] == "TAKE")
+		listIter iterItemInRoom = FindEntityByName(playerWordsVector[1], player->location->contains);
+		if (iterItemInRoom == player->location->contains.end())
+		{
+			for (ptrEntity element : player->location->contains)
 			{
-				//Revisar, no funciona para bar dentro de window dentro de cell. Habrá que buscar el item en la lista del world, hay que crearla
-				listIter iter = FindEntityByName(playerWordsVector[1], cell->contains);
-				if (iter != cell->contains.end())
+				if (element->type == Type::ITEM)
 				{
-					Take(std::dynamic_pointer_cast<Player>(player), std::dynamic_pointer_cast<Item>(*iter));
-					std::cout << TAKE_ITEM << std::endl << std::endl;
-					return ReturnState::STAY;
-				}
-				else
-				{
-					std::cout << NO_ITEM_IN_ROOM << std::endl << std::endl;
-					return ReturnState::STAY;
+					if (std::dynamic_pointer_cast<Item>(element)->isOpen)
+					{
+						listIter iterInside = FindEntityByName(playerWordsVector[1], element->contains);
+						if (iterInside != player->location->contains.end())
+						{
+							std::cout << (*iterInside)->description << std::endl << std::endl;
+							return ReturnState::STAY;
+						}
+					}
 				}
 			}
-			else if (playerWordsVector.size() == 2 && playerWordsVector[0] == "DROP")
-			{
-				listIter iter = FindEntityByName(playerWordsVector[1], player->contains);
+		}
+		else
+		{
+			std::cout << (*iterItemInRoom)->description << std::endl << std::endl;
+			return ReturnState::STAY;
+		}
+		
+	
+		std::cout << NO_ITEM_IN_ROOM << std::endl << std::endl;
+		return ReturnState::STAY;		
 
-				if (iter != player->contains.end())
+	}
+	else if (playerWordsVector.size() == 2 && playerWordsVector[0] == "TAKE")
+	{
+
+		listIter iter = FindEntityByName(playerWordsVector[1], player->contains);
+		if (iter != player->contains.end())
+		{
+			std::cout << ALREADY_GOT_ITEM << std::endl << std::endl;
+			return ReturnState::STAY;
+		}
+		
+		iter = FindEntityByName(playerWordsVector[1], player->location->contains);
+		if (iter != player->location->contains.end())
+		{
+			Take(player, std::dynamic_pointer_cast<Item>(*iter));
+			std::cout << TAKE_ITEM << std::endl << std::endl;
+			return ReturnState::STAY;
+		}
+		else if(iter == player->location->contains.end())
+		{
+			for (ptrEntity element : player->location->contains)
+			{
+				if (element->type == Type::ITEM)
 				{
-					Drop(std::dynamic_pointer_cast<Player>(player), std::dynamic_pointer_cast<Item>(*iter));
-					std::cout << DROP_ITEM << std::endl << std::endl;
-					return ReturnState::STAY;
+					if (std::dynamic_pointer_cast<Item>(element)->isOpen)
+					{
+						listIter iterInside = FindEntityByName(playerWordsVector[1], element->contains);
+						if (iterInside != element->contains.end())
+						{
+							Take(player, std::dynamic_pointer_cast<Item>(*iterInside));
+							std::cout << TAKE_ITEM << std::endl << std::endl;
+							return ReturnState::STAY;
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			std::cout << NO_ITEM_IN_ROOM << std::endl << std::endl;
+			return ReturnState::STAY;
+		}
+	}
+	else if (playerWordsVector.size() == 2 && playerWordsVector[0] == "DROP")
+	{
+		listIter iter = FindEntityByName(playerWordsVector[1], player->contains);
+
+		if (iter != player->contains.end())
+		{
+			Drop(player, std::dynamic_pointer_cast<Item>(*iter));
+			std::cout << DROP_ITEM << std::endl << std::endl;
+			return ReturnState::STAY;
+		}
+		else
+		{
+			std::cout << NO_ITEM_IN_INV << std::endl << std::endl;
+			return ReturnState::STAY;
+		}
+	}
+	else if (playerWordsVector.size() == 2 && playerWordsVector[0] == "GO")
+	{
+		Direction playerDirection;
+		if (playerWordsVector[1] == "NORTH" || playerWordsVector[1] == "N") {
+			playerDirection = Direction::NORTH;
+		}
+
+		if (playerWordsVector[1] == "SOUTH" || playerWordsVector[1] == "S") {
+			playerDirection = Direction::NORTH;
+		}
+
+		if (playerWordsVector[1] == "EAST" || playerWordsVector[1] == "E") {
+			playerDirection = Direction::NORTH;
+		}
+
+		if (playerWordsVector[1] == "WEST" || playerWordsVector[1] == "W") {
+			playerDirection = Direction::NORTH;
+		}
+
+		GoDirection canGo = Go(player, playerDirection);
+		switch (canGo)
+		{
+		case GoDirection::OK:
+			return ReturnState::NEXT_ROOM;
+
+		case GoDirection::CLOSED:
+			std::cout << DOOR_CLOSED << std::endl << std::endl;
+			return ReturnState::STAY;
+
+		case GoDirection::NO_WAY:
+			std::cout << WRONG_DIRECTION << std::endl << std::endl;
+			return ReturnState::STAY;
+		
+		default: ReturnState::STAY;
+		}
+
+		//We've exited the jail
+		if (player->location == nullptr)
+			return ReturnState::FREEDOM;
+
+	}
+	//command: put into
+	else if (playerWordsVector.size() > 2 && playerWordsVector[0] == "PUT")
+	{
+		std::map<std::string, std::string> items = GetItemsToCombine(playerWordsVector);
+		ptrItem firstItem;
+		ptrItem secondItem;
+
+		listIter iterFirstItem = FindEntityByName(items["firstItem"], player->contains);
+		if (iterFirstItem == player->contains.end())
+		{
+			std::cout << NO_ITEM_IN_INV << std::endl << std::endl;
+			return ReturnState::STAY;
+		}
+
+		listIter iterSecondItemInPlayer = FindEntityByName(items["secondItem"], player->contains);
+		listIter iterSecondItemInRoom = FindEntityByName(items["secondItem"], player->location->contains);
+		if (iterSecondItemInPlayer != player->contains.end())
+		{
+			//Check if item can be opened 
+			if (std::dynamic_pointer_cast<Item>(*iterSecondItemInPlayer)->canBeOpened)
+			{
+				//Check if it's open
+				if (std::dynamic_pointer_cast<Item>(*iterSecondItemInPlayer)->isOpen)
+				{
+					//check item size
+					if (std::dynamic_pointer_cast<Item>(*iterFirstItem)->size < std::dynamic_pointer_cast<Item>(*iterSecondItemInPlayer)->size)
+					{
+						//put item1 into item2
+						PutInto(std::dynamic_pointer_cast<Item>(*iterFirstItem), std::dynamic_pointer_cast<Item>(*iterSecondItemInPlayer));
+					}
+					else
+					{
+						std::cout << CANT_PUT_ITEM_TOO_BIG << std::endl << std::endl;
+						return ReturnState::STAY;
+					}
 				}
 				else
 				{
-					std::cout << NO_ITEM_IN_INV << std::endl << std::endl;
+					std::cout << CANT_PUT_ITEM_CLOSED << std::endl << std::endl;
 					return ReturnState::STAY;
 				}
 			}
-			else {
-				std::cout << DONT_UNDERSTAND << std::endl << std::endl;
+			else
+			{
+				std::cout << BAD_IDEA << std::endl << std::endl;
 				return ReturnState::STAY;
 			}
 
-			///////
+		}
+		if (iterSecondItemInRoom != player->location->contains.end())
+		{
+			//Check if item can be opened 
+			if (std::dynamic_pointer_cast<Item>(*iterSecondItemInRoom)->canBeOpened)
+			{
+				//Check if it's open
+				if (std::dynamic_pointer_cast<Item>(*iterSecondItemInRoom)->isOpen)
+				{
+					//check item size
+					if (std::dynamic_pointer_cast<Item>(*iterFirstItem)->size < std::dynamic_pointer_cast<Item>(*iterSecondItemInRoom)->size)
+					{
+
+						//put item1 into item2
+						PutInto(std::dynamic_pointer_cast<Item>(*iterFirstItem), std::dynamic_pointer_cast<Item>(*iterSecondItemInRoom));
+						TriggerConsequences();
 						
-			
-			
+					}
+					else
+					{
+						std::cout << CANT_PUT_ITEM_TOO_BIG << std::endl << std::endl;
+						return ReturnState::STAY;
+					}
+				}
+				else
+				{
+					std::cout << CANT_PUT_ITEM_CLOSED << std::endl << std::endl;
+					return ReturnState::STAY;
+				}
+			}
+			else
+			{
+				std::cout << BAD_IDEA << std::endl << std::endl;
+				return ReturnState::STAY;
+			}
+		}
 	}
+	else if (playerWordsVector.size() == 2 && playerWordsVector[0] == "SEARCH")
+	{
+		listIter li = FindEntityByName(playerWordsVector[1], listCreatures);
+		
+		if (li != listCreatures.end())
+		{
+			ptrNpc npc = std::dynamic_pointer_cast<Npc>(*li);
+			if (npc->location->name == player->location->name)
+			{
+				if (npc->hp <= 0)
+				{
+					std::cout << LOOT << std::endl;
+					Search(player, npc);
+				}
+				else
+				{
+					std::cout << BAD_IDEA << std::endl;
+				}
+			}
+		}
+		else 
+		{
+			std::cout << NO_SEARCH << std::endl;
+		}		
+	}
+	else if (playerWordsVector.size() == 2 && playerWordsVector[0] == "OPEN")
+	{
+		listIter itItemRoom = FindEntityByName(playerWordsVector[1], player->location->contains);
+		if (itItemRoom != player->location->contains.end())
+		{
+			OpenItem(std::dynamic_pointer_cast<Item>(*itItemRoom));
+			std::cout << OPENED << std::endl;
+
+		}
+		else
+		{
+			listIter itItemPlayer = FindEntityByName(playerWordsVector[1], player->contains);
+			if (itItemPlayer != player->contains.end())
+			{
+				OpenItem(std::dynamic_pointer_cast<Item>(*itItemPlayer));
+				std::cout << OPENED << std::endl;
+			}
+			else
+				std::cout << NO_ITEM_IN_ROOM << std::endl;
+		}	
+	}
+	else if (playerWordsVector.size() > 2 && playerWordsVector[0] == "OPEN" && (playerWordsVector[2] == "EXIT" || playerWordsVector[2] == "DOOR"))
+	{
+		// area under development. We prevent the player from going through this door.
+		if (player->location == aisle2)
+		{
+			if (playerWordsVector[1] == "EAST")
+			{
+				std::cout << DOOR_LOCKED << std::endl;
+			}
+		}
+		else
+		{
+			OpenExit(playerWordsVector[1], player);
+		}
+	}
+	//unknown command	
+	else
+	{
+		std::cout << DONT_UNDERSTAND << std::endl << std::endl;
+		return ReturnState::STAY;
+	}
+
+							
 	return ReturnState::STAY;
+	
+
 }
 
-//void World::LoadLiterals() 
-//{
-//	literalsMap["CELL_TITLE"] = CELL_TITLE;
-//	literalsMap["CELL_INIT_DESC"] = CELL_INIT_DESC;
-//	literalsMap["CELL_MATTRESS"] = CELL_MATTRESS;
-//	literalsMap["CELL_LOOK_MATTRESS"] = CELL_LOOK_MATTRESS;
-//	literalsMap["CELL_BOWL"] = CELL_BOWL;
-//	literalsMap["CELL_LOOK_BOWL"] = CELL_LOOK_BOWL;
-//	literalsMap["CELL_PIGEON"] = CELL_PIGEON;
-//	literalsMap["CELL_LOOK_PIGEON"] = CELL_LOOK_PIGEON;
-//	literalsMap["CELL_IRON_BAR"] = CELL_IRON_BAR;
-//	literalsMap["CELL_LOOK_IRON_BAR"] = CELL_LOOK_IRON_BAR;
-//	literalsMap["CELL_BREADCRUMBS"] = CELL_BREADCRUMBS;
-//	literalsMap["CELL_LOOK_BREADCRUMBS"] = CELL_LOOK_BREADCRUMBS;
-//	literalsMap["CELL_LOOK_WINDOW_NO_BARS"] = CELL_LOOK_WINDOW_NO_BARS;
-//	literalsMap["CELL_WINDOW"] = CELL_WINDOW;
-//	literalsMap["CELL_LOOK_WINDOW"] = CELL_LOOK_WINDOW;
-//	literalsMap["CELL_LOOK_DOOR"] = CELL_LOOK_DOOR;
-//	literalsMap["CELL_LOOK_GUARD"] = CELL_LOOK_GUARD;
-//	literalsMap["CELL_LOOK_DEAD_GUARD"] = CELL_LOOK_DEAD_GUARD;
-//	literalsMap["CELL_SEARCH_GUARD_DEAD"] = CELL_SEARCH_GUARD_DEAD;
-//	literalsMap["CELL_SEARCH_GUARD_ALIVE"] = CELL_SEARCH_GUARD_ALIVE;
-//	literalsMap["CELL_KEY"] = CELL_KEY;
-//	literalsMap["CELL_LOOK_KEY"] = CELL_LOOK_KEY;
-//	literalsMap["CELL_GUARD_SWORD"] = CELL_GUARD_SWORD;
-//	
-//	literalsMap["CELL_EXIT_HIT_MACE"] = CELL_EXIT_HIT_MACE;
-//	literalsMap["CELL_EXIT_HIT_BAREHANDED"] = CELL_EXIT_HIT_BAREHANDED;
-//	literalsMap["CELL_EXIT_COMBINE_ROPE_SWORD"] = CELL_EXIT_COMBINE_ROPE_SWORD;
-//	literalsMap["CELL_EXIT_USE_ROPE"] = CELL_EXIT_USE_ROPE;
-//	literalsMap["CELL_EXIT_SUCCESS"] = CELL_EXIT_SUCCESS;
-//
-//	literalsMap["AISLE1_TITLE"] = AISLE1_TITLE;
-//	literalsMap["AISLE1_INIT_DESC"] = AISLE1_INIT_DESC;
-//	literalsMap["AISLE1_LOOK_DOOR"] = AISLE1_LOOK_DOOR;
-//	literalsMap["AISLE1_DESK"] = AISLE1_DESK;
-//	literalsMap["AISLE1_LOOK_DESK"] = AISLE1_LOOK_DESK;
-//
-//	literalsMap["AISLE2_TITLE"] = AISLE2_TITLE;
-//	literalsMap["AISLE2_INIT_DESC"] = AISLE2_INIT_DESC;
-//	literalsMap["AISLE2_LOOK_NORTH_DOOR"] = AISLE2_LOOK_NORTH_DOOR;
-//	literalsMap["AISLE2_LOOK_SOUTH_DOOR"] = AISLE2_LOOK_SOUTH_DOOR;
-//
-//	literalsMap["AISLE3_TITLE"] = AISLE3_TITLE;
-//	literalsMap["AISLE3_INIT_DESC"] = AISLE3_INIT_DESC;
-//	literalsMap["AISLE3_LOOK_UPSTAIRS"] = AISLE3_LOOK_UPSTAIRS;
-//	literalsMap["AISLE3_LOOK_SOUTH_DOOR"] = AISLE3_LOOK_SOUTH_DOOR;
-//
-//	literalsMap["ARMORY_TITLE"] = ARMORY_TITLE;
-//	literalsMap["ARMORY_INIT_DESC"] = ARMORY_INIT_DESC;
-//	literalsMap["ARMORY_CLOSET"] = ARMORY_CLOSET;
-//	literalsMap["ARMORY_LOOK_CLOSET"] = ARMORY_LOOK_CLOSET;
-//	literalsMap["ARMORY_SHIELD"] = ARMORY_SHIELD;
-//	literalsMap["ARMORY_LOOK_SHIELD"] = ARMORY_LOOK_SHIELD;
-//	literalsMap["ARMORY_CANT_TAKE_SHIELD"] = ARMORY_CANT_TAKE_SHIELD;
-//
-//	literalsMap["GUARDROOM_TITLE"] = GUARDROOM_TITLE;
-//	literalsMap["GUARDROOM_INIT_DESC"] = GUARDROOM_INIT_DESC;
-//	literalsMap["GUARDROOM_LOOK_CLOSED_CLOSET"] = GUARDROOM_LOOK_CLOSED_CLOSET;
-//	literalsMap["GUARDROOM_CLOSED_CLOSET"] = GUARDROOM_CLOSED_CLOSET;
-//	literalsMap["GUARDROOM_LOOK_OPEN_CLOSET"] = GUARDROOM_LOOK_OPEN_CLOSET;
-//	literalsMap["GUARDROOM_KEY"] = GUARDROOM_KEY;
-//
-//	literalsMap["TOOLROOM_TITLE"] = TOOLROOM_TITLE;
-//	literalsMap["TOOLROOM_INIT_DESC"] = TOOLROOM_INIT_DESC;
-//	literalsMap["TOOLROOM_LOOK_CLOSET_LOCKED"] = TOOLROOM_LOOK_CLOSET_LOCKED;
-//	literalsMap["TOOLROOM_CLOSET"] = TOOLROOM_CLOSET;
-//	literalsMap["TOOLROOM_ROPE"] = TOOLROOM_ROPE;
-//	literalsMap["TOOLROOM_LOOK_ROPE"] = TOOLROOM_LOOK_ROPE;
-//	literalsMap["TOOLROOM_TWOHANDED_MACE"] = TOOLROOM_TWOHANDED_MACE;
-//	literalsMap["TOOLROOM_LOOK_TWOHANDED_MACE"] = TOOLROOM_LOOK_TWOHANDED_MACE;
-//	literalsMap["TOOLROOM_GUARD_ALIVE"] = TOOLROOM_GUARD_ALIVE;
-//	literalsMap["TOOLROOM_GUARD_DEAD"] = TOOLROOM_GUARD_DEAD;
-//	literalsMap["TOOLROOM_SEARCH_GUARD"] = TOOLROOM_SEARCH_GUARD;
-//	literalsMap["TOOLROOM_PLAYER_DEAD"] = TOOLROOM_PLAYER_DEAD;
-//
-//	literalsMap["UPSTAIRS_TITLE"] = UPSTAIRS_TITLE;
-//	literalsMap["UPSTAIRS_INIT_DESC"] = UPSTAIRS_INIT_DESC;
-//	literalsMap["UPSTAIRS_DESC_GUARD_DEAD"] = UPSTAIRS_DESC_GUARD_DEAD;
-//	literalsMap["UPSTAIRS_LOOK_NORTH_DOOR"] = UPSTAIRS_LOOK_NORTH_DOOR;
-//	literalsMap["UPSTAIRS_LOOK_WEST_DOOR"] = UPSTAIRS_LOOK_WEST_DOOR;
-//	literalsMap["UPSTAIRS_LOOK_EAST"] = UPSTAIRS_LOOK_EAST;
-//
-//	literalsMap["GUARDS_BEDROOM_TITLE"] = GUARDS_BEDROOM_TITLE;
-//	literalsMap["GUARDS_BEDROOM_INIT_DESC"] = GUARDS_BEDROOM_INIT_DESC;
-//	literalsMap["GUARDS_BEDROOM_GUARD_ALIVE"] = GUARDS_BEDROOM_GUARD_ALIVE;
-//	literalsMap["GUARDS_BEDROOM_LOOK_GUARD_ALIVE"] = GUARDS_BEDROOM_LOOK_GUARD_ALIVE;
-//	literalsMap["GUARDS_BEDROOM_LOOK_GUARD_DEAD"] = GUARDS_BEDROOM_LOOK_GUARD_DEAD;
-//	literalsMap["GUARDS_BEDROOM_SEARCH_GUARD_ALIVE"] = GUARDS_BEDROOM_SEARCH_GUARD_ALIVE;
-//	literalsMap["GUARDS_BEDROOM_SEARCH_GUARD_DEAD"] = GUARDS_BEDROOM_SEARCH_GUARD_DEAD;
-//	literalsMap["GUARDS_BEDROOM_CLOSED_WARDROBE"] = GUARDS_BEDROOM_CLOSED_WARDROBE;
-//	literalsMap["GUARDS_BEDROOM_LOOK_CLOSED_WARDROBE"] = GUARDS_BEDROOM_LOOK_CLOSED_WARDROBE;
-//	literalsMap["GUARDS_BEDROOM_LOOK_OPEN_WARDROBE"] = GUARDS_BEDROOM_LOOK_OPEN_WARDROBE;
-//	literalsMap["GUARDS_BEDROOM_LOOK_CLOTHES"] = GUARDS_BEDROOM_LOOK_CLOTHES;
-//	literalsMap["GUARDS_BEDROOM_LOOK_BAG_OF_COINS"] = GUARDS_BEDROOM_LOOK_BAG_OF_COINS;
-//	literalsMap["GUARDS_BEDROOM_LOOK_COINS"] = GUARDS_BEDROOM_LOOK_COINS;
-//	literalsMap["GUARDS_BEDROOM_CUIRASS"] = GUARDS_BEDROOM_CUIRASS;
-//	literalsMap["GUARDS_BEDROOM_LOOK_CUIRASS"] = GUARDS_BEDROOM_LOOK_CUIRASS;
-//	literalsMap["GUARDS_BEDROOM_HELMET"] = GUARDS_BEDROOM_HELMET;
-//	literalsMap["GUARDS_BEDROOM_LOOK_HELMET"] = GUARDS_BEDROOM_LOOK_HELMET;
-//
-//	literalsMap["MEETINGS_ROOM_TITLE"] = MEETINGS_ROOM_TITLE;
-//	literalsMap["MEETINGS_ROOM_INIT_DESC"] = MEETINGS_ROOM_INIT_DESC;
-//	literalsMap["MEETINGS_ROOM_LOOK_OFFICER_ALIVE"] = MEETINGS_ROOM_LOOK_OFFICER_ALIVE;
-//	literalsMap["MEETINGS_ROOM_LOOK_OFFICER_DEAD"] = MEETINGS_ROOM_LOOK_OFFICER_DEAD;
-//	literalsMap["MEETINGS_ROOM_SEARCH_OFFICER_DEAD"] = MEETINGS_ROOM_SEARCH_OFFICER_DEAD;
-//	literalsMap["MEETINGS_ROOM_PLAYER_DEAD"] = MEETINGS_ROOM_PLAYER_DEAD;
-//	literalsMap["MEETINGS_ROOM_LOOK_LARGE_TABLE"] = MEETINGS_ROOM_LOOK_LARGE_TABLE;
-//	literalsMap["MEETINGS_ROOM_OFFICER_SWORD"] = MEETINGS_ROOM_OFFICER_SWORD;
-//	literalsMap["MEETINGS_ROOM_LOOK_OFFICER_SWORD"] = MEETINGS_ROOM_LOOK_OFFICER_SWORD;
-//
-//	literalsMap["MAIN_HALL_TITLE"] = MAIN_HALL_TITLE;
-//	literalsMap["MAIN_HALL_INIT_DESC"] = MAIN_HALL_INIT_DESC;
-//	literalsMap["MAIN_HALL_STREET_EXIT"] = MAIN_HALL_STREET_EXIT;
-//
-//	literalsMap["MAIN_HALL_EXIT_NO_CLOTHES_NO_MONEY"] = MAIN_HALL_EXIT_NO_CLOTHES_NO_MONEY;
-//	literalsMap["MAIN_HALL_EXIT_NO_CLOTHES_WITH_MONEY"] = MAIN_HALL_EXIT_NO_CLOTHES_WITH_MONEY;
-//	literalsMap["MAIN_HALL_BRIBE_SUCCESS"] = MAIN_HALL_BRIBE_SUCCESS;
-//	literalsMap["MAIN_HALL_BRIBE_FAILURE"] = MAIN_HALL_BRIBE_FAILURE;
-//	literalsMap["MAIN_HALL_EXIT_GUARD_CLOTHES"] = MAIN_HALL_EXIT_GUARD_CLOTHES;
-//	literalsMap["MAIN_HALL_EXIT_SUCCESS"] = MAIN_HALL_EXIT_SUCCESS;
-//
-//	literalsMap["BAD_IDEA"] = BAD_IDEA;
-//	literalsMap["CANT_DO"] = CANT_DO;
-//	literalsMap["DOOR_LOCKED"] = DOOR_LOCKED;
-//	literalsMap["GAME_INTRO"] = GAME_INTRO;
-//	literalsMap["DONT_UNDERSTAND"] = DONT_UNDERSTAND;
-//	literalsMap["NOT_DOING_THAT"] = NOT_DOING_THAT;
-//	literalsMap["EXIT_DESC"] = EXIT_DESC;
-//	literalsMap["DOOR"] = DOOR;
-//	literalsMap["DOOR_DESC"] = DOOR_DESC;
-//	literalsMap["EXIT_STAIRS_DESC"] = EXIT_STAIRS_DESC;
-//	literalsMap["CHAIR"] = CHAIR;
-//	literalsMap["LOOK_CHAIR"] = LOOK_CHAIR;
-//	literalsMap["GUARD"] = GUARD;
-//	literalsMap["OFFICER"] = OFFICER;
-//
-//
-//
-//
-//	
-//}
-
-World::ptrEntity World::GetLocation(const Scenario& sc) const{
+ReturnState World::TriggerConsequences()
+{
+	//CELL1
 	
-	switch (sc) {
-		case Scenario::CELL:
-			return cell;
-			break;
-		case Scenario::AISLE1:
-			return aisle1;
-			break;
-		case Scenario::AISLE2:
-			return aisle2;
-			break;			
-		case Scenario::AISLE3:
-			return aisle3;
-			break;
-		case Scenario::ARMORY:
-			return armory;
-			break;
-		case Scenario::GUARDROOM:
-			return guardroom;
-			break;
-		case Scenario::TOOLROOM:
-			return toolroom;
-			break;
-		case Scenario::UPSTAIRS:
-			return upstairs;
-			break;
-		case Scenario::GUARDS_BEDROOM:
-			return guardsBedroom;
-			break;
-		case Scenario::MEETINGS_ROOM:
-			return meetingsRoom;
-			break;
-		case Scenario::MAIN_HALL:
-			return mainHall;
-			break;
-		case Scenario::MAIN_HALL_EXIT:
-			return mainHallDoorExit;
-			break;
-		case Scenario::CELL_EXIT:
-			return windowExit;
-			break;
-		default:
-			return nullptr;
+	if (player->location == cell)
+	{
+		//Breadcrumbs in the window -> spawn pigeon in cell
+		if (pigeon->parentEntity == nullptr)
+		{
+			listIter iterBreadcrumbs = FindEntityByName(CELL_BREADCRUMBS, window->contains);
+			if (iterBreadcrumbs != window->contains.end())
+			{
+				pigeon->parentEntity = cell;
+				cell->contains.push_back(pigeon);
+				std::cout << CELL_PIGEON_COMES_IN << std::endl << std::endl;
+				return ReturnState::STAY;
+			}
+		}
+
+		//Pigeon in door opening -> guard enters the cell
+		if (pigeon->parentEntity == doorOpening)
+		{
+			listIter iterPigeon = FindEntityByName(CELL_PIGEON, doorOpening->contains);
+			if (iterPigeon != doorOpening->contains.end())
+			{
+			
+				if (FindEntityByName(CELL_BAR, player->contains) != player->contains.end())
+				{
+					cellDoorExit->isOpen = true;
+					cellDoorExit->isLocked = false;
+					guardAisle1->location = cell;
+					std::cout << CELL_HIT_GUARD << std::endl << std::endl;
+					guardAisle1->hp = 0;
+					guardAisle1->description = CELL_LOOK_DEAD_GUARD;
+					doorOpening->description = CELL_LOOK_DOOR_OPENING_GUARD_DEAD;
+					TransferItem(pigeon, cell);
+					std::cout << CELL_PIGEON_BACK_TO_WINDOW << std::endl << std::endl;
+				}
+				else
+				{
+					std::cout << CELL_GUARD_ON_ENTER2 << std::endl;
+					TransferItem(pigeon, cell);
+					std::cout << CELL_PIGEON_BACK_TO_WINDOW << std::endl << std::endl;
+
+				}
+			}
+			return ReturnState::STAY;
+		}
+
+		if (windowExit->isOpen)
+		{
+			listIter iter = FindEntityByName(TOOLROOM_ROPE, window->contains);
+			if (iter != window->contains.end()) {
+				std::cout << CELL_EXIT_SUCCESS << std::endl;
+			}
+
+			return ReturnState::FREEDOM;
+		}
 	}
 }
+

@@ -14,11 +14,14 @@
 #include "armor.h"
 #include "weapon.h"
 
+
 class World
 {
 public:
 
 	typedef  std::shared_ptr<Creature> ptrCreature;
+	typedef  std::shared_ptr<Npc> ptrNpc;
+	typedef  std::shared_ptr<Player> ptrPlayer;
 	typedef  std::shared_ptr<Room> ptrRoom;
 	typedef  std::shared_ptr<Item> ptrItem;
 	typedef  std::shared_ptr<Exit> ptrExit;
@@ -26,21 +29,19 @@ public:
 	typedef  std::shared_ptr<Armor> ptrArmor;
 	typedef  std::shared_ptr<Entity> ptrEntity;
 	
-
-	World();
+	
 	void Init();
 	ReturnState Start();
 	ReturnState Update();
+	
+	
+	std::list<ptrEntity> listCreatures;
 
 private:
 
-	std::map<Scenario, std::string> scenarioNames;
-	std::map<std::string, std::string> literalsMap;
 	std::vector<std::string> playerWordsVector;
 	std::string playerCleanInput;
-
-	//void LoadLiterals();
-	ptrEntity GetLocation(const Scenario& sc) const;
+	ReturnState TriggerConsequences();
 
 ;	////ITEMS (including weapons and armors)
 	//cell
@@ -50,7 +51,7 @@ private:
 	ptrItem bar;
 	ptrItem breadcrumbs;
 	ptrItem window;
-	
+	ptrItem doorOpening;
 
 	//aisle1
 	ptrItem chairAisle1;
@@ -71,7 +72,7 @@ private:
 
 	//toolroom
 	ptrItem rope;
-	ptrWeapon twoHandedMace;
+	ptrItem twoHandedMace;
 	ptrItem toolsCloset;
 	
 	//guards bedroom
@@ -151,12 +152,12 @@ private:
 	ptrExit mainHallDoorExit;
 
 	//CREATURES
-	ptrCreature player;
-	ptrCreature guardAisle1;
-	ptrCreature guardToolRoom;
-	ptrCreature guardSleeping;
-	ptrCreature officerMeetingRoom;
-
+	ptrPlayer player;
+	ptrNpc guardAisle1;
+	ptrNpc guardToolRoom;
+	ptrNpc guardSleeping;
+	ptrNpc officerMeetingRoom;
+	ptrNpc guardGuardroom;
 };
 
 

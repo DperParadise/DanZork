@@ -7,7 +7,7 @@
 #include <memory>
 
 
-void ParseInput(const std::string &inputString, std::vector<std::string> &inputWordsVector);
+void ParseInput(const char *input, char *output);
 std::string ToUpper(std::string s1);
 
 
@@ -37,8 +37,31 @@ enum class ReturnState {
 	STAY,
 	NEXT_ROOM,
 	ERROR,
-	QUIT
+	QUIT,
+	FREEDOM
 };
 
+enum HitArea {
+	HEAD,
+	LEFT_ARM,
+	RIGHT_ARM,
+	TORSE,
+	LEFT_LEG,
+	RIGHT_LEG
+};
 
+enum class GoDirection {
+	OK,
+	CLOSED,
+	NO_WAY,
+	FREEDOM
+};
+
+enum class ItemSize {
+	EXTRA_SMALL,
+	SMALL,
+	MEDIUM,
+	LARGE,
+	EXTRA_LARGE
+};
 #endif //end GLOBALS_H

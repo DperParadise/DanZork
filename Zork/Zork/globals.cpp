@@ -2,40 +2,34 @@
 #include <memory>
 
  
-void ParseInput(const std::string &inputString, std::vector<std::string> &inputWordsVector) 
+void ParseInput(const char *input, char *output)
 {
-	bool processingWords = false;
-	size_t parsedChars = 0;
-	inputWordsVector.clear();
-
-	const char *begin = inputString.c_str();
-	const char *end = inputString.c_str();
-	size_t inputLength = inputString.length();
-
-	while (parsedChars <= inputLength && inputLength != 0)
+	bool blank_read = true;
+	int i = 0;
+	int last_pos = 0;
+	while (input[i] != '\0')
 	{
-		if (*end != ' ' && *end !='\0')
+		if (input[i] != ' ')
 		{
-			processingWords = true;
-			++end;
+			output[last_pos] = input[i];						
+			blank_read = false;
+			last_pos++;
 		}
 		else
-		{	// we have read one word
-			if (processingWords)
+		{
+			if (!blank_read)
 			{
-				inputWordsVector.push_back(ToUpper(std::string(begin, end)));
-				processingWords = false;
-				++end;
-				begin = end;
+				output[last_pos] = input[i];
+				blank_read = true;
+				last_pos++;
 			}
-			else {
-				++begin;
-				++end;
-			}		
 		}
-		
-		++parsedChars;
+		i++;
 	}
+	if (output[last_pos - 1] == ' ')
+		output[last_pos - 1] = '\0';
+	else
+		output[last_pos] = '\0';
 }
 
 std::string ToUpper(std::string s1)
@@ -44,3 +38,4 @@ std::string ToUpper(std::string s1)
 	std::transform(copy.begin(), copy.end(), copy.begin(), ::toupper);
 	return copy;
 }
+
