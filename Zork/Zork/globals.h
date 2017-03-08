@@ -64,4 +64,7 @@ enum class ItemSize {
 	LARGE,
 	EXTRA_LARGE
 };
+
+#define RELEASE(x) if(x != nullptr) {delete x; x = nullptr;}
+
 #endif //end GLOBALS_H

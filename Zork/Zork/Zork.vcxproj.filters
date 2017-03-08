@@ -21,9 +21,6 @@
     <ClInclude Include="entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="creature.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="room.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -45,9 +42,6 @@
     <ClInclude Include="world.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="commands.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="globals.cpp">
@@ -57,9 +51,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="creature.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="room.cpp">
@@ -78,9 +69,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="world.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="commands.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

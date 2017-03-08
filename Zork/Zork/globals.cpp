@@ -32,10 +32,5 @@ void ParseInput(const char *input, char *output)
 		output[last_pos] = '\0';
 }
 
-std::string ToUpper(std::string s1)
-{
-	std::string copy = s1;
-	std::transform(copy.begin(), copy.end(), copy.begin(), ::toupper);
-	return copy;
-}
+
 

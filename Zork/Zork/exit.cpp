@@ -1,12 +1,19 @@
 #include "exit.h"
+#include "globals.h"
+#include "entity.h"
 
 Exit::Exit(
 	Direction dir,
-	ptrRoom src,
-	ptrRoom dest,
+	Room *src,
+	Room *dest,
 	bool isOpen,
-	bool isLocked,
 	Type type,
 	const std::string &name,
 	const std::string &desc,
-	std::list<ptrEntity> &&list) : direction(dir), source(src), destination(dest), isOpen(), isLocked(isLocked), Entity(type, name, desc, std::move(list)) {}
+	std::list<Entity*> list) : direction(dir), source(src), destination(dest), isOpen(), Entity(type, name, desc,list) {}
+
+Exit::~Exit()
+{
+	RELEASE(source);
+	RELEASE(destination);
+}

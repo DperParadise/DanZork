@@ -1,18 +1,15 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-#include "creature.h"
 
-
-class Player : public Creature
+class Room;
+class Player : public Entity
 {
 public:
 
-	Player(ptrRoom loc, int hp, int defense, int attack, Type type, const std::string &name, const std::string &desc, std::list<ptrEntity> &&list, ptrRoom prevRoom, int lives, int score);
+	Player(Room *loc, Type type, const std::string &name, const std::string &desc, std::list<Entity*> list);
+	~Player();
 
-	int score;
-	int lives;
-	ptrRoom previousRoom;
-
+	Room *location;
 
 	
 };

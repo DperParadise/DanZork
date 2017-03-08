@@ -2,23 +2,22 @@
 #define EXIT_H
 
 #include "globals.h"
-#include "entity.h"
-#include <memory.h>
-#include "room.h"
 
+class Entity;
+class Room;
 class Exit : public Entity
 {
 public:
 
-	typedef std::shared_ptr<Room> ptrRoom;
 
-	Exit(Direction dir, ptrRoom src, ptrRoom dest, bool isOpen, bool isLocked, Type type, const std::string &name, const std::string &desc, std::list<ptrEntity> &&list);
+	Exit(Direction dir, Room *src, Room *dest, bool isOpen, Type type, const std::string &name, const std::string &desc, std::list<Entity*> list);
+	~Exit();
 
 	Direction direction;
-	ptrRoom source;
-	ptrRoom destination;
+	Room *source;
+	Room *destination;
 	bool isOpen;
-	bool isLocked;
+	
 };
 
 

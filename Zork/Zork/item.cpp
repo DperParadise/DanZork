@@ -1,13 +1,16 @@
 #include "item.h"
+#include "globals.h"
 
 Item::Item(
-	ptrEntity parentEntity,
+	Entity *pnt,
 	ItemSize size,
 	bool isOpen,
-	bool canBeOpened,
 	Type type,
 	const std::string &name,
 	const std::string &desc,
-	std::list<ptrEntity> &&list) : parentEntity(parentEntity), size(size), isOpen(isOpen), canBeOpened(canBeOpened), Entity(type, name, desc, std::move(list)) {}
+	std::list<Entity*> list) : parent(pnt), size(size), isOpen(isOpen),  Entity(type, name, desc, list) {}
 
-Item::~Item() {}
+Item::~Item()
+{
+	RELEASE(parent);
+}

@@ -1,14 +1,17 @@
 #include "player.h"
+#include "entity.h"
+#include "globals.h"
 
+class Room;
 Player::Player(
-	ptrRoom loc,
-	int hp,
-	int defense,
-	int attack,
+	Room *loc,
 	Type type,
 	const std::string &name,
 	const std::string &desc,
-	std::list<ptrEntity> &&list, 
-	ptrRoom prevRoom, 
-	int lives,
-	int score) : previousRoom(prevRoom), lives(lives), score(score), Creature(loc, hp, defense, attack, type, name, desc, std::move(list)) {}
+	std::list<Entity*> list
+	) : location(loc), Entity(type, name, desc, list) {}
+
+Player::~Player()
+{
+	RELEASE(location);
+}
