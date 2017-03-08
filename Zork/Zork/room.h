@@ -3,6 +3,7 @@
 
 #include <string>
 #include <list>
+#include "entity.h"
 
 class Room : public Entity
 {

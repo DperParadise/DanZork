@@ -1,6 +1,8 @@
 #ifndef NPC_H
 #define NPC_H
 
+#include "entity.h"
+
 class Entity;
 class Room;
 class Npc : public Entity

@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "globals.h"
+#include "entity.h"
 
 class Room;
 class Item;

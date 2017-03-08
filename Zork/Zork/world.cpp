@@ -12,5 +12,9 @@ void World::Start()
 
 ReturnState World::Update()
 {
+	ReturnState ret = ReturnState::CONTINUE;
 	//Receive Input and make player execute actions
+
+
+	return ret;
 }

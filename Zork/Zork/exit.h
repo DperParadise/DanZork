@@ -2,6 +2,7 @@
 #define EXIT_H
 
 #include "globals.h"
+#include "entity.h"
 
 class Entity;
 class Room;
