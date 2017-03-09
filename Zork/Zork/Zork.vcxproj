@@ -148,7 +148,7 @@
     <ClInclude Include="globals.h" />
     <ClInclude Include="item.h" />
     <ClInclude Include="literals.h" />
-    <ClInclude Include="npc.h" />
+    <ClInclude Include="enemy.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="room.h" />
   </ItemGroup>
@@ -159,7 +159,7 @@
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="item.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="npc.cpp" />
+    <ClCompile Include="enemy.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="room.cpp" />
   </ItemGroup>

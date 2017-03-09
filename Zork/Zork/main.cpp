@@ -1,13 +1,6 @@
 #include "globals.h"
 #include "world.h"
-//#include "literals.h"
 #include <iostream>
-#include <string>
-#include <vector>
-#include <map>
-#include <memory>
-
-Scenario scenarioGlobal = Scenario::CELL;
 
 int main() 
 {
@@ -30,14 +23,20 @@ int main()
 	}
 	
 	if (ret == ReturnState::QUIT)
+	{
 		std::cout << "Thanks for Playing Dan Zork\n" << std::endl;
+		world->CleanUp();
+	}
 	if (ret == ReturnState::ERROR)
 		std::cout << "Error" << std::endl;
+
 	if (ret == ReturnState::ENDGAME)
+	{
 		std::cout << "At last you are free. Good job!" << std::endl;
+		world->CleanUp();
+	}
 
-	RELEASE(world);
-
+	
 	return 0;
 }
 	
