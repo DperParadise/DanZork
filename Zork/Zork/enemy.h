@@ -13,10 +13,7 @@ public:
 	~Enemy();
 
 	Room *location;
-	Type type;
-	std::string name;
-	std::string description;
-	std::list<Entity*> contains;
+	
 };
 
 

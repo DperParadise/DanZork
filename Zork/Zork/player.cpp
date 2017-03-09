@@ -11,10 +11,7 @@ Player::Player(
 	std::list<Entity*> list
 	) : location(loc), Entity(type, name, desc, list) {}
 
-Player::~Player()
-{
-	RELEASE(location);
-}
+Player::~Player(){}
 
 void Player::Pickup(Item *item)
 {

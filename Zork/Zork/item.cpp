@@ -10,7 +10,4 @@ Item::Item(
 	const std::string &desc,
 	std::list<Entity*> list) : parent(pnt), size(size), isOpen(isOpen),  Entity(type, name, desc, list) {}
 
-Item::~Item()
-{
-	RELEASE(parent);
-}
+Item::~Item(){}

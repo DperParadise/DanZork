@@ -12,8 +12,4 @@ Exit::Exit(
 	const std::string &desc,
 	std::list<Entity*> list) : direction(dir), source(src), destination(dest), isOpen(), Entity(type, name, desc,list) {}
 
-Exit::~Exit()
-{
-	RELEASE(source);
-	RELEASE(destination);
-}
+Exit::~Exit(){}
