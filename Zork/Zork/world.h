@@ -28,7 +28,7 @@ private:
 	typedef std::list<Entity*> Inventory;
 
 	std::list<Entity*> world;
-	char input[50];
+	char raw_input[50];
 	char command[50];
 
 	

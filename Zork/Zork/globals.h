@@ -2,6 +2,7 @@
 #define GLOBALS_H
 
 void ParseInput(const char *input, char *output);
+void ToUpper(const char *input, char *output);
 
 enum Type { ENEMY, PLAYER, EXIT, ROOM, ITEM };
 

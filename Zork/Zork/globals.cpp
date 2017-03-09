@@ -1,6 +1,6 @@
 #include "globals.h"
 #include <memory>
-
+#include <ctype.h>
  
 void ParseInput(const char *input, char *output)
 {
@@ -31,6 +31,17 @@ void ParseInput(const char *input, char *output)
 	//	output[last_pos - 1] = '\0';
 	//else
 	//	output[last_pos] = '\0';
+}
+
+void ToUpper(const char *input, char *output)
+{
+	int i = 0;
+	while (input[i] != '\0')
+	{
+		output[i] = toupper(input[i]);
+		i++;
+	}
+	output[i] = '\0';
 }
 
 

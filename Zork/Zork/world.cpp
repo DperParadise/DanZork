@@ -43,18 +43,24 @@ void World::Init()
 	player = new Player(cell, PLAYER, "Daniel", "It's me", pla_inv);
 	enemy = new Enemy(corridor, ENEMY, "guard", "a cell guard wearing it's outfit", {});
 
+	//Set relationshipts between entities
+
+
+
+
 }
 
 void World::Start()
 {
 	//Initial message
+	printf("*****Wellcome to Dan Zork*****\n");
 }
 
 ReturnState World::Update()
 {
 	ReturnState ret = ReturnState::CONTINUE;
 	//Receive Input and make player execute actions
-	memset(input, '\0', sizeof(input)/sizeof(char));
+	memset(raw_input, '\0', sizeof(raw_input)/sizeof(char));
 	memset(command, '\0', sizeof(command) / sizeof(char));
 	printf(">");
 	int i = 0;
@@ -62,12 +68,16 @@ ReturnState World::Update()
 
 	while ('\n' != (c = getchar()))
 	{
-		input[i] = c;
+		raw_input[i] = c;
 		i++;
 	}
 
-	ParseInput(input, command);
-	
+	ParseInput(raw_input, command);
+	ToUpper(command, raw_input);
+
+	//Quit game
+	if (!strcmp(raw_input, "Q"))
+		return QUIT;
 
 
 	return ret;
@@ -75,5 +85,26 @@ ReturnState World::Update()
 
 void World::CleanUp()
 {
-
+	/*RELEASE(enemy);
+	RELEASE(player);
+	RELEASE(guard_outfit);
+	RELEASE(closet);
+	RELEASE(closet_key);
+	RELEASE(table);
+	RELEASE(bar);
+	RELEASE(pigeon);
+	RELEASE(door_hole);
+	RELEASE(breadcrumbs);
+	RELEASE(window);
+	RELEASE(door_hs);
+	RELEASE(door_hc);
+	RELEASE(door_ch);
+	RELEASE(door_wc);
+	RELEASE(door_cw);
+	RELEASE(door_ccl);
+	RELEASE(door_clc);
+	RELEASE(main_hall);
+	RELEASE(wardrobe);
+	RELEASE(corridor);
+	RELEASE(cell);*/
 }
