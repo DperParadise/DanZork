@@ -14,6 +14,7 @@ public:
 	~Player();
 
 	void Pickup(Item *item);
+	void Drop(Item *item);
 	void Open(Item *item);
 	void Close(Item *item);
 	void LookAt(Entity* entity);

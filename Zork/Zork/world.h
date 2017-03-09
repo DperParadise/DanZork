@@ -18,7 +18,8 @@ public:
 
 private:
 	std::list<Entity*> world;
-
+	char input[50];
+	char command[50];
 };
 
 

@@ -21,6 +21,11 @@ void Player::Pickup(Item *item)
 
 }
 
+void Player::Drop(Item *item)
+{
+
+}
+
 void Player::Open(Item *item)
 {
 

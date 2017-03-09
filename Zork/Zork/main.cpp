@@ -16,7 +16,7 @@ int main()
 	world->Start();
 	ReturnState ret = ReturnState::CONTINUE;
 
-	while (ret != ReturnState::CONTINUE || ret != ReturnState::RESTART)
+	while (ret == ReturnState::CONTINUE || ret == ReturnState::RESTART)
 	{	
 		if (ret == ReturnState::CONTINUE)
 		{
@@ -30,7 +30,7 @@ int main()
 	}
 	
 	if (ret == ReturnState::QUIT)
-		std::cout << "Thanks for Playing Danzork\n" << std::endl;
+		std::cout << "Thanks for Playing Dan Zork\n" << std::endl;
 	if (ret == ReturnState::ERROR)
 		std::cout << "Error" << std::endl;
 	if (ret == ReturnState::ENDGAME)
