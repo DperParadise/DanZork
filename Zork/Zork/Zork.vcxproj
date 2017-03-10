@@ -147,7 +147,6 @@
     <ClInclude Include="exit.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="item.h" />
-    <ClInclude Include="literals.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="room.h" />

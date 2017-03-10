@@ -8,7 +8,7 @@ Player::Player(
 	Type type,
 	const std::string &name,
 	const std::string &desc,
-	std::list<Entity*> list
+	std::list<Entity*> &list
 	) : location(loc), Entity(type, name, desc, list) {}
 
 Player::~Player(){}

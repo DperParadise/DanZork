@@ -11,14 +11,13 @@ class Entity
 	
 public:
 	
-	Entity();
-	Entity(Type type, const std::string &name, const std::string &description, std::list<Entity*> list);
+	Entity(Type type, const std::string &name, const std::string &description, std::list<Entity*> &list);
 	virtual ~Entity();
 
 	Type type;
 	std::string name;
 	std::string description;
-	std::list<Entity*> contains;
+	std::list<Entity*> &contains;
 };
 
 

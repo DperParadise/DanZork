@@ -9,7 +9,7 @@ class Room : public Entity
 {
 public:
 
-	Room(Type type, const std::string &name, const std::string &desc, std::list<Entity*> list);	
+	Room(Type type, const std::string &name, const std::string &desc, std::list<Entity*> &list);	
 
 };
 

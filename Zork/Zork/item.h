@@ -7,12 +7,14 @@ class Item : public Entity
 {
 public:
 
-	Item(Entity *parentEntity, ItemSize size, bool isOpen, Type type, const std::string &name, const std::string &desc, std::list<Entity*> list);
+	Item(Entity *parentEntity, ItemSize size, bool isOpen, bool isContainer, bool isLocked, Type type, const std::string &name, const std::string &desc, std::list<Entity*> &list);
 	virtual ~Item();
 
 	Entity *parent;
 	ItemSize size;
 	bool isOpen;
+	bool isContainer;
+	bool isLocked;
 };
 
 

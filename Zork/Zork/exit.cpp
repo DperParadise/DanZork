@@ -10,6 +10,6 @@ Exit::Exit(
 	Type type,
 	const std::string &name,
 	const std::string &desc,
-	std::list<Entity*> list) : direction(dir), source(src), destination(dest), isOpen(), Entity(type, name, desc,list) {}
+	std::list<Entity*> &list) : direction(dir), source(src), destination(dest), isOpen(), Entity(type, name, desc,list) {}
 
 Exit::~Exit(){}

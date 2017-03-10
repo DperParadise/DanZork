@@ -10,7 +10,7 @@ class Player : public Entity
 {
 public:
 
-	Player(Room *loc, Type type, const std::string &name, const std::string &desc, std::list<Entity*> list);
+	Player(Room *loc, Type type, const std::string &name, const std::string &desc, std::list<Entity*> &list);
 	~Player();
 
 	void Pickup(Item *item);
