@@ -82,6 +82,7 @@ void World::Init()
 	//MAIN HALL
 	mh_inv.push_back(door_hs);
 
+	
 }
 
 void World::Start()
@@ -94,8 +95,12 @@ ReturnState World::Update()
 {
 	ReturnState ret = ReturnState::CONTINUE;
 	//Receive Input and make player execute actions
-	memset(raw_input, '\0', sizeof(raw_input)/sizeof(char));
-	memset(command, '\0', sizeof(command) / sizeof(char));
+	memset(raw_input, '\0', length + 1);
+	memset(input, '\0', length + 1);
+	memset(command, '\0', length + 1);
+	memset(sub1, '\0', length + 1);
+	memset(sub2, '\0', length + 1);
+	
 	printf(">");
 	int i = 0;
 	char c = ' ';
@@ -105,12 +110,68 @@ ReturnState World::Update()
 		raw_input[i] = c;
 		i++;
 	}
+	//trim and lower case input
+	TrimInput(raw_input, input);
 
-	ParseInput(raw_input, command);
-	ToUpper(command, raw_input);
+	//search for first command
+	char *beg = input;
+	int num_char = 0;
+	while (*beg != '\0' && *beg != ' ')
+	{
+		beg++;
+		num_char++;
+	}	
+	memcpy(command, input, num_char);
+	beg++;
+	num_char++;
+	memcpy(sub1, beg, length - num_char);
+	
+	//Check if the command is "use with"
+	if (!strcmp("use", command))
+	{
+		while (sub1[sub_idx] != '\0' && match_chars < mw_length)
+		{
+			if (sub1[sub_idx] == my_word[mw_idx])
+			{
+				if (found_idx == -1)
+					found_idx = sub_idx;
 
+				sub_idx++;
+				mw_idx++;
+				match_chars++;
+			}
+			else
+			{
+				found_idx = -1;
+				mw_idx = 0;
+				match_chars = 0;
+				sub_idx++;
+			}
+		}
+
+		if (found_idx != -1 && match_chars < mw_length)
+			found_idx = -1;
+
+		if (found_idx != -1)
+		{
+			strcat(command, "with");
+			beg = sub1 + found_idx + mw_length;
+			memcpy(sub2, beg, length - (found_idx + 1 + mw_length));
+			sub1[found_idx] = '\0';			
+		}
+
+		//reset variables
+		found_idx = -1;
+		match_chars = 0;
+		mw_idx = 0;
+		sub_idx = 0;
+	}
+
+	//Debug
+	std::cout << "command : " << command << ", " << "sub1 : " << sub1 << ", sub2 : " << sub2 << std::endl;
+	
 	//Quit game
-	if (!strcmp(raw_input, "Q"))
+	if (!strcmp(command, "q"))
 		return QUIT;
 
 

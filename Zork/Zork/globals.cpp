@@ -2,7 +2,7 @@
 #include <memory>
 #include <ctype.h>
  
-void ParseInput(const char *input, char *output)
+void TrimInput(const char *input, char *output)
 {
 	bool blank_read = true;
 	int i = 0;
@@ -26,19 +26,23 @@ void ParseInput(const char *input, char *output)
 		}
 		i++;
 	}
-	//Add end of string character - needed only if it isn't provided in the input
-	//if (output[last_pos - 1] == ' ')
-	//	output[last_pos - 1] = '\0';
-	//else
-	//	output[last_pos] = '\0';
+	//Add end of string character
+	if (output[last_pos - 1] == ' ')
+		output[last_pos - 1] = '\0';
+	else
+		output[last_pos] = '\0';
+
+	//----------------------ToLower--------------------------------------
+	ToLower(output, output);
+
 }
 
-void ToUpper(const char *input, char *output)
+void ToLower(const char *input, char *output)
 {
 	int i = 0;
 	while (input[i] != '\0')
 	{
-		output[i] = toupper(input[i]);
+		output[i] = tolower(input[i]);
 		i++;
 	}
 	output[i] = '\0';

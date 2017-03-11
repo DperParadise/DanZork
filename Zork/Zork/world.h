@@ -29,7 +29,17 @@ private:
 
 	std::list<Entity*> world;
 	char raw_input[50];
+	char input[50];
 	char command[50];
+	char sub1[50];
+	char sub2[50];
+	size_t length = 49;
+	char my_word[7] = " with ";
+	size_t mw_length = 6;
+	size_t mw_idx = 0;
+	size_t sub_idx = 0;
+	int found_idx = -1;
+	size_t match_chars = 0;
 
 	
 	//--------------------------------------ROOMS-----------------------------------------
