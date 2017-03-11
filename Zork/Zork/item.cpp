@@ -8,8 +8,8 @@ Item::Item(
 	bool isContainer,
 	bool isLocked,
 	Type type,
-	const std::string &name,
-	const std::string &desc,
+	const char *name,
+	const char *desc,
 	std::list<Entity*> &list) : parent(pnt), size(size), isOpen(isOpen), isContainer(isContainer), isLocked(isLocked), Entity(type, name, desc, list) {}
 
 Item::~Item(){}

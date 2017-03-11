@@ -8,8 +8,8 @@ Exit::Exit(
 	Room *dest,
 	bool isOpen,
 	Type type,
-	const std::string &name,
-	const std::string &desc,
+	const char *name,
+	const char *desc,
 	std::list<Entity*> &list) : direction(dir), source(src), destination(dest), isOpen(), Entity(type, name, desc,list) {}
 
 Exit::~Exit(){}

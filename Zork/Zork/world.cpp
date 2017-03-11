@@ -36,7 +36,7 @@ void World::Init()
 	 //---------------------------------------ITEMS CELL-----------------------------------------
 	window = new Item(cell, MEDIUM, true, true, false, ITEM, "window", "barred window leading to the forest with a loose bar. You can hear doves singing nearby.", win_inv);
 	world.push_back(window);
-	breadcrumbs = new Item(cell, SMALL, false, false, false, ITEM, "bread crumbs", "bread crumbs. Someone enjoy his last meal here.", common_inv);
+	breadcrumbs = new Item(cell, SMALL, false, false, false, ITEM, "bread crumbs", "bread crumbs. Someone enjoyed his last meal here.", common_inv);
 	world.push_back(breadcrumbs);
 	door_hole = new Item(cell, SMALL, true, true, false, ITEM, "door hole", "through this hole prisoners are given food.", doh_inv);
 	world.push_back(door_hole);
@@ -93,8 +93,9 @@ void World::Start()
 
 ReturnState World::Update()
 {
-	ReturnState ret = ReturnState::CONTINUE;
 	//Receive Input and make player execute actions
+	ReturnState ret = ReturnState::CONTINUE;
+	
 	memset(raw_input, '\0', length + 1);
 	memset(input, '\0', length + 1);
 	memset(command, '\0', length + 1);
@@ -168,8 +169,15 @@ ReturnState World::Update()
 	}
 
 	//Debug
-	std::cout << "command : " << command << ", " << "sub1 : " << sub1 << ", sub2 : " << sub2 << std::endl;
+	//std::cout << "command : " << command << ", " << "sub1 : " << sub1 << ", sub2 : " << sub2 << std::endl;
 	
+	//test Pickup
+	if (!strcmp(command, "pickup")) 
+	{
+		player->Pickup(sub1);
+		std::cout << player->GetMessage() << std::endl;
+	}
+
 	//Quit game
 	if (!strcmp(command, "q"))
 		return QUIT;

@@ -10,14 +10,17 @@ class Exit : public Entity
 {
 public:
 
-
-	Exit(Direction location, Room *src, Room *dest, bool isOpen, Type type, const std::string &name, const std::string &desc, std::list<Entity*> &list);
+	Exit(Direction location, Room *src, Room *dest, bool isOpen, Type type, const char *name, const char *desc, std::list<Entity*> &list);
 	~Exit();
+
+	bool isOpen;
+
+private:
 
 	Direction direction;
 	Room *source;
 	Room *destination;
-	bool isOpen;
+	
 	
 };
 
