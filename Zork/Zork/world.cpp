@@ -34,25 +34,25 @@ void World::Init()
 	door_hs = new Exit(NORTH, main_hall, nullptr, false, EXIT, "street exit", "door leading to the street to the north.", common_inv);
 	world.push_back(door_hs);
 	 //---------------------------------------ITEMS CELL-----------------------------------------
-	window = new Item(cell, MEDIUM, true, true, false, ITEM, "window", "barred window leading to the forest with a loose bar. You can hear doves singing nearby.", win_inv);
+	window = new Item(cell, nullptr, MEDIUM, true, true, false, ITEM, "window", "barred window leading to the forest with a loose bar. You can hear doves singing nearby.", win_inv);
 	world.push_back(window);
-	breadcrumbs = new Item(cell, SMALL, false, false, false, ITEM, "bread crumbs", "bread crumbs. Someone enjoyed his last meal here.", common_inv);
+	breadcrumbs = new Item(cell, nullptr, SMALL, false, false, false, ITEM, "bread crumbs", "bread crumbs. Someone enjoyed his last meal here.", common_inv);
 	world.push_back(breadcrumbs);
-	door_hole = new Item(cell, SMALL, true, true, false, ITEM, "door hole", "through this hole prisoners are given food.", doh_inv);
+	door_hole = new Item(cell, nullptr, MEDIUM, true, true, false, ITEM, "door hole", "through this hole prisoners are given food.", doh_inv);
 	world.push_back(door_hole);
-	pigeon = new Item(nullptr, SMALL, false, false, false, ITEM, "pigeon", "young pigeon.", common_inv);
+	pigeon = new Item(nullptr, nullptr, SMALL, false, false, false, ITEM, "pigeon", "young pigeon.", common_inv);
 	world.push_back(pigeon);
-	bar = new Item(cell, SMALL, false, false, false, ITEM, "bar", "metallic bar.", common_inv);
+	bar = new Item(cell, window, SMALL, false, false, false, ITEM, "bar", "metallic bar.", common_inv);
 	world.push_back(bar);
 	//---------------------------------------ITEMS CORRIDOR-------------------------------------
-	table = new Item(corridor, MEDIUM, false, false, false, ITEM, "table", "wood table", common_inv);
+	table = new Item(corridor, nullptr, MEDIUM, false, false, false, ITEM, "table", "wood table", common_inv);
 	world.push_back(table);
-	closet_key = new Item(corridor, SMALL, false, false, false, ITEM, "closet key", "key with a tag attached: closet.", common_inv);
+	closet_key = new Item(corridor, nullptr, SMALL, false, false, false, ITEM, "closet key", "key with a tag attached: closet.", common_inv);
 	world.push_back(closet_key);
 	//---------------------------------------ITEMS WARDROBE-------------------------------------
-	closet = new Item(wardrobe, LARGE, false, true, true, ITEM, "clothes closet", "clothes closet used by the guards.", clo_inv);
+	closet = new Item(wardrobe, nullptr, LARGE, false, true, true, ITEM, "clothes closet", "clothes closet used by the guards. It's closed", clo_inv);
 	world.push_back(closet);
-	guard_outfit = new Item(wardrobe, SMALL, false, false, false, ITEM, "guard outfit", "guard outfit clean and ready to wear", common_inv);
+	guard_outfit = new Item(wardrobe, closet, SMALL, false, false, false, ITEM, "guard outfit", "guard outfit clean and ready to wear", common_inv);
 	world.push_back(guard_outfit);
 	//--------------------------------------PLAYER & ENEMIES------------------------------
 	player = new Player(cell, PLAYER, "Daniel", "It's me", pla_inv);
@@ -63,6 +63,7 @@ void World::Init()
 	//Fill inventories
 	//CELL
 	win_inv.push_back(bar);
+	cel_inv.push_back(bar);
 	cel_inv.push_back(window);
 	cel_inv.push_back(breadcrumbs);
 	cel_inv.push_back(door_hole);
@@ -76,6 +77,7 @@ void World::Init()
 
 	//WARDROBE
 	clo_inv.push_back(guard_outfit);
+	war_inv.push_back(guard_outfit);
 	war_inv.push_back(closet);
 	war_inv.push_back(door_wc);
 
@@ -171,12 +173,24 @@ ReturnState World::Update()
 	//Debug
 	//std::cout << "command : " << command << ", " << "sub1 : " << sub1 << ", sub2 : " << sub2 << std::endl;
 	
-	//test Pickup
+	//test--------------------------------------------
+	
+	if (!strcmp(command, "lookat"))
+	{
+		player->LookAt(sub1, this);
+		std::cout << player->GetMessage() << std::endl;
+	}
 	if (!strcmp(command, "pickup")) 
 	{
 		player->Pickup(sub1);
 		std::cout << player->GetMessage() << std::endl;
 	}
+	if (!strcmp(command, "i"))
+	{
+		player->ShowInv();
+		std::cout << player->GetMessage() << std::endl;
+	}
+	//------------------------------------------------
 
 	//Quit game
 	if (!strcmp(command, "q"))
@@ -192,4 +206,9 @@ void World::CleanUp()
 	{
 		RELEASE(*it);
 	}
+}
+
+const std::list<Entity*>& World::GetWorldInv() const
+{
+	return world;
 }

@@ -4,7 +4,7 @@
 #include "globals.h"
 #include "entity.h"
 #include <string>
-
+class World;
 class Room;
 class Player : public Entity
 {
@@ -15,20 +15,20 @@ public:
 
 	void Pickup(const char *item);
 	void Drop(const char *item);
-	void Open(const char *item) const;
-	void Close(const char *item) const;
-	void LookAt(const char *entity) const;
+	void Open(const char *item);
+	void Close(const char *item);
+	void LookAt(const char *entity, const World *world);
 	void Go(Direction);
-	void UseWith(const char *item1, const char *item2) const;
-	void Inventory() const;
+	void UseWith(const char *item1, const char *item2);
+	void ShowInv();
 	
-	char *GetMessage();
+	const char *GetMessage();
 
 	Room *location;
 private:
-
-	char message[100];
-
+	typedef std::list<Entity*> Inventory;
+	char message[400];
+	size_t mg_length;
 	
 };
 

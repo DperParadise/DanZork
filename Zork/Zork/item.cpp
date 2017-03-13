@@ -2,6 +2,7 @@
 #include "globals.h"
 
 Item::Item(
+	Room *loc,
 	Entity *pnt,
 	ItemSize size,
 	bool isOpen,
@@ -10,6 +11,6 @@ Item::Item(
 	Type type,
 	const char *name,
 	const char *desc,
-	std::list<Entity*> &list) : parent(pnt), size(size), isOpen(isOpen), isContainer(isContainer), isLocked(isLocked), Entity(type, name, desc, list) {}
+	std::list<Entity*> &list) : loc(loc), parent(pnt), size(size), isOpen(isOpen), isContainer(isContainer), isLocked(isLocked), Entity(type, name, desc, list) {}
 
 Item::~Item(){}

@@ -11,6 +11,9 @@ class Exit;
 class Entity;
 class World
 {
+private:
+	typedef std::list<Entity*> Inventory;
+
 public:
 	
 	//Create game objects
@@ -22,12 +25,11 @@ public:
 	ReturnState Update();
 	
 	void CleanUp();
+	const Inventory& GetWorldInv() const;
 
 private:
 
-	typedef std::list<Entity*> Inventory;
-
-	std::list<Entity*> world;
+	Inventory world;
 	char raw_input[50];
 	char input[50];
 	char command[50];
