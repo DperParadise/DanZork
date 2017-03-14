@@ -14,6 +14,7 @@ public:
 	~Exit();
 
 	bool isOpen;
+	const Room *GetSource()const;
 
 private:
 

@@ -13,3 +13,8 @@ Exit::Exit(
 	std::list<Entity*> &list) : direction(dir), source(src), destination(dest), isOpen(), Entity(type, name, desc,list) {}
 
 Exit::~Exit(){}
+
+const Room* Exit::GetSource() const
+{
+	return source;
+}

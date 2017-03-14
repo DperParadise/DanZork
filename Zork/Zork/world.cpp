@@ -7,6 +7,7 @@
 #include "enemy.h"
 #include <list>
 
+
 void World::Init()
 {
 	//Create game entities
@@ -21,9 +22,9 @@ void World::Init()
 	world.push_back(main_hall);
 	//---------------------------------------EXITS----------------------------------------------
 	//cell <-> corridor
-	door_clc = new Exit(NORTH, cell, corridor, false, EXIT, "cell door", "metallic cell door with a hole to the north.", clc_inv);
+	door_clc = new Exit(NORTH, cell, corridor, false, EXIT, "cell door", "metallic cell door to the north.", clc_inv);
 	world.push_back(door_clc);
-	door_ccl = new Exit(SOUTH, corridor, cell, false, EXIT, "cell door", "metallic cell door with a hole to the south.", clc_inv);
+	door_ccl = new Exit(SOUTH, corridor, cell, false, EXIT, "cell door", "metallic cell door to the south.", clc_inv);
 	world.push_back(door_ccl);
 	//corridor <-> wardrobe
 	door_cw = new Exit(EAST, corridor, wardrobe, false, EXIT, "wardrobe door", "wooden door to the east.", common_inv);
@@ -34,7 +35,7 @@ void World::Init()
 	door_hs = new Exit(NORTH, main_hall, nullptr, false, EXIT, "street exit", "door leading to the street to the north.", common_inv);
 	world.push_back(door_hs);
 	 //---------------------------------------ITEMS CELL-----------------------------------------
-	window = new Item(cell, nullptr, MEDIUM, true, true, false, ITEM, "window", "barred window leading to the forest with a loose bar. You can hear doves singing nearby.", win_inv);
+	window = new Item(cell, nullptr, MEDIUM, true, true, false, ITEM, "window", "barred window leading to the forest. You can hear doves singing nearby.", win_inv);
 	world.push_back(window);
 	breadcrumbs = new Item(cell, nullptr, SMALL, false, false, false, ITEM, "bread crumbs", "bread crumbs. Someone enjoyed his last meal here.", common_inv);
 	world.push_back(breadcrumbs);
@@ -42,7 +43,7 @@ void World::Init()
 	world.push_back(door_hole);
 	pigeon = new Item(nullptr, nullptr, SMALL, false, false, false, ITEM, "pigeon", "young pigeon.", common_inv);
 	world.push_back(pigeon);
-	bar = new Item(cell, window, SMALL, false, false, false, ITEM, "bar", "metallic bar.", common_inv);
+	bar = new Item(cell, nullptr, SMALL, false, false, false, ITEM, "bar", "rusty metallic bar fallen from the window. The guards haven't noticed it.", common_inv);
 	world.push_back(bar);
 	//---------------------------------------ITEMS CORRIDOR-------------------------------------
 	table = new Item(corridor, nullptr, MEDIUM, false, false, false, ITEM, "table", "wood table", common_inv);
@@ -62,7 +63,6 @@ void World::Init()
 
 	//Fill inventories
 	//CELL
-	win_inv.push_back(bar);
 	cel_inv.push_back(bar);
 	cel_inv.push_back(window);
 	cel_inv.push_back(breadcrumbs);

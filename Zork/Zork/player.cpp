@@ -3,6 +3,7 @@
 #include "globals.h"
 #include "room.h"
 #include "item.h"
+#include "exit.h"
 #include "world.h"
 
 Player::Player(
@@ -20,7 +21,6 @@ Player::~Player(){}
 
 void Player::Pickup(const char *item)
 {
-	memset(message, '\0', mg_length);
 	strcpy(message, "I can't pick that ");
 
 	//look for the item inside the room of the player
@@ -29,7 +29,7 @@ void Player::Pickup(const char *item)
 	Inventory::iterator to_delete;
 	bool found = false;
 
-	for(it = location->contains.begin(); !found && it != end; it++)
+	for(it = location->contains.begin(); !found && it != end;)
 	{
 		if(strcmp((*it)->name,item) == 0)
 			if ((*it)->type == ITEM )
@@ -47,10 +47,10 @@ void Player::Pickup(const char *item)
 					}
 				}
 			}
+		if (!found) it++;
 	}
 	if (found)
 	{
-		((Item*)(*it))->parent = this;
 		((Item*)(*it))->loc = nullptr;
 		location->contains.erase(to_delete);
 	}
@@ -74,48 +74,82 @@ void Player::Close(const char *item)
 
 void Player::LookAt(const char *entity, const World *world) 
 {
-	memset(message, '\0', mg_length);
 	strcpy(message, "I can't look at that ");
 
 	bool found = false;
 	bool visible = false;
 	Inventory::const_iterator it;
 
-	for (it = world->GetWorldInv().begin(); it != world->GetWorldInv().end() && !found; it++) 
+	for (it = world->GetWorldInv().begin(); it != world->GetWorldInv().end() && !found;) 
 	{
 		if (strcmp(entity, (*it)->name) == 0)
 		{
 			found = true;
 		}
+		if (!found)
+			it++;
 	}
 
+	
 	if (found && (*it)->type == ROOM)
 	{
-		if (strcmp(location->name, entity) == 0)
+		if (location == *it)
 		{
 			visible = true;
 		}
 	}
 
-	if (found && (*it)->type == ITEM)
+	else if (found && (*it)->type == ITEM)
 	{
-		if (strcmp(((Item*)(*it))->loc->name, location->name))
+		if (location == ((Item*)(*it))->loc)
 		{
 			visible = true;			
 		}
+		else
+		{
+			bool fnd = false;
+			for (Inventory::iterator iter = contains.begin(); iter != contains.end() && !fnd; iter++)
+			{
+				if (*it == (*iter))
+				{
+					visible = true;
+					fnd = true;
+				}
+			}
+		}
 	}
+	
+	else if (found && (*it)->type == EXIT)
+	{
+		if (location == ((Exit*)(*it))->GetSource())
+		{
+			visible = true;
+		}
+	}
+
 
 	if (visible)
 	{
-		memset(message, '\0', mg_length);
-
-		for (Inventory::iterator it = location->contains.begin(); it != location->contains.end(); it++)
+		strcpy(message, (*it)->name);
+		strcat(message, " : ");
+		strcat(message, (*it)->description);
+		strcat(message, "\n");
+		
+		if ((*it)->contains.size() != 0)
 		{
-			if (((Item*)(*it))->parent == nullptr || ((Item*)(((Item*)(*it))->parent))->isOpen)
+			strcat(message, "Inside the ");
+			strcat(message, location->name);
+			strcat(message, ":\n");
+			strcat(message, "================\n");
+		}
+
+		for (Inventory::iterator iter = (*it)->contains.begin(); iter != (*it)->contains.end(); iter++)
+		{
+			if (((Item*)(*iter))->parent == nullptr || ((Item*)(((Item*)(*iter))->parent))->isOpen)
 			{
-				strcat(message, (*it)->name);
+				strcat(message, (*iter)->name);
 				strcat(message, " : ");
-				strcat(message, (*it)->description);
+				strcat(message, (*iter)->description);
 				strcat(message, "\n");
 			}
 		}
@@ -136,13 +170,22 @@ void Player::UseWith(const char *item1, const char *item2)
 void Player::ShowInv()
 {
 	memset(message, '\0', mg_length);
-	strcpy(message, "Empty");
-	Inventory::iterator it;
-	Inventory::iterator end = contains.end();
-	for (it = contains.begin(); it != end; it++)
+	
+	if (contains.size() == 0)
 	{
-		strcat(message, ((Item*)(*it))->name);
-		strcat(message, "\n");
+		strcpy(message, "Inventory is empty");
+	}
+	else
+	{
+		strcpy(message, "Inventory:\n");
+		strcat(message, "==========\n");
+		Inventory::iterator it;
+		Inventory::iterator end = contains.end();
+		for (it = contains.begin(); it != end; it++)
+		{
+			strcat(message, ((Item*)(*it))->name);
+			strcat(message, "\n");
+		}
 	}
 }
 
