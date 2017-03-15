@@ -26,7 +26,6 @@ void Player::Pickup(const char *item)
 	//look for the item inside the room of the player
 	Inventory::iterator it;
 	Inventory::iterator end = location->contains.end();
-	Inventory::iterator to_delete;
 	bool found = false;
 
 	for(it = location->contains.begin(); !found && it != end;)
@@ -38,21 +37,34 @@ void Player::Pickup(const char *item)
 				{
 					if(((Item*)(*it))->size == SMALL)
 					{
-						found = true;
+						found = true;						
+						
+						//Erase item from from former parent inventory
+						if (((Item*)(*it))->parent != nullptr)
+						{
+							bool fnd = false;
+							Inventory::iterator to_delete;
+							for (Inventory::iterator iter = ((Item*)(*it))->parent->contains.begin(); !fnd && iter != ((Item*)(*it))->parent->contains.end();)
+							{
+								if (*iter == *it)
+								{
+									fnd = true;
+									to_delete = iter;
+								}
+								else
+									it++;
+							}
+							((Item*)(*it))->parent->contains.erase(to_delete);
+
+						}
+						//Set new parent - player
 						((Item*)(*it))->parent = this;
 						contains.push_back(*it);
-						strcpy(message, item);
-						strcat(message, " added to inventory");
-						to_delete = it;
+						sprintf(message, "%s added to inventory", item);					
 					}
 				}
 			}
 		if (!found) it++;
-	}
-	if (found)
-	{
-		((Item*)(*it))->loc = nullptr;
-		location->contains.erase(to_delete);
 	}
 }
 
@@ -103,19 +115,8 @@ void Player::LookAt(const char *entity, const World *world)
 	{
 		if (location == ((Item*)(*it))->loc)
 		{
-			visible = true;			
-		}
-		else
-		{
-			bool fnd = false;
-			for (Inventory::iterator iter = contains.begin(); iter != contains.end() && !fnd; iter++)
-			{
-				if (*it == (*iter))
-				{
-					visible = true;
-					fnd = true;
-				}
-			}
+			if(((Item*)(*it))->parent == nullptr || ((Item*)(*it))->parent == this || ((Item*)(((Item*)(*it))->parent))->isOpen)
+				visible = true;			
 		}
 	}
 	
@@ -130,17 +131,11 @@ void Player::LookAt(const char *entity, const World *world)
 
 	if (visible)
 	{
-		strcpy(message, (*it)->name);
-		strcat(message, " : ");
-		strcat(message, (*it)->description);
-		strcat(message, "\n");
+		sprintf(message, "%s: %s\n", (*it)->name, (*it)->description);
 		
 		if ((*it)->contains.size() != 0)
-		{
-			strcat(message, "Inside the ");
-			strcat(message, location->name);
-			strcat(message, ":\n");
-			strcat(message, "================\n");
+		{			
+			sprintf(message, "Inside the %s:\n================\n", (*it)->name);
 		}
 
 		for (Inventory::iterator iter = (*it)->contains.begin(); iter != (*it)->contains.end(); iter++)
@@ -164,6 +159,64 @@ void Player::Go(Direction dir)
 
 void Player::UseWith(const char *item1, const char *item2) 
 {
+	strcpy(message, "I can't do that ");
+	bool found1 = false;
+	bool found2 = false;
+	Inventory::iterator it1;
+	Inventory::iterator it2;
+	
+	//Look for the item1 in the player's inventory
+	for (it1 = contains.begin(); !found1 && it1 != contains.end();)
+	{
+		if (strcmp((*it1)->name, item1) == 0)
+		{
+			found1 = true;
+		}
+		if (!found1) it1++;
+	}
+
+	for (it2 = location->contains.begin(); !found2 && it2 != location->contains.end();)
+	{
+		if (strcmp((*it2)->name, item2) == 0)
+		{
+			found2 = true;
+		}
+		if (!found2) it2++;
+	}
+
+	if(!found2)
+		for (it2 = contains.begin(); !found2 && it2 != contains.end();)
+		{
+			if (strcmp((*it2)->name, item2) == 0)
+			{
+				found2 = true;
+			}
+			if (!found2) it2++;
+		}
+
+	if (found1 && found2)
+	{
+		if ((*it2)->type == ITEM)
+		{
+			if (((Item*)(*it2))->isOpen && ((Item*)(*it1))->size <= ((Item*)(*it2))->size)
+			{				
+				//Get ready to delete it from player inventory
+				Inventory::iterator to_delete = it1;
+				
+				//Use item2 as new parent of item1				
+				((Item*)(*it1))->parent = ((Item*)(*it2));
+				((Item*)(*it1))->loc = ((Item*)(*it2))->loc;
+				(*it2)->contains.push_back(*it1);
+				contains.erase((to_delete));
+				sprintf(message, "%s put into %s", item1, item2);
+
+			}
+		}
+	}
+
+	//--------player haven't picked bread crumbs up or no item found
+	if (!found1)
+		sprintf(message, "I don't have %s", item1);
 
 }
 

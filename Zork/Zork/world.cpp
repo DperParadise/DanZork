@@ -185,6 +185,11 @@ ReturnState World::Update()
 		player->Pickup(sub1);
 		std::cout << player->GetMessage() << std::endl;
 	}
+	if (!strcmp(command, "usewith"))
+	{
+		player->UseWith(sub1, sub2);
+		std::cout << player->GetMessage() << std::endl;
+	}
 	if (!strcmp(command, "i"))
 	{
 		player->ShowInv();
