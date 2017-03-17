@@ -22,9 +22,9 @@ void World::Init()
 	world.push_back(main_hall);
 	//---------------------------------------EXITS----------------------------------------------
 	//cell <-> corridor
-	door_clc = new Exit(NORTH, cell, corridor, false, EXIT, "cell door", "metallic cell door to the north.", clc_inv);
+	door_clc = new Exit(NORTH, cell, corridor, true, EXIT, "cell door", "metallic cell door to the north.", clc_inv);
 	world.push_back(door_clc);
-	door_ccl = new Exit(SOUTH, corridor, cell, false, EXIT, "cell door", "metallic cell door to the south.", clc_inv);
+	door_ccl = new Exit(SOUTH, corridor, cell, true, EXIT, "cell door", "metallic cell door to the south.", clc_inv);
 	world.push_back(door_ccl);
 	//corridor <-> wardrobe
 	door_cw = new Exit(EAST, corridor, wardrobe, false, EXIT, "wardrobe door", "wooden door to the east.", common_inv);
@@ -91,6 +91,7 @@ void World::Start()
 {
 	//Initial message
 	printf("*****Wellcome to Dan Zork*****\n");
+	printf("Current location: %s\n===========================\n%s\n", player->location->name, player->location->description);
 }
 
 ReturnState World::Update()
@@ -175,6 +176,12 @@ ReturnState World::Update()
 	
 	//test--------------------------------------------
 	
+	if (!strcmp(command, "go"))
+	{
+		player->Go(sub1);
+		std::cout << player->GetMessage() << std::endl;
+	}
+
 	if (!strcmp(command, "lookat"))
 	{
 		player->LookAt(sub1, this);

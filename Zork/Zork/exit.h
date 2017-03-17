@@ -14,14 +14,15 @@ public:
 	~Exit();
 
 	bool isOpen;
-	const Room *GetSource()const;
+	const Direction GetDirection() const;
+	Room *GetSource() const;
+	Room *GetDestination() const;
 
 private:
 
 	Direction direction;
 	Room *source;
 	Room *destination;
-	
 	
 };
 

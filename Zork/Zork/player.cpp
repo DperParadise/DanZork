@@ -102,21 +102,36 @@ void Player::LookAt(const char *entity, const World *world)
 			it++;
 	}
 
-	
 	if (found && (*it)->type == ROOM)
 	{
 		if (location == *it)
 		{
-			visible = true;
+			sprintf(message, "%s: %s\n", (*it)->name, (*it)->description);
+
+			if ((*it)->contains.size() != 0)
+			{				
+				strcat(message, "Inside the ");
+				strcat(message, (*it)->name);
+				strcat(message, ":\n================\n");
+
+				for (Inventory::iterator iter = (*it)->contains.begin(); iter != (*it)->contains.end(); iter++)
+				{
+					if (((Item*)(*iter))->parent == nullptr)
+					{
+						strcat(message, (*iter)->name);
+						strcat(message, "\n");
+					}
+				}
+			}
 		}
 	}
 
 	else if (found && (*it)->type == ITEM)
 	{
 		if (location == ((Item*)(*it))->loc)
-		{
-			if(((Item*)(*it))->parent == nullptr || ((Item*)(*it))->parent == this || ((Item*)(((Item*)(*it))->parent))->isOpen)
-				visible = true;			
+		{		
+			sprintf(message, "%s: %s\n", (*it)->name, (*it)->description);
+			LookInsideItem((Item*)(*it));				
 		}
 	}
 	
@@ -124,37 +139,54 @@ void Player::LookAt(const char *entity, const World *world)
 	{
 		if (location == ((Exit*)(*it))->GetSource())
 		{
-			visible = true;
-		}
-	}
-
-
-	if (visible)
-	{
-		sprintf(message, "%s: %s\n", (*it)->name, (*it)->description);
-		
-		if ((*it)->contains.size() != 0)
-		{			
-			sprintf(message, "Inside the %s:\n================\n", (*it)->name);
-		}
-
-		for (Inventory::iterator iter = (*it)->contains.begin(); iter != (*it)->contains.end(); iter++)
-		{
-			if (((Item*)(*iter))->parent == nullptr || ((Item*)(((Item*)(*iter))->parent))->isOpen)
-			{
-				strcat(message, (*iter)->name);
-				strcat(message, " : ");
-				strcat(message, (*iter)->description);
-				strcat(message, "\n");
-			}
+			sprintf(message, "%s: %s\n", (*it)->name, (*it)->description);
 		}
 	}
 
 }
 
-void Player::Go(Direction dir)
+void Player::Go(const char *dir)
 {
+	strcpy(message, "I can't go in that direction");
 
+	Direction d;
+	Room *dest;
+	bool room_chg = false;
+
+	if (!strcmp(dir, "n") || !strcmp(dir, "north"))
+		d = NORTH;
+	else if (!strcmp(dir, "s") || !strcmp(dir, "south"))
+		d = SOUTH;
+	else if (!strcmp(dir, "w") || !strcmp(dir, "west"))
+		d = WEST;
+	else if (!strcmp(dir, "e") || !strcmp(dir, "east"))
+		d = EAST;
+
+	//Check exit
+	for (Inventory::iterator it = location->contains.begin(); it != location->contains.end(); it++)
+	{
+		if ((*it)->type == EXIT && ((Exit*)(*it))->GetDirection() == d)
+		{
+			if (((Exit*)(*it))->isOpen)
+			{
+				//Set items new location
+				dest = ((Exit*)(*it))->GetDestination();				
+				SetItemLoc(contains, location, dest);
+				room_chg = true;
+				break;
+			}
+			else
+			{
+				strcpy(message, "The door is closed");
+			}
+		}		
+	}
+	if (room_chg)
+	{
+		//Set player new location
+		location = dest;
+		sprintf(message, "Current location: %s\n===========================\n%s\n", location->name, location->description);
+	}
 }
 
 void Player::UseWith(const char *item1, const char *item2) 
@@ -245,4 +277,44 @@ void Player::ShowInv()
 const char *Player::GetMessage()
 {
 	return message;
+}
+
+void Player::SetItemLoc(Inventory inv, Room *curr_loc, Room *ftr_loc)
+{
+	for (Inventory::iterator it = inv.begin(); it != inv.end(); it++)
+	{
+		//Remove item from previous room inventory
+		bool found = false;
+		for (Inventory::iterator it_room = curr_loc->contains.begin(); !found && it_room != curr_loc->contains.end();)
+		{
+			if (*it == *it_room)
+			{
+				found = true;
+				curr_loc->contains.erase(it_room);
+			}
+			else
+				it_room++;
+		}
+
+		((Item*)(*it))->loc = ftr_loc;
+		if ((*it)->contains.size() != 0)
+			SetItemLoc((*it)->contains, curr_loc, ftr_loc);
+	}
+}
+
+void Player::LookInsideItem(Item *item)
+{
+	if (item->contains.size() != 0 && item->isOpen)
+	{
+		strcat(message, "Inside the ");
+		strcat(message, item->name);
+		strcat(message, ":\n");
+
+		for(Inventory::iterator it = item->contains.begin(); it != item->contains.end(); it++)
+		{		
+			strcat(message, (*it)->name);
+			strcat(message, "\n");
+			LookInsideItem((Item*)(*it));	
+		}
+	}
 }
