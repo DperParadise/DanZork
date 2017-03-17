@@ -175,13 +175,16 @@ ReturnState World::Update()
 	//std::cout << "command : " << command << ", " << "sub1 : " << sub1 << ", sub2 : " << sub2 << std::endl;
 	
 	//test--------------------------------------------
-	
+	if (!strcmp(command, "drop"))
+	{
+		player->Drop(sub1);
+		std::cout << player->GetMessage() << std::endl;
+	}
 	if (!strcmp(command, "go"))
 	{
 		player->Go(sub1);
 		std::cout << player->GetMessage() << std::endl;
 	}
-
 	if (!strcmp(command, "lookat"))
 	{
 		player->LookAt(sub1, this);

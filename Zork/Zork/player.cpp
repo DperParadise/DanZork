@@ -21,7 +21,7 @@ Player::~Player(){}
 
 void Player::Pickup(const char *item)
 {
-	strcpy(message, "I can't pick that ");
+	strcpy(message, "I can't pick that\n");
 
 	//look for the item inside the room of the player
 	Inventory::iterator it;
@@ -60,7 +60,7 @@ void Player::Pickup(const char *item)
 						//Set new parent - player
 						((Item*)(*it))->parent = this;
 						contains.push_back(*it);
-						sprintf(message, "%s added to inventory", item);					
+						sprintf(message, "%s added to inventory\n", item);					
 					}
 				}
 			}
@@ -70,7 +70,25 @@ void Player::Pickup(const char *item)
 
 void Player::Drop(const char *item)
 {
-	
+	strcpy(message, "I can't drop that\n");
+
+	Entity* item_fnd = nullptr;
+	for (Inventory::iterator it = contains.begin(); it != contains.end(); it++)
+	{
+		if (!strcmp((*it)->name, item))
+		{
+			item_fnd = (*it);
+			contains.erase(it);
+			break;
+		}
+	}
+
+	if (item_fnd != nullptr)
+	{
+		((Item*)item_fnd)->parent = nullptr;
+		location->contains.push_back(item_fnd);
+		strcpy(message, "Item dropped\n");
+	}
 
 }
 
@@ -86,7 +104,7 @@ void Player::Close(const char *item)
 
 void Player::LookAt(const char *entity, const World *world) 
 {
-	strcpy(message, "I can't look at that ");
+	strcpy(message, "I can't look at that\n");
 
 	bool found = false;
 	bool visible = false;
@@ -94,10 +112,17 @@ void Player::LookAt(const char *entity, const World *world)
 
 	for (it = world->GetWorldInv().begin(); it != world->GetWorldInv().end() && !found;) 
 	{
-		if (strcmp(entity, (*it)->name) == 0)
+		if ((*it)->type == EXIT)
 		{
-			found = true;
+			if (!strcmp(entity, (*it)->name) && location == ((Exit*)(*it))->GetSource())
+				found = true;
 		}
+		else
+		{
+			if(strcmp(entity, (*it)->name) == 0)
+				found = true;
+		}
+
 		if (!found)
 			it++;
 	}
@@ -116,7 +141,7 @@ void Player::LookAt(const char *entity, const World *world)
 
 				for (Inventory::iterator iter = (*it)->contains.begin(); iter != (*it)->contains.end(); iter++)
 				{
-					if (((Item*)(*iter))->parent == nullptr)
+					if ((*iter)->type == EXIT || ((Item*)(*iter))->parent == nullptr)
 					{
 						strcat(message, (*iter)->name);
 						strcat(message, "\n");
@@ -147,7 +172,7 @@ void Player::LookAt(const char *entity, const World *world)
 
 void Player::Go(const char *dir)
 {
-	strcpy(message, "I can't go in that direction");
+	strcpy(message, "I can't go in that direction\n");
 
 	Direction d;
 	Room *dest;
@@ -177,7 +202,7 @@ void Player::Go(const char *dir)
 			}
 			else
 			{
-				strcpy(message, "The door is closed");
+				strcpy(message, "The door is closed\n");
 			}
 		}		
 	}
@@ -191,7 +216,7 @@ void Player::Go(const char *dir)
 
 void Player::UseWith(const char *item1, const char *item2) 
 {
-	strcpy(message, "I can't do that ");
+	strcpy(message, "I can't do that\n");
 	bool found1 = false;
 	bool found2 = false;
 	Inventory::iterator it1;
@@ -240,7 +265,7 @@ void Player::UseWith(const char *item1, const char *item2)
 				((Item*)(*it1))->loc = ((Item*)(*it2))->loc;
 				(*it2)->contains.push_back(*it1);
 				contains.erase((to_delete));
-				sprintf(message, "%s put into %s", item1, item2);
+				sprintf(message, "%s put into %s\n", item1, item2);
 
 			}
 		}
@@ -248,7 +273,7 @@ void Player::UseWith(const char *item1, const char *item2)
 
 	//--------player haven't picked bread crumbs up or no item found
 	if (!found1)
-		sprintf(message, "I don't have %s", item1);
+		sprintf(message, "I don't have %s\n", item1);
 
 }
 
@@ -258,7 +283,7 @@ void Player::ShowInv()
 	
 	if (contains.size() == 0)
 	{
-		strcpy(message, "Inventory is empty");
+		strcpy(message, "Inventory is empty\n");
 	}
 	else
 	{
