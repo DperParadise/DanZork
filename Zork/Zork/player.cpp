@@ -96,7 +96,8 @@ void Player::Open(const char *item)
 {
 	strcpy(message, "I can't open that\n");
 	Entity* fnd = nullptr;
-	for (Inventory::iterator it = contains.begin(); it != contains.end(); it++)
+	
+	for (Inventory::iterator it = location->contains.begin(); it != location->contains.end(); it++)
 	{
 		if (!strcmp(item, (*it)->name))
 		{
@@ -104,19 +105,7 @@ void Player::Open(const char *item)
 			break;
 		}
 	}
-
-	if (fnd == nullptr)
-	{
-		for (Inventory::iterator it = location->contains.begin(); it != location->contains.end(); it++)
-		{
-			if (!strcmp(item, (*it)->name))
-			{
-				fnd = (*it);
-				break;
-			}
-		}
-	}
-
+	
 	if (fnd != nullptr)
 	{
 		if (fnd->type == EXIT)
