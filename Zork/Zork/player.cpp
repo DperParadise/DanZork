@@ -94,7 +94,65 @@ void Player::Drop(const char *item)
 
 void Player::Open(const char *item) 
 {
+	strcpy(message, "I can't open that\n");
+	Entity* fnd = nullptr;
+	for (Inventory::iterator it = contains.begin(); it != contains.end(); it++)
+	{
+		if (!strcmp(item, (*it)->name))
+		{
+			fnd = (*it);
+			break;
+		}
+	}
 
+	if (fnd == nullptr)
+	{
+		for (Inventory::iterator it = location->contains.begin(); it != location->contains.end(); it++)
+		{
+			if (!strcmp(item, (*it)->name))
+			{
+				fnd = (*it);
+				break;
+			}
+		}
+	}
+
+	if (fnd != nullptr)
+	{
+		if (fnd->type == EXIT)
+		{
+			if (((Exit*)(fnd))->isOpen)
+				strcpy(message, "Door already open\n");
+			else 
+			{
+				((Exit*)(fnd))->isOpen = true;
+				strcpy(message, "Door open\n");
+			}	
+		}
+		else if (fnd->type == ITEM && ((Item*)(fnd))->isContainer)
+		{
+			if (((Item*)(fnd))->isLocked)// trying to open wardrobe closet
+			{
+				bool found = false;
+				for (Inventory::iterator it = contains.begin(); it != contains.end(); it++)
+				{
+					if (!strcmp("closet key", (*it)->name))
+					{
+						sprintf(message, "You open the %s\n", (*it)->name);
+						((Item*)(fnd))->isLocked = false;
+						((Item*)(fnd))->isOpen = true;
+						found = true;
+						break;
+					}
+
+				}
+
+				if (!found)
+					sprintf(message, "You need a key to open the %s", fnd->name);
+			}
+		}
+
+	}
 }
 
 void Player::Close(const char *item) 
