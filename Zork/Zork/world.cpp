@@ -20,19 +20,26 @@ void World::Init()
 	world.push_back(wardrobe);
 	main_hall = new Room(ROOM, "main hall", "main hall entrance. A door leads to the street.", mh_inv);
 	world.push_back(main_hall);
+	street = new Room(ROOM, "street", "Freedom at last!!", common_inv);
+	world.push_back(street);
 	//---------------------------------------EXITS----------------------------------------------
 	//cell <-> corridor
-	door_clc = new Exit(NORTH, cell, corridor, true, EXIT, "cell door", "metallic cell door to the north.", clc_inv);
+	door_clc = new Exit(NORTH, cell, corridor, false, EXIT, "cell door", "metallic cell door to the north.", clc_inv);
 	world.push_back(door_clc);
-	door_ccl = new Exit(SOUTH, corridor, cell, true, EXIT, "cell door", "metallic cell door to the south.", clc_inv);
+	door_ccl = new Exit(SOUTH, corridor, cell, false, EXIT, "cell door", "metallic cell door to the south.", clc_inv);
 	world.push_back(door_ccl);
 	//corridor <-> wardrobe
 	door_cw = new Exit(EAST, corridor, wardrobe, false, EXIT, "wardrobe door", "wooden door to the east.", common_inv);
 	world.push_back(door_cw);
-	door_wc = new Exit(WEST, wardrobe, corridor, true, EXIT, "wardrobe door", "wooden door to the west.", common_inv);
+	door_wc = new Exit(WEST, wardrobe, corridor, false, EXIT, "wardrobe door", "wooden door to the west.", common_inv);
 	world.push_back(door_wc);
+	//corridor<->main hall
+	door_ch = new Exit(NORTH, corridor, main_hall, false, EXIT, "main hall door", "metallic door to the north.", common_inv);
+	world.push_back(door_ch);
+	door_hc = new Exit(SOUTH, main_hall, corridor, false, EXIT, "main hall door", "metallic door to the south.", common_inv);
+	world.push_back(door_hc);
 	//main_hall -> stret
-	door_hs = new Exit(NORTH, main_hall, nullptr, false, EXIT, "street exit", "door leading to the street to the north.", common_inv);
+	door_hs = new Exit(NORTH, main_hall, street, false, EXIT, "street exit door", "door leading to the street to the north.", common_inv);
 	world.push_back(door_hs);
 	 //---------------------------------------ITEMS CELL-----------------------------------------
 	window = new Item(cell, nullptr, MEDIUM, true, true, false, ITEM, "window", "barred window leading to the forest. You can hear doves singing nearby.", win_inv);
@@ -74,6 +81,7 @@ void World::Init()
 	cor_inv.push_back(closet_key);
 	cor_inv.push_back(door_ccl);
 	cor_inv.push_back(door_cw);
+	cor_inv.push_back(door_ch);
 
 	//WARDROBE
 	clo_inv.push_back(guard_outfit);
@@ -83,7 +91,7 @@ void World::Init()
 
 	//MAIN HALL
 	mh_inv.push_back(door_hs);
-
+	mh_inv.push_back(door_hc);
 	
 }
 

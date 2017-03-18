@@ -115,6 +115,14 @@ void Player::Open(const char *item)
 			else 
 			{
 				((Exit*)(fnd))->isOpen = true;
+				Room *dest = ((Exit*)(fnd))->GetDestination();
+				for (Inventory::iterator it_dst = dest->contains.begin(); it_dst != dest->contains.end(); it_dst++)
+				{
+					if (!strcmp(fnd->name, (*it_dst)->name))
+					{
+						((Exit*)(*it_dst))->isOpen = true;
+					}
+				}
 				strcpy(message, "Door open\n");
 			}	
 		}
@@ -165,6 +173,14 @@ void Player::Close(const char *entity)
 			if (((Exit*)fnd)->isOpen == true)
 			{
 				((Exit*)fnd)->isOpen = false;
+				Room *dest = ((Exit*)(fnd))->GetDestination();
+				for (Inventory::iterator it_dst = dest->contains.begin(); it_dst != dest->contains.end(); it_dst++)
+				{
+					if (!strcmp(fnd->name, (*it_dst)->name))
+					{
+						((Exit*)(*it_dst))->isOpen = false;
+					}
+				}
 				sprintf(message, "%s closed\n", fnd->name);
 			}
 			else
