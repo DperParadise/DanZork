@@ -144,9 +144,47 @@ void Player::Open(const char *item)
 	}
 }
 
-void Player::Close(const char *item) 
+void Player::Close(const char *entity) 
 {
+	strcpy(message, "I can't do that\n");
+	bool found = false;
+	Entity *fnd = nullptr;
+	for (Inventory::iterator it = location->contains.begin(); it != location->contains.end(); it++)
+	{
+		if (!strcmp(entity, (*it)->name))
+		{
+			found = true;
+			fnd = *it;
+		}
+	}
 
+	if (found)
+	{
+		if (fnd->type == EXIT)
+		{
+			if (((Exit*)fnd)->isOpen == true)
+			{
+				((Exit*)fnd)->isOpen = false;
+				sprintf(message, "%s closed\n", fnd->name);
+			}
+			else
+				strcpy(message, "Already closed\n");
+		}
+		if (fnd->type == ITEM)
+		{
+			if (((Item*)fnd)->isContainer)
+			{
+				if (((Item*)fnd)->isOpen)
+				{
+					((Item*)fnd)->isOpen = false;
+					sprintf(message, "%s closed\n", fnd->name);
+				}
+				else
+					strcpy(message, "Already closed\n");
+			}
+
+		}
+	}
 }
 
 void Player::LookAt(const char *entity, const World *world) 
