@@ -9,6 +9,7 @@ class Item;
 class Enemy;
 class Exit;
 class Entity;
+class Observer;
 class World
 {
 private:
@@ -36,7 +37,7 @@ private:
 	char sub1[50];
 	char sub2[50];
 	size_t length = 49;
-	char my_word[7] = " with ";
+	const char my_word[7] = " with ";
 	size_t mw_length = 6;
 	size_t mw_idx = 0;
 	size_t sub_idx = 0;
@@ -86,6 +87,10 @@ private:
 	//----------------- not used inventory ------------------------//
 	Inventory common_inv;
 
+	//----------------- Observers ---------------------------------//
+	Observer *window_obs;
+	Observer *door_hole_obs;
+	Observer *player_obs;
 };
 
 

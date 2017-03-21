@@ -29,7 +29,7 @@ public:
 	void Go(const char *dir);
 	void UseWith(const char *item1, const char *item2);
 	void ShowInv();
-	void SetItemLoc(Inventory inv, Room *curr_loc, Room *ftr_loc);
+	void SetItemLoc(Inventory &inv, Room *ftr_loc);
 	void LookInsideItem(Item *item);
 	const char *GetMessage();
 

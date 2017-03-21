@@ -5,6 +5,7 @@
 #include "item.h"
 #include "exit.h"
 #include "world.h"
+#include "enemy.h"
 
 Player::Player(
 	Room *loc,
@@ -52,7 +53,7 @@ void Player::Pickup(const char *item)
 									to_delete = iter;
 								}
 								else
-									it++;
+									iter++;
 							}
 							((Item*)(*it))->parent->contains.erase(to_delete);
 
@@ -86,7 +87,6 @@ void Player::Drop(const char *item)
 	if (item_fnd != nullptr)
 	{
 		((Item*)item_fnd)->parent = nullptr;
-		location->contains.push_back(item_fnd);
 		strcpy(message, "Item dropped\n");
 	}
 
@@ -135,7 +135,7 @@ void Player::Open(const char *item)
 				{
 					if (!strcmp("closet key", (*it)->name))
 					{
-						sprintf(message, "You open the %s\n", (*it)->name);
+						sprintf(message, "You open the %s\n", fnd->name);
 						((Item*)(fnd))->isLocked = false;
 						((Item*)(fnd))->isOpen = true;
 						found = true;
@@ -242,7 +242,7 @@ void Player::LookAt(const char *entity, const World *world)
 
 				for (Inventory::iterator iter = (*it)->contains.begin(); iter != (*it)->contains.end(); iter++)
 				{
-					if ((*iter)->type == EXIT || ((Item*)(*iter))->parent == nullptr)
+					if ((*iter)->type == ENEMY || (*iter)->type == EXIT || (*iter)->type == ITEM && ((Item*)(*iter))->parent == nullptr)
 					{
 						strcat(message, (*iter)->name);
 						strcat(message, "\n");
@@ -264,6 +264,14 @@ void Player::LookAt(const char *entity, const World *world)
 	else if (found && (*it)->type == EXIT)
 	{
 		if (location == ((Exit*)(*it))->GetSource())
+		{
+			sprintf(message, "%s: %s\n", (*it)->name, (*it)->description);
+		}
+	}
+
+	else if (found && (*it)->type == ENEMY)
+	{
+		if (location == ((Enemy*)(*it))->location)
 		{
 			sprintf(message, "%s: %s\n", (*it)->name, (*it)->description);
 		}
@@ -297,7 +305,7 @@ void Player::Go(const char *dir)
 			{
 				//Set items new location
 				dest = ((Exit*)(*it))->GetDestination();				
-				SetItemLoc(contains, location, dest);
+				SetItemLoc(contains, dest);
 				room_chg = true;
 				break;
 			}
@@ -405,26 +413,26 @@ const char *Player::GetMessage()
 	return message;
 }
 
-void Player::SetItemLoc(Inventory inv, Room *curr_loc, Room *ftr_loc)
+void Player::SetItemLoc(Inventory &inv, Room *ftr_loc)
 {
 	for (Inventory::iterator it = inv.begin(); it != inv.end(); it++)
 	{
-		//Remove item from previous room inventory
-		bool found = false;
-		for (Inventory::iterator it_room = curr_loc->contains.begin(); !found && it_room != curr_loc->contains.end();)
+		//Set new location to items 
+		for (Inventory::iterator it_room = location->contains.begin(); it_room != location->contains.end(); it_room++)
 		{
-			if (*it == *it_room)
+			if (!strcmp((*it_room)->name, (*it)->name))
 			{
-				found = true;
-				curr_loc->contains.erase(it_room);
+				((Item*)(*it_room))->loc = ftr_loc;
+				ftr_loc->contains.push_back(*it_room);
+				location->contains.erase(it_room);
+				break;
 			}
-			else
-				it_room++;
 		}
 
-		((Item*)(*it))->loc = ftr_loc;
 		if ((*it)->contains.size() != 0)
-			SetItemLoc((*it)->contains, curr_loc, ftr_loc);
+		{
+			SetItemLoc((*it)->contains, ftr_loc);
+		}	
 	}
 }
 

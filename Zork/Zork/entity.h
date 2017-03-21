@@ -5,7 +5,7 @@
 #include <string>
 #include <list>
 
-
+class Observer;
 class Entity
 {
 	
@@ -18,6 +18,13 @@ public:
 	const char *name;
 	const char *description;
 	std::list<Entity*> &contains;
+
+//Observer
+private:
+	Observer *observer;
+public:	
+	void RegisterObs(Observer *obs);
+	bool NotifyObs();
 };
 
 
