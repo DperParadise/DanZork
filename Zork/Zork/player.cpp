@@ -34,7 +34,11 @@ void Player::Pickup(const char *item)
 		if(strcmp((*it)->name,item) == 0)
 			if ((*it)->type == ITEM )
 			{
-				if ((Item*)((Item*)(*it))->parent == nullptr || ((Item*)((Item*)(*it))->parent)->isOpen)
+				if (((Item*)(*it))->parent != nullptr && ((Item*)(*it))->parent->type == PLAYER)
+				{
+					sprintf(message, "%s already in your inventory\n", item);
+				}				
+				else if (((Item*)(*it))->parent == nullptr || ((Item*)((Item*)(*it))->parent)->isOpen)
 				{
 					if(((Item*)(*it))->size == SMALL)
 					{
@@ -110,21 +114,28 @@ void Player::Open(const char *item)
 	{
 		if (fnd->type == EXIT)
 		{
-			if (((Exit*)(fnd))->isOpen)
-				strcpy(message, "Door already open\n");
-			else 
+			if (((Exit*)(fnd))->isLocked == false)
 			{
-				((Exit*)(fnd))->isOpen = true;
-				Room *dest = ((Exit*)(fnd))->GetDestination();
-				for (Inventory::iterator it_dst = dest->contains.begin(); it_dst != dest->contains.end(); it_dst++)
+				if (((Exit*)(fnd))->isOpen)
+					strcpy(message, "Door already open\n");
+				else
 				{
-					if (!strcmp(fnd->name, (*it_dst)->name))
+					((Exit*)(fnd))->isOpen = true;
+					Room *dest = ((Exit*)(fnd))->GetDestination();
+					for (Inventory::iterator it_dst = dest->contains.begin(); it_dst != dest->contains.end(); it_dst++)
 					{
-						((Exit*)(*it_dst))->isOpen = true;
+						if (!strcmp(fnd->name, (*it_dst)->name))
+						{
+							((Exit*)(*it_dst))->isOpen = true;
+						}
 					}
+					strcpy(message, "Door open\n");
 				}
-				strcpy(message, "Door open\n");
-			}	
+			}
+			else
+			{
+				strcpy(message, "Door locked\n");
+			}
 		}
 		else if (fnd->type == ITEM && ((Item*)(fnd))->isContainer)
 		{

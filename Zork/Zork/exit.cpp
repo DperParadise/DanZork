@@ -7,10 +7,11 @@ Exit::Exit(
 	Room *src,
 	Room *dest,
 	bool isOpen,
+	bool isLocked,
 	Type type,
 	const char *name,
 	const char *desc,
-	std::list<Entity*> &list) : direction(dir), source(src), destination(dest), isOpen(isOpen), Entity(type, name, desc,list) {}
+	std::list<Entity*> &list) : direction(dir), source(src), destination(dest), isOpen(isOpen), isLocked(isLocked), Entity(type, name, desc,list) {}
 
 Exit::~Exit(){}
 

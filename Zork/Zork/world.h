@@ -55,6 +55,7 @@ private:
 	Room *main_hall;
 	Inventory mh_inv;
 	Room *street;
+	Inventory st_inv;
 	//---------------------------------------EXITS----------------------------------------------
 	Exit *door_clc; //cell -> corridor
 	Inventory clc_inv;

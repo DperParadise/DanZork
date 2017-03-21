@@ -20,26 +20,26 @@ void World::Init()
 	world.push_back(wardrobe);
 	main_hall = new Room(ROOM, "main hall", "main hall entrance. A door leads to the street.", mh_inv);
 	world.push_back(main_hall);
-	street = new Room(ROOM, "street", "Sorroundings of the prison. A guard stands next to the door staring at you.", common_inv);
+	street = new Room(ROOM, "street", "Sorroundings of the prison. A guard stands next to the door staring at you.", st_inv);
 	world.push_back(street);
 	//---------------------------------------EXITS----------------------------------------------
 	//cell <-> corridor
-	door_clc = new Exit(NORTH, cell, corridor, false, EXIT, "cell door", "metallic cell door to the north.", clc_inv);
+	door_clc = new Exit(NORTH, cell, corridor, false, true, EXIT, "cell door", "metallic cell door to the north.", clc_inv);
 	world.push_back(door_clc);
-	door_ccl = new Exit(SOUTH, corridor, cell, false, EXIT, "cell door", "metallic cell door to the south.", clc_inv);
+	door_ccl = new Exit(SOUTH, corridor, cell, false, true, EXIT, "cell door", "metallic cell door to the south.", clc_inv);
 	world.push_back(door_ccl);
 	//corridor <-> wardrobe
-	door_cw = new Exit(EAST, corridor, wardrobe, false, EXIT, "wardrobe door", "wooden door to the east.", common_inv);
+	door_cw = new Exit(EAST, corridor, wardrobe, false, false, EXIT, "wardrobe door", "wooden door to the east.", common_inv);
 	world.push_back(door_cw);
-	door_wc = new Exit(WEST, wardrobe, corridor, false, EXIT, "wardrobe door", "wooden door to the west.", common_inv);
+	door_wc = new Exit(WEST, wardrobe, corridor, false, false, EXIT, "wardrobe door", "wooden door to the west.", common_inv);
 	world.push_back(door_wc);
 	//corridor<->main hall
-	door_ch = new Exit(NORTH, corridor, main_hall, false, EXIT, "main hall door", "metallic door to the north.", common_inv);
+	door_ch = new Exit(NORTH, corridor, main_hall, false, false, EXIT, "main hall door", "metallic door to the north.", common_inv);
 	world.push_back(door_ch);
-	door_hc = new Exit(SOUTH, main_hall, corridor, false, EXIT, "main hall door", "metallic door to the south.", common_inv);
+	door_hc = new Exit(SOUTH, main_hall, corridor, false, false, EXIT, "main hall door", "metallic door to the south.", common_inv);
 	world.push_back(door_hc);
 	//main_hall -> stret
-	door_hs = new Exit(NORTH, main_hall, street, false, EXIT, "exit door", "door leading to the street to the north.", common_inv);
+	door_hs = new Exit(NORTH, main_hall, street, false, false, EXIT, "street door", "door leading to the street to the north.", common_inv);
 	world.push_back(door_hs);
 	 //---------------------------------------ITEMS CELL-----------------------------------------
 	window = new Item(cell, nullptr, MEDIUM, true, true, false, ITEM, "window", "barred window leading to the forest. You can hear doves singing nearby.", win_inv);
@@ -58,7 +58,7 @@ void World::Init()
 	closet_key = new Item(corridor, nullptr, SMALL, false, false, false, ITEM, "closet key", "key with a tag attached: closet.", common_inv);
 	world.push_back(closet_key);
 	//---------------------------------------ITEMS WARDROBE-------------------------------------
-	closet = new Item(wardrobe, nullptr, LARGE, false, true, true, ITEM, "clothes closet", "clothes closet used by the guards.", clo_inv);
+	closet = new Item(wardrobe, nullptr, LARGE, false, true, true, ITEM, "closet", "clothes closet used by the guards.", clo_inv);
 	world.push_back(closet);
 	guard_outfit = new Item(wardrobe, closet, SMALL, false, false, false, ITEM, "guard outfit", "guard outfit clean and ready to wear", common_inv);
 	world.push_back(guard_outfit);
@@ -223,7 +223,7 @@ ReturnState World::Update()
 			}
 			else
 			{
-				printf("Hey who are you! The guard notices your prisoner outfit. In a fast movement he shoots you. You were so close...but the game is over for you.\n");
+				printf("Hey!!, who are you? The guard notices your prisoner outfit. In a fast movement he shoots you. You were so close...but the game is over for you.\n");
 				return QUIT;
 			}
 		}
@@ -289,6 +289,10 @@ ReturnState World::Update()
 				if (bar_fnd)
 				{
 					printf("You hear the guard running towards you swearing and threatening you.\nAs soon as you see him comming into the cell you hit him on the head with the bar and knock him out. Stains of blood cover the guard body\n");
+					door_clc->isLocked = false;
+					door_clc->isOpen = true;
+					door_ccl->isLocked = false;
+					door_ccl->isOpen = true;
 					enemy->location = cell;
 					cel_inv.push_back(enemy);
 					door_hole->description = "through this hole prisoners are given food.\nThere is a corridor in front of the cell.";
@@ -296,7 +300,7 @@ ReturnState World::Update()
 				}
 				else
 				{
-					printf("You hear the guard running towards you swearing and threatening you.\nHe enters the cell: You wanna play games my friend? I'll teach you a game.\n He knocks you out...You open your eyes. Headche, blood in your head. You pickup the breadcrumbs from the window\n");			
+					printf("You hear the guard running towards you swearing and threatening you.\nHe enters the cell: You wanna play games my friend?I'll teach you a game.\n He knocks you out...You open your eyes. Headache, blood in your head. You pickup the breadcrumbs from the window\n");			
 					breadcrumbs->parent = player;
 					player->contains.push_back(breadcrumbs);
 					for (Inventory::iterator it = win_inv.begin(); it != win_inv.end(); it++)
