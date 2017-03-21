@@ -325,6 +325,7 @@ ReturnState World::Update()
 	else if (!strcmp(command, "h"))
 	{
 		printf("Accepted commands:\n==================\n");
+		printf("i: shows your inventory\n");
 		printf("lookat X: examine location or item X. Example: lookat cell, lookat window\n");
 		printf("pickup X: take item X\n");
 		printf("drop X: drop item X\n");
