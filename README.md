@@ -1,4 +1,4 @@
-# Zork Inspired Game - UNDER REVIEW & DEVELOPMENT - NOT PLAYABLE
+# Zork Inspired Game - Dan Zork
 
 ## Synopsis
 
@@ -26,8 +26,22 @@ GitHub link: https://github.com/DperParadise/Zork
 Download map: https://drive.google.com/open?id=0Bwhzd1ijHPU5dUFkN282YkYySjA)   
 
 ## Gameplay guide ( spoiler!!! )   
-
-
+pickup bar   
+pickup bread crumbs   
+use bread crumbs with window   
+pickup pigeon   
+use pigeon with door hole   
+go n   
+pickup closet key   
+open wardrobe door   
+go e   
+open closet   
+pickup guard outfit   
+go w   
+open main hall door   
+go n   
+open street door   
+go n
 
 ## License   
 
