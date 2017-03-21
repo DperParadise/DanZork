@@ -53,19 +53,19 @@ void World::Init()
 	bar = new Item(cell, nullptr, SMALL, false, false, false, ITEM, "bar", "rusty metallic bar fallen from the window. The guards haven't noticed it.", common_inv);
 	world.push_back(bar);
 	//---------------------------------------ITEMS CORRIDOR-------------------------------------
-	table = new Item(corridor, nullptr, MEDIUM, false, false, false, ITEM, "table", "wood table", common_inv);
+	table = new Item(corridor, nullptr, MEDIUM, false, false, false, ITEM, "table", "wood table.", common_inv);
 	world.push_back(table);
 	closet_key = new Item(corridor, nullptr, SMALL, false, false, false, ITEM, "closet key", "key with a tag attached: closet.", common_inv);
 	world.push_back(closet_key);
 	//---------------------------------------ITEMS WARDROBE-------------------------------------
 	closet = new Item(wardrobe, nullptr, LARGE, false, true, true, ITEM, "closet", "clothes closet used by the guards.", clo_inv);
 	world.push_back(closet);
-	guard_outfit = new Item(wardrobe, closet, SMALL, false, false, false, ITEM, "guard outfit", "guard outfit clean and ready to wear", common_inv);
+	guard_outfit = new Item(wardrobe, closet, SMALL, false, false, false, ITEM, "guard outfit", "guard outfit clean and ready to wear.", common_inv);
 	world.push_back(guard_outfit);
 	//--------------------------------------PLAYER & ENEMIES------------------------------
-	player = new Player(cell, PLAYER, "Daniel", "It's me", pla_inv);
+	player = new Player(cell, PLAYER, "Daniel", "It's me.", pla_inv);
 	world.push_back(player);
-	enemy = new Enemy(corridor, ENEMY, "guard", "a cell guard wearing it's outfit soaked in blood", common_inv);
+	enemy = new Enemy(corridor, ENEMY, "guard", "a cell guard wearing it's outfit soaked in blood.", common_inv);
 	world.push_back(enemy);
 
 	//Fill inventories
@@ -108,7 +108,7 @@ void World::Init()
 void World::Start()
 {
 	//Initial message
-	printf("*****Wellcome to Dan Zork*****\n");
+	printf("*****Wellcome to Dan Zork*****\nIf you need help press h\n");
 	printf("Current location: %s\n===========================\n%s\n", player->location->name, player->location->description);
 }
 
@@ -198,17 +198,17 @@ ReturnState World::Update()
 		player->Close(sub1);
 		std::cout << player->GetMessage() << std::endl;
 	}
-	if (!strcmp(command, "open"))
+	else if (!strcmp(command, "open"))
 	{
 		player->Open(sub1);
 		std::cout << player->GetMessage() << std::endl;
 	}
-	if (!strcmp(command, "drop"))
+	else if (!strcmp(command, "drop"))
 	{
 		player->Drop(sub1);
 		std::cout << player->GetMessage() << std::endl;
 	}
-	if (!strcmp(command, "go"))
+	else if (!strcmp(command, "go"))
 	{
 		player->Go(sub1);
 		std::cout << player->GetMessage() << std::endl;
@@ -228,17 +228,17 @@ ReturnState World::Update()
 			}
 		}
 	}
-	if (!strcmp(command, "lookat"))
+	else if (!strcmp(command, "lookat"))
 	{
 		player->LookAt(sub1, this);
 		std::cout << player->GetMessage() << std::endl;
 	}
-	if (!strcmp(command, "pickup")) 
+	else if (!strcmp(command, "pickup"))
 	{
 		player->Pickup(sub1);
 		std::cout << player->GetMessage() << std::endl;
 	}
-	if (!strcmp(command, "usewith"))
+	else if (!strcmp(command, "usewith"))
 	{
 		player->UseWith(sub1, sub2);
 		std::cout << player->GetMessage() << std::endl;
@@ -317,17 +317,32 @@ ReturnState World::Update()
 
 
 	}
-	if (!strcmp(command, "i"))
+	else if (!strcmp(command, "i"))
 	{
 		player->ShowInv();
 		std::cout << player->GetMessage() << std::endl;
 	}
+	else if (!strcmp(command, "h"))
+	{
+		printf("Accepted commands:\n==================\n");
+		printf("lookat X: examine location or item X. Example: lookat cell, lookat window\n");
+		printf("pickup X: take item X\n");
+		printf("drop X: drop item X\n");
+		printf("use item1 with item2: deposits item1 into item2. Example: use bread crumbs with window\n");
+		printf("open X: open item or door X\n");
+		printf("close X: close item or door X\n");
+		printf("go X: go in the direction of X which can be: n,north,s,south,w,west,e,east\n");
+		printf("q : exit the game\n");
+
+	}
 	//------------------------------------------------
 
 	//Quit game
-	if (!strcmp(command, "q"))
+	else if (!strcmp(command, "q"))
 		return QUIT;
-
+	
+	else
+		printf("Unknown command. Try again\n");
 
 	return ret;
 }
