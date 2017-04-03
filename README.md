@@ -2,7 +2,7 @@
 
 ## Synopsis
 
-Your character is unfairly jailed. You have to escape. Will you dare to find your way out? or will you perish in the hands of terrible guards?
+You have been unfairly jailed!. You have to escape. Will you dare to find your way out? or will you perish in the hands of terrible guards?
 
 ## Author
 Daniel Pérez Paraíso  
