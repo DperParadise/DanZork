@@ -15,7 +15,7 @@ public:
 	
 	Observer(Entity *sbjt, const char *itm);
 	~Observer();
-	bool Update();
+	bool Check();
 
 };
 

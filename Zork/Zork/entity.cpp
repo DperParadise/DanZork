@@ -20,6 +20,6 @@ void Entity::RegisterObs(Observer *obs)
 }
 bool Entity::NotifyObs()
 {
-	return observer->Update();
+	return observer->Check();
 }
 

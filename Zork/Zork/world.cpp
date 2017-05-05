@@ -65,7 +65,7 @@ void World::Init()
 	//--------------------------------------PLAYER & ENEMIES------------------------------
 	player = new Player(cell, PLAYER, "Daniel", "It's me.", pla_inv);
 	world.push_back(player);
-	enemy = new Enemy(corridor, ENEMY, "guard", "a cell guard wearing it's outfit soaked in blood.", common_inv);
+	enemy = new Enemy(corridor, ENEMY, "guard", "a cell guard wearing its outfit soaked in blood.", common_inv);
 	world.push_back(enemy);
 
 	//Fill inventories
@@ -108,7 +108,7 @@ void World::Init()
 void World::Start()
 {
 	//Initial message
-	printf("*****Wellcome to Dan Zork*****\nIf you need help press h\n");
+	printf("*****Wellcome to Dan Zork*****\nIf you need help type h\n");
 	printf("Current location: %s\n===========================\n%s\n", player->location->name, player->location->description);
 }
 
@@ -219,11 +219,15 @@ ReturnState World::Update()
 			if (end_success)
 			{
 				printf("You: Ehmm Hello?\nGuard: Hello. You are the new guard. Aren't you?\nYou: ehh Yes, yes. My shift is over already\nGuard: Ok, see you tomorrow!\nYou: hehe Sure...\nFREEDOM AT LAST!!\n");
+				printf("Press enter to exit");
+				getchar();
 				return QUIT;
 			}
 			else
 			{
 				printf("Hey!!, who are you? The guard notices your prisoner outfit. In a fast movement he shoots you. You were so close...but the game is over for you.\n");
+				printf("Press enter to exit");
+				getchar();
 				return QUIT;
 			}
 		}
@@ -333,7 +337,7 @@ ReturnState World::Update()
 		printf("open X: open item or door X\n");
 		printf("close X: close item or door X\n");
 		printf("go X: go in the direction of X which can be: n,north,s,south,w,west,e,east\n");
-		printf("q : exit the game\n");
+		printf("q : exit the game\n\n");
 
 	}
 	//------------------------------------------------

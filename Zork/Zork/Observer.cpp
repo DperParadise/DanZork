@@ -10,7 +10,7 @@ Observer::Observer(Entity *sbjt, const char *itm)
 
 Observer::~Observer() {}
 
-bool Observer::Update()
+bool Observer::Check()
 {
 	bool ret = false;
 	for (Inventory::iterator it = subject->contains.begin(); it != subject->contains.end(); it++)
