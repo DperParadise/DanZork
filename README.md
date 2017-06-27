@@ -21,8 +21,8 @@ Daniel Pérez Paraíso
 **q**: exit the game   
 ## Map
 
-![prsion map](https://i.imgsafe.org/111bc27d83.jpg)    
-Download map: https://drive.google.com/open?id=0Bwhzd1ijHPU5dUFkN282YkYySjA)   
+![prison map](https://i.imgsafe.org/111bc27d83.jpg)    
+[Download map](https://drive.google.com/open?id=0Bwhzd1ijHPU5dUFkN282YkYySjA)   
 
 ## Gameplay guide ( spoiler!!! )   
 pickup bar   
