@@ -6,7 +6,7 @@ You have been unfairly jailed!. You have to escape. Will you dare to find your w
 
 ## Author
 Daniel Pérez Paraíso  
-GitHub link: https://github.com/DperParadise/Zork   
+GitHub link: https://github.com/DperParadise/DanZork   
 
 ## Accepted commands
 
