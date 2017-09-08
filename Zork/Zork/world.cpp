@@ -42,7 +42,7 @@ void World::Init()
 	door_hs = new Exit(NORTH, main_hall, street, false, false, EXIT, "street door", "door leading to the street to the north.", common_inv);
 	world.push_back(door_hs);
 	 //---------------------------------------ITEMS CELL-----------------------------------------
-	window = new Item(cell, nullptr, MEDIUM, true, true, false, ITEM, "window", "barred window leading to the forest. You can hear doves singing nearby.", win_inv);
+	window = new Item(cell, nullptr, MEDIUM, true, false, false, ITEM, "window", "barred window leading to the forest. You can hear doves singing nearby.", win_inv);
 	world.push_back(window);
 	breadcrumbs = new Item(cell, nullptr, SMALL, false, false, false, ITEM, "bread crumbs", "bread crumbs. Someone enjoyed his last meal here.", common_inv);
 	world.push_back(breadcrumbs);
@@ -292,15 +292,20 @@ ReturnState World::Update()
 
 				if (bar_fnd)
 				{
-					printf("You hear the guard running towards you swearing and threatening you.\nAs soon as you see him comming into the cell you hit him on the head with the bar and knock him out. Stains of blood cover the guard body\n");
-					door_clc->isLocked = false;
-					door_clc->isOpen = true;
-					door_ccl->isLocked = false;
-					door_ccl->isOpen = true;
-					enemy->location = cell;
-					cel_inv.push_back(enemy);
-					door_hole->description = "through this hole prisoners are given food.\nThere is a corridor in front of the cell.";
-					
+					if (enemy_dead == false)
+					{
+						enemy_dead = true;
+						printf("You hear the guard running towards you swearing and threatening you.\nAs soon as you see him comming into the cell you hit him on the head with the bar and knock him out. Stains of blood cover the guard body\n");
+						door_clc->isLocked = false;
+						door_clc->isOpen = true;
+						door_ccl->isLocked = false;
+						door_ccl->isOpen = true;
+						enemy->location = cell;
+						cel_inv.push_back(enemy);
+						door_hole->description = "through this hole prisoners are given food.\nThere is a corridor in front of the cell.";
+					}
+					else
+						printf("the pigeon flies around and escapes through the window.\n");
 				}
 				else
 				{

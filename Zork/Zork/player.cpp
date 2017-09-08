@@ -355,18 +355,20 @@ void Player::UseWith(const char *item1, const char *item2)
 		{
 			found1 = true;
 		}
-		if (!found1) it1++;
+		if (!found1) 
+			it1++;
 	}
-
+	//Look for the second items in the current room
 	for (it2 = location->contains.begin(); !found2 && it2 != location->contains.end();)
 	{
 		if (strcmp((*it2)->name, item2) == 0)
 		{
 			found2 = true;
 		}
-		if (!found2) it2++;
+		if (!found2) 
+			it2++;
 	}
-
+	//Look for the second item in the player's inventory
 	if(!found2)
 		for (it2 = contains.begin(); !found2 && it2 != contains.end();)
 		{
@@ -374,7 +376,8 @@ void Player::UseWith(const char *item1, const char *item2)
 			{
 				found2 = true;
 			}
-			if (!found2) it2++;
+			if (!found2) 
+				it2++;
 		}
 
 	if (found1 && found2)
@@ -397,7 +400,6 @@ void Player::UseWith(const char *item1, const char *item2)
 		}
 	}
 
-	//--------player haven't picked bread crumbs up or no item found
 	if (!found1)
 		sprintf(message, "I don't have %s\n", item1);
 

@@ -84,7 +84,7 @@ private:
 	Player *player;
 	Inventory pla_inv;
 	Enemy *enemy;
-	
+	bool enemy_dead = false;
 	//----------------- not used inventory ------------------------//
 	Inventory common_inv;
 
