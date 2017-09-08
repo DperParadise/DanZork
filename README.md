@@ -5,8 +5,7 @@
 You have been unfairly jailed!. You have to escape. Will you dare to find your way out? or will you perish in the hands of terrible guards?
 
 ## Author
-Daniel Pérez Paraíso  
-GitHub link: https://github.com/DperParadise/Zork   
+Daniel Pérez Paraíso   
 
 ## Accepted commands
 
@@ -22,8 +21,8 @@ GitHub link: https://github.com/DperParadise/Zork
 **q**: exit the game   
 ## Map
 
-![prsion map](https://i.imgsafe.org/111bc27d83.jpg)    
-Download map: https://drive.google.com/open?id=0Bwhzd1ijHPU5dUFkN282YkYySjA)   
+![prison map](https://i.imgsafe.org/111bc27d83.jpg)    
+[Download map](https://drive.google.com/open?id=0Bwhzd1ijHPU5dUFkN282YkYySjA)   
 
 ## Gameplay guide ( spoiler!!! )   
 pickup bar   
