@@ -297,6 +297,7 @@ void Player::Go(const char *dir)
 	Direction d;
 	Room *dest;
 	bool room_chg = false;
+	bool wrong_dir = false;
 
 	if (!strcmp(dir, "n") || !strcmp(dir, "north"))
 		d = NORTH;
@@ -306,25 +307,30 @@ void Player::Go(const char *dir)
 		d = WEST;
 	else if (!strcmp(dir, "e") || !strcmp(dir, "east"))
 		d = EAST;
+	else
+		wrong_dir = true;
 
-	//Check exit
-	for (Inventory::iterator it = location->contains.begin(); it != location->contains.end(); it++)
+	if (!wrong_dir)
 	{
-		if ((*it)->type == EXIT && ((Exit*)(*it))->GetDirection() == d)
+		//Check exit
+		for (Inventory::iterator it = location->contains.begin(); it != location->contains.end(); it++)
 		{
-			if (((Exit*)(*it))->isOpen)
+			if ((*it)->type == EXIT && ((Exit*)(*it))->GetDirection() == d)
 			{
-				//Set items new location
-				dest = ((Exit*)(*it))->GetDestination();				
-				SetItemLoc(contains, dest);
-				room_chg = true;
-				break;
+				if (((Exit*)(*it))->isOpen)
+				{
+					//Set items new location
+					dest = ((Exit*)(*it))->GetDestination();
+					SetItemLoc(contains, dest);
+					room_chg = true;
+					break;
+				}
+				else
+				{
+					strcpy(message, "The door is closed\n");
+				}
 			}
-			else
-			{
-				strcpy(message, "The door is closed\n");
-			}
-		}		
+		}
 	}
 	if (room_chg)
 	{
